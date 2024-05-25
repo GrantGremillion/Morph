@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
             currentDirection = Direction.Down;
         }
 
-        Debug.Log("Current Direction: " + currentDirection);
+        //Debug.Log("Current Direction: " + currentDirection);
     }
 }
 
