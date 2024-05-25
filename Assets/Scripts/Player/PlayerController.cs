@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour
     // Dash variables
     private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 24f;
-    private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
     private enum Direction
@@ -27,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private TrailRenderer tr;
+    [SerializeField] private float dashingPower;
+    [SerializeField] private float dashingTime = 0.2f;
 
     // Start is called before the first frame update
     void Awake()
@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+        Debug.Log(rb.velocity);
     }
 
 
