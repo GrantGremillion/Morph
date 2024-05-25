@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movementInput;
     private Direction currentDirection;
+    private bool isFacingRight = true;
 
     // Dash variables
     private bool canDash = true;
@@ -22,21 +23,16 @@ public class PlayerController : MonoBehaviour
         Right
     }
 
-
     [SerializeField] private float speed;
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private float dashingPower;
     [SerializeField] private float dashingTime = 0.2f;
 
-    // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (isDashing)
@@ -44,7 +40,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        rb.velocity = movementInput * speed;
+        rb.velocity = movementInput.normalized * speed;
     }
 
     void Update()
@@ -58,70 +54,68 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-        Debug.Log(rb.velocity);
     }
-
 
     private void OnMove(InputValue inputValue)
+{
+    movementInput = inputValue.Get<Vector2>();
+
+    if (movementInput != Vector2.zero)
     {
-        movementInput = inputValue.Get<Vector2>();
-
-        if (movementInput != Vector2.zero)
+        // Prioritize horizontal movement over vertical movement
+        if (movementInput.x > 0)
         {
-            if (Mathf.Abs(movementInput.x) > Mathf.Abs(movementInput.y))
-            {
-                if (movementInput.x > 0)
-                {
-                    currentDirection = Direction.Right;
-                }
-                else
-                {
-                    currentDirection = Direction.Left;
-                }
-            }
-            else
-            {
-                if (movementInput.y > 0)
-                {
-                    currentDirection = Direction.Up;
-                }
-                else
-                {
-                    currentDirection = Direction.Down;
-                }
-            }
-
-            // Optional: Log the current direction for debugging purposes
-            Debug.Log("Current Direction: " + currentDirection);
+            currentDirection = Direction.Right;
+            isFacingRight = true;
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
+        else if (movementInput.x < 0)
+        {
+            currentDirection = Direction.Left;
+            isFacingRight = false;
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (movementInput.y > 0)
+        {
+            currentDirection = Direction.Up;
+        }
+        else if (movementInput.y < 0)
+        {
+            currentDirection = Direction.Down;
+        }
+
+        Debug.Log("Current Direction: " + currentDirection);
     }
+}
+
 
     private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
+
         if (currentDirection == Direction.Left)
         {
-            rb.velocity = new Vector2(-transform.localScale.x * dashingPower, 0f);
+            rb.velocity = new Vector2(-dashingPower, 0f);
         }
         else if (currentDirection == Direction.Right)
         {
-            rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+            rb.velocity = new Vector2(dashingPower, 0f);
         }
         else if (currentDirection == Direction.Up)
         {
-            rb.velocity = new Vector2(0f,transform.localScale.y * dashingPower);
+            rb.velocity = new Vector2(0f, dashingPower);
         }
         else
         {
-            rb.velocity = new Vector2(0f,-transform.localScale.y * dashingPower);
+            rb.velocity = new Vector2(0f, -dashingPower);
         }
+
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
-
     }
 }

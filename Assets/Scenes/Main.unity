@@ -198,9 +198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88b85c5dca239047aaa03705ba1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
   tr: {fileID: 291280281}
-  dashingPower: 8
+  dashingPower: 4
   dashingTime: 0.1
 --- !u!114 &291280280
 MonoBehaviour:
