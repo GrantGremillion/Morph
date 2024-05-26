@@ -14,9 +14,14 @@ public class PlayerController : MonoBehaviour
     private bool canDash = true;
     private bool isDashing;
     private float dashingCooldown = 1f;
+
+    // Health variables
     public int health;
     public int numOfHearts;
 
+    public float knockbackForce = 10f;
+    public float knockbackDuration = 0.5f;
+    private bool isKnockedBack;
 
     // Facing Directions
     private enum Direction
@@ -39,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isDashing)
+        if (isDashing || isKnockedBack)
         {
             return;
         }
@@ -49,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (isDashing)
+        if (isDashing || isKnockedBack)
         {
             return;
         }
@@ -124,10 +129,27 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision)
-{
-    if (collision.gameObject.CompareTag("Enemy"))
     {
-        health --;
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            health--;
+            StartCoroutine(Knockback(collision));
+        }
     }
-}
+
+    private IEnumerator Knockback(Collision2D collision)
+    {
+        isKnockedBack = true;
+
+        Vector2 difference = (transform.position - collision.transform.position).normalized;
+        Vector2 force = difference * knockbackForce;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(force, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(knockbackDuration);
+
+        isKnockedBack = false;
+    }
+
+
 }
