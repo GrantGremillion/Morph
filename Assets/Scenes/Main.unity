@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 291280281}
   - component: {fileID: 291280282}
   - component: {fileID: 291280283}
+  - component: {fileID: 291280284}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -307,10 +308,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88b85c5dca239047aaa03705ba1ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   health: 3
   numOfHearts: 3
   knockbackForce: 5
   knockbackDuration: 0.2
+  animationSpeed: 0.175
   speed: 0.7
   tr: {fileID: 291280281}
   dashingPower: 4
@@ -564,6 +567,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.10326406, y: 0.09629644}
   m_EdgeRadius: 0
+--- !u!95 &291280284
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291280275}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e77c1d50d9d6e864fa8f321b55d4de59, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &351480647
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,7 +813,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 0.7
+  orthographic size: 0.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2282,7 +2306,7 @@ MonoBehaviour:
   m_Follow: {fileID: 291280278}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 0.7
+    OrthographicSize: 0.5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animator; 
     private Rigidbody2D rb;
     private Vector2 movementInput;
     private Direction currentDirection;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         Right
     }
 
+    [SerializeField] private float animationSpeed; 
     [SerializeField] private float speed;
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private float dashingPower;
@@ -40,8 +42,9 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        animator.speed = animationSpeed;
     }
-
     void FixedUpdate()
     {
         if (isDashing || isKnockedBack)
@@ -63,6 +66,25 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+
+        if (movementInput == Vector2.zero) 
+        {
+            switch (currentDirection)
+            {
+                case Direction.Up:
+                    animator.Play("IdleUp");
+                    break; 
+                case Direction.Down:
+                    animator.Play("IdleDown");
+                    break; 
+                case Direction.Left:
+                    animator.Play("IdleHorizontal");
+                    break; 
+                case Direction.Right:
+                    animator.Play("IdleHorizontal");
+                    break; 
+            }
+        }
     }
 
     private void OnMove(InputValue inputValue)
@@ -74,30 +96,32 @@ public class PlayerController : MonoBehaviour
             // Prioritize horizontal movement over vertical movement
             if (movementInput.x > 0)
             {
+                animator.Play("WalkHorizontal"); 
                 currentDirection = Direction.Right;
 
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
             else if (movementInput.x < 0)
             {
+                animator.Play("WalkHorizontal"); 
                 currentDirection = Direction.Left;
 
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
             else if (movementInput.y > 0)
             {
+                animator.Play("WalkUp"); 
                 currentDirection = Direction.Up;
             }
             else if (movementInput.y < 0)
             {
+                animator.Play("WalkDown"); 
                 currentDirection = Direction.Down;
             }
 
             //Debug.Log("Current Direction: " + currentDirection);
         }
     }
-
-
     private IEnumerator Dash()
     {
         canDash = false;
