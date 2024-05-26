@@ -1634,8 +1634,10 @@ MonoBehaviour:
   banana: {fileID: 3105558158463327667, guid: 663afc09ff7f5b241820531850be0fec, type: 3}
   blueberry: {fileID: 6965595104004759051, guid: ae3a1e2a869417c4bba8c214d55d8c00, type: 3}
   cherry: {fileID: 6642731324118583853, guid: 3c8c44ee6c7bef44d806e4f034ce6287, type: 3}
-  minSpawnDistance: 0.25
-  maxSpawnDistance: 0.4
+  minSpawnDistance: 0.2
+  maxSpawnDistance: 0.25
+  moveSpeed: 1
+  maxDistanceFromPlayer: 0.3
 --- !u!1 &1483982594
 GameObject:
   m_ObjectHideFlags: 0

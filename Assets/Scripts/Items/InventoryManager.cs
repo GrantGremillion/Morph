@@ -15,6 +15,8 @@ public class InventoryManager : MonoBehaviour
 
     public float minSpawnDistance = 2f;
     public float maxSpawnDistance = 5f;
+    public float moveSpeed = 1f; // Speed at which items move away from the player
+    public float maxDistanceFromPlayer = 10f; // Maximum distance from player before items stop moving
 
     public void AddItem(string item)
     {
@@ -47,30 +49,36 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             // Make sure the player has items
-            if (items.Count == 0)
-            {
-                return;
-            }
+            if (items.Count == 0) return;
 
             string randomItem = RandomElementSelector.GetRandomElement(items);
             Vector3 spawnPosition = GetRandomSpawnPosition(player.transform.position);
-            print("Randomly selected item: " + randomItem);
+            //print("Randomly selected item: " + randomItem);
 
+
+            GameObject newItem = null;
             if (randomItem == "banana")
             {
-                Instantiate(banana, spawnPosition, Quaternion.identity);
+                newItem = Instantiate(banana, spawnPosition, Quaternion.identity);
             }
             else if (randomItem == "blueberry")
             {
-                Instantiate(blueberry, spawnPosition, Quaternion.identity);
+                newItem = Instantiate(blueberry, spawnPosition, Quaternion.identity);
             }
             else
             {
-                Instantiate(cherry, spawnPosition, Quaternion.identity);
+                newItem = Instantiate(cherry, spawnPosition, Quaternion.identity);
             }
-            items.Remove(randomItem);
-        }
 
+            // Remove item from player inventory
+            items.Remove(randomItem);
+
+            // Start moving the new item away from the player
+            if (newItem != null)
+            {
+                StartCoroutine(MoveItemAway(newItem.transform));
+            }
+        }
     }
 
     private Vector3 GetRandomSpawnPosition(Vector3 playerPosition)
@@ -88,6 +96,16 @@ public class InventoryManager : MonoBehaviour
         Vector3 spawnPosition = playerPosition + spawnOffset;
 
         return spawnPosition;
+    }
+
+    private IEnumerator MoveItemAway(Transform itemTransform)
+    {
+        while (Vector3.Distance(itemTransform.position, player.transform.position) < maxDistanceFromPlayer)
+        {
+            // Move the item away from the player
+            itemTransform.position += (itemTransform.position - player.transform.position).normalized * moveSpeed * Time.deltaTime;
+            yield return null;
+        }
     }
 
 }
