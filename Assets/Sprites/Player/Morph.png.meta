@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c793667b9e5f7e742a685298484c9fa0
+guid: 55853a5057872b14e891cee4dc83bc54
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Basic_0
+      name: Morph_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cba7ee7d5a17b58489fc36a570fe018f
-      internalID: -1809993938
+      spriteID: 3b2206daefade8740aba92cf5c909d6f
+      internalID: 1255695540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_1
+      name: Morph_1
       rect:
         serializedVersion: 2
         x: 16
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddda8e250d5e0f241972945f394e7501
-      internalID: 724804839
+      spriteID: 77ff7a88f3f2dac46a09f43af32936bb
+      internalID: -1025377627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_2
+      name: Morph_2
       rect:
         serializedVersion: 2
         x: 32
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 199055ed59f119a4ea8496ad59cc54f5
-      internalID: 1918231259
+      spriteID: b7ab46cd72fc329408f82e1361a9755d
+      internalID: 683403726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_3
+      name: Morph_3
       rect:
         serializedVersion: 2
         x: 48
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 325e8b1211721b94c9154aaf59025957
-      internalID: 62218319
+      spriteID: f40f8a0106d47ec4ea6549af7c52e392
+      internalID: 1641466578
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_4
+      name: Morph_4
       rect:
         serializedVersion: 2
         x: 64
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b712960d3b041ac49b6d188ef1efc096
-      internalID: -2005820802
+      spriteID: a28bc1d44557ab5418be6a73f12f442f
+      internalID: 1402289132
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_5
+      name: Morph_5
       rect:
         serializedVersion: 2
         x: 80
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 696fe746b153dd54da5e7e132098e202
-      internalID: 1108198654
+      spriteID: 9daa90d4229487b41a63222587ef915d
+      internalID: 888809706
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_6
+      name: Morph_6
       rect:
         serializedVersion: 2
         x: 96
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5b4dfb3d9a45f848b12de44ab07434c
-      internalID: -1902333440
+      spriteID: 9109a9ab4bf70524ebb300dfbc16c926
+      internalID: 782909420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_7
+      name: Morph_7
       rect:
         serializedVersion: 2
         x: 112
@@ -258,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca8cc7a68cde5c1458ab80f4c4e350f3
-      internalID: 1555602465
+      spriteID: 7a0d47e19ad066a49b8cdbdd6a76d309
+      internalID: 1070240337
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_8
+      name: Morph_8
       rect:
         serializedVersion: 2
         x: 144
@@ -279,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b7f502dc598921499451e2c33827c1c
-      internalID: 1383740951
+      spriteID: 292b55586da550f43b0d18fb8edb819c
+      internalID: -1193516197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_9
+      name: Morph_9
       rect:
         serializedVersion: 2
         x: 160
@@ -300,14 +300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71e89d069fc1f4745bd509404833aa6a
-      internalID: -312566761
+      spriteID: a6be5f44aa2fb4341bc4d514994a7b21
+      internalID: 1677767900
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_10
+      name: Morph_10
       rect:
         serializedVersion: 2
         x: 176
@@ -321,14 +321,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa9abc0a17a544648854b7924a6b3b34
-      internalID: 372231831
+      spriteID: 9d5b17900c6ea264ca912eded34006c8
+      internalID: 1585593204
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_11
+      name: Morph_11
       rect:
         serializedVersion: 2
         x: 192
@@ -342,14 +342,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0c45f7d7c5107c488246b86c664ad17
-      internalID: 1135956556
+      spriteID: 10ff39f72823e094b9bba29ba8893cbe
+      internalID: -710259598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_12
+      name: Morph_12
       rect:
         serializedVersion: 2
         x: 208
@@ -363,14 +363,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d2068d900bb83c4e93a9b000b43dad9
-      internalID: -1968622237
+      spriteID: 1777cf1d1aad0c547b8538aba8b014ad
+      internalID: -2062186091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_13
+      name: Morph_13
       rect:
         serializedVersion: 2
         x: 224
@@ -384,14 +384,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f5baa830699b5b4a9777150a6922bb2
-      internalID: -2125253331
+      spriteID: bb5db397799da41478bf35a3920b61dc
+      internalID: 641941546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_14
+      name: Morph_14
       rect:
         serializedVersion: 2
         x: 240
@@ -405,14 +405,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21543e2a35e22824496560eabea9eff5
-      internalID: -899936298
+      spriteID: 1213d70057817cb4d9e3bbcbfc22389a
+      internalID: -2127225874
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_15
+      name: Morph_15
       rect:
         serializedVersion: 2
         x: 256
@@ -426,14 +426,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73e9f00a73d48124c80d390e72342d1e
-      internalID: 1164025063
+      spriteID: 8d1f383aeb472ee43bbdf88b238e00ae
+      internalID: 634649259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_16
+      name: Morph_16
       rect:
         serializedVersion: 2
         x: 288
@@ -447,14 +447,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8339668a7324c0d429754c6c02ae4f61
-      internalID: -66834467
+      spriteID: 1877db33cbd46734896ededda573ea2e
+      internalID: 99942011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_17
+      name: Morph_17
       rect:
         serializedVersion: 2
         x: 304
@@ -468,14 +468,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 674a8c66b12729947add0013056a57b2
-      internalID: -1760846946
+      spriteID: 9f30a121e8e48bd4ca18e6d1ee515021
+      internalID: -1492854327
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_18
+      name: Morph_18
       rect:
         serializedVersion: 2
         x: 320
@@ -489,14 +489,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0ee6ff2d40788949b3661b0ebcd9785
-      internalID: 536677866
+      spriteID: 122293e499c26634a8975181beb8fcf4
+      internalID: 1358925117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_19
+      name: Morph_19
       rect:
         serializedVersion: 2
         x: 336
@@ -510,14 +510,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f899e2f0e3074249881a5c5e8ba8d2d
-      internalID: 1113069898
+      spriteID: fffea16e3258ea24cbaeec8e08860713
+      internalID: 612941628
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_20
+      name: Morph_20
       rect:
         serializedVersion: 2
         x: 352
@@ -531,14 +531,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1480ab5b71598744e850b1877315383c
-      internalID: -455521573
+      spriteID: b3489eff40d524747b203b0c72e2f7cf
+      internalID: -1776697265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_21
+      name: Morph_21
       rect:
         serializedVersion: 2
         x: 368
@@ -552,14 +552,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1b9f67dad3ae6748bf221f65db1ae98
-      internalID: 154072529
+      spriteID: 3f1ec5884606fb6488c923f7dcfa1888
+      internalID: 763387358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_22
+      name: Morph_22
       rect:
         serializedVersion: 2
         x: 384
@@ -573,14 +573,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 317dd46e5f9613e42ad45c1bbceaaa0a
-      internalID: 1391737619
+      spriteID: 24623d8133a4aea429a9a08dc4928ec7
+      internalID: 410341719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_23
+      name: Morph_23
       rect:
         serializedVersion: 2
         x: 400
@@ -594,14 +594,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8345ca9e987488043a2af46a95126b03
-      internalID: 2067907967
+      spriteID: 23e25b66fa8841f4199a7eab2bc2d643
+      internalID: -511283838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_24
+      name: Morph_24
       rect:
         serializedVersion: 2
         x: 432
@@ -615,14 +615,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 962ff248b589f4b448f4c4972370771d
-      internalID: -324743112
+      spriteID: 113abb9d9e04a5b43bde7211f50a5bb3
+      internalID: 980803444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_25
+      name: Morph_25
       rect:
         serializedVersion: 2
         x: 448
@@ -636,14 +636,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 628eab5ef64fb004b96ac4ffe151f4ca
-      internalID: -1031250560
+      spriteID: d3e55727aae564d449c8d306e172532b
+      internalID: -586230983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_26
+      name: Morph_26
       rect:
         serializedVersion: 2
         x: 464
@@ -657,14 +657,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d4b3f5578008004b86f19a7363563cb
-      internalID: -1648514987
+      spriteID: eea73df68bfcad54a96307346ff542c9
+      internalID: 893646634
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_27
+      name: Morph_27
       rect:
         serializedVersion: 2
         x: 480
@@ -678,14 +678,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d41ac6ab574d82e4490aa08e2b923693
-      internalID: -946498006
+      spriteID: 39eb1e00c013348408ccff2e26acd58e
+      internalID: 432295761
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_28
+      name: Morph_28
       rect:
         serializedVersion: 2
         x: 496
@@ -699,14 +699,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4dc52d19152338a489391ce6587bce98
-      internalID: -631261712
+      spriteID: d050d62be87dab841ad056f54287ebf3
+      internalID: -868249418
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_29
+      name: Morph_29
       rect:
         serializedVersion: 2
         x: 512
@@ -720,14 +720,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d18b7e128d39dbb45ba70c884d02d18a
-      internalID: -609345684
+      spriteID: 4b79bc7185f179d4a9808481696bb113
+      internalID: 365936200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_30
+      name: Morph_30
       rect:
         serializedVersion: 2
         x: 528
@@ -741,14 +741,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a7aba96d7b7b7a4d85c7f60cb14ef63
-      internalID: -1909678501
+      spriteID: ad05fb185483c4c45adf6276e0dd62fb
+      internalID: -1393605384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_31
+      name: Morph_31
       rect:
         serializedVersion: 2
         x: 544
@@ -762,14 +762,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae87e1b7b6d675343884ea348a29fef2
-      internalID: 1794745046
+      spriteID: f7f38aaa3bd0fa84a8571d19cc2f8796
+      internalID: 336030606
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_32
+      name: Morph_32
       rect:
         serializedVersion: 2
         x: 576
@@ -783,14 +783,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10c19089aabfc9e4197be17d5c91023e
-      internalID: -1490261465
+      spriteID: 42d4ae6feae7d2b4b9a6143d8c2864d6
+      internalID: -1582736931
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_33
+      name: Morph_33
       rect:
         serializedVersion: 2
         x: 592
@@ -804,14 +804,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6ae2c3cb7149c4468945c96ad2c7cf9
-      internalID: 2041951750
+      spriteID: 0cc2542e7e955164089c973543a83df9
+      internalID: 385947659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_34
+      name: Morph_34
       rect:
         serializedVersion: 2
         x: 608
@@ -825,14 +825,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e79ab0b7bacc50a4897bad04e6212b0f
-      internalID: 2098347859
+      spriteID: a263b54d3a74c5d4d85290f6dd2f178f
+      internalID: -1735363235
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_35
+      name: Morph_35
       rect:
         serializedVersion: 2
         x: 624
@@ -846,14 +846,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc5ccf463e00e984dbff1c8e249a42e1
-      internalID: -1122422277
+      spriteID: 25724135f0ff59c4ab55debcf1b440e8
+      internalID: 180747648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_36
+      name: Morph_36
       rect:
         serializedVersion: 2
         x: 640
@@ -867,14 +867,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e84938561afc544fba150f068f11eae
-      internalID: -346741085
+      spriteID: 685cee71031c3ee499fbde79aad2fe97
+      internalID: -1611504551
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_37
+      name: Morph_37
       rect:
         serializedVersion: 2
         x: 656
@@ -888,14 +888,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f23d7832b6a2dc458400e52d0075abc
-      internalID: 1508485512
+      spriteID: 1e8b581ef4ba4e64a834a57a3d924d8f
+      internalID: 51269667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_38
+      name: Morph_38
       rect:
         serializedVersion: 2
         x: 672
@@ -909,14 +909,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c4db6227188ee64f85fad6bfccabbbe
-      internalID: 288952978
+      spriteID: c6deca46c935488419c43749a3689b70
+      internalID: 68537735
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_39
+      name: Morph_39
       rect:
         serializedVersion: 2
         x: 688
@@ -930,14 +930,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d07efe753df9f3b4f88ebde9a2285ffd
-      internalID: 855580595
+      spriteID: 214acb3e41cd15049b0f6da593c2b42b
+      internalID: -379056278
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_40
+      name: Morph_40
       rect:
         serializedVersion: 2
         x: 720
@@ -951,14 +951,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9f7856e2ed98204a83a9df2bcf8b64e
-      internalID: 534997402
+      spriteID: ce4250950c6c03b4eb8fbed6c9ffc35a
+      internalID: -37704810
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_41
+      name: Morph_41
       rect:
         serializedVersion: 2
         x: 736
@@ -972,14 +972,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd3691d0ca6d04447ba0a1aba248a0e1
-      internalID: -425274018
+      spriteID: 7d5c14050f25afb4c99a5a597936d64c
+      internalID: -440795920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_42
+      name: Morph_42
       rect:
         serializedVersion: 2
         x: 752
@@ -993,14 +993,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f944f9a739ae73345bd8065581ff1038
-      internalID: 1851571881
+      spriteID: 51a78e60aa43cb2448d2cb84e3b83252
+      internalID: 1058099713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_43
+      name: Morph_43
       rect:
         serializedVersion: 2
         x: 768
@@ -1014,14 +1014,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5abfe2175c279f41ae9b4a04ce62db4
-      internalID: -1215486270
+      spriteID: 17f9a8e64c05f704c87b48a6403fd8d7
+      internalID: 1744459281
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_44
+      name: Morph_44
       rect:
         serializedVersion: 2
         x: 784
@@ -1035,14 +1035,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 792d24f93e9a6d741b3da6f4f4412adc
-      internalID: 634735882
+      spriteID: 77f9e19cbad63d643a17e6810e07e2f4
+      internalID: -1699485113
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_45
+      name: Morph_45
       rect:
         serializedVersion: 2
         x: 800
@@ -1056,14 +1056,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17e847fb9c1ccf2429b550d00addb99c
-      internalID: -1275472930
+      spriteID: c298a420c7bd0b44ebdc8bb363042e7d
+      internalID: -404448816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_46
+      name: Morph_46
       rect:
         serializedVersion: 2
         x: 816
@@ -1077,14 +1077,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b4053e8d859240429a22c98e40b2d49
-      internalID: -705447820
+      spriteID: 98bf7ed0f89ea8442afb71d81577cfda
+      internalID: -20877951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_47
+      name: Morph_47
       rect:
         serializedVersion: 2
         x: 832
@@ -1098,8 +1098,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 025d6ba8ace7e3b4ca330ce784ddf3e2
-      internalID: -854197442
+      spriteID: 1bd15cafe4274d64e8c865c4f0107fa4
+      internalID: 167773258
       vertices: []
       indices: 
       edges: []
@@ -1115,54 +1115,54 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Basic_0: -1809993938
-      Basic_1: 724804839
-      Basic_10: 372231831
-      Basic_11: 1135956556
-      Basic_12: -1968622237
-      Basic_13: -2125253331
-      Basic_14: -899936298
-      Basic_15: 1164025063
-      Basic_16: -66834467
-      Basic_17: -1760846946
-      Basic_18: 536677866
-      Basic_19: 1113069898
-      Basic_2: 1918231259
-      Basic_20: -455521573
-      Basic_21: 154072529
-      Basic_22: 1391737619
-      Basic_23: 2067907967
-      Basic_24: -324743112
-      Basic_25: -1031250560
-      Basic_26: -1648514987
-      Basic_27: -946498006
-      Basic_28: -631261712
-      Basic_29: -609345684
-      Basic_3: 62218319
-      Basic_30: -1909678501
-      Basic_31: 1794745046
-      Basic_32: -1490261465
-      Basic_33: 2041951750
-      Basic_34: 2098347859
-      Basic_35: -1122422277
-      Basic_36: -346741085
-      Basic_37: 1508485512
-      Basic_38: 288952978
-      Basic_39: 855580595
-      Basic_4: -2005820802
-      Basic_40: 534997402
-      Basic_41: -425274018
-      Basic_42: 1851571881
-      Basic_43: -1215486270
-      Basic_44: 634735882
-      Basic_45: -1275472930
-      Basic_46: -705447820
-      Basic_47: -854197442
-      Basic_5: 1108198654
-      Basic_6: -1902333440
-      Basic_7: 1555602465
-      Basic_8: 1383740951
-      Basic_9: -312566761
+      Morph_0: 1255695540
+      Morph_1: -1025377627
+      Morph_10: 1585593204
+      Morph_11: -710259598
+      Morph_12: -2062186091
+      Morph_13: 641941546
+      Morph_14: -2127225874
+      Morph_15: 634649259
+      Morph_16: 99942011
+      Morph_17: -1492854327
+      Morph_18: 1358925117
+      Morph_19: 612941628
+      Morph_2: 683403726
+      Morph_20: -1776697265
+      Morph_21: 763387358
+      Morph_22: 410341719
+      Morph_23: -511283838
+      Morph_24: 980803444
+      Morph_25: -586230983
+      Morph_26: 893646634
+      Morph_27: 432295761
+      Morph_28: -868249418
+      Morph_29: 365936200
+      Morph_3: 1641466578
+      Morph_30: -1393605384
+      Morph_31: 336030606
+      Morph_32: -1582736931
+      Morph_33: 385947659
+      Morph_34: -1735363235
+      Morph_35: 180747648
+      Morph_36: -1611504551
+      Morph_37: 51269667
+      Morph_38: 68537735
+      Morph_39: -379056278
+      Morph_4: 1402289132
+      Morph_40: -37704810
+      Morph_41: -440795920
+      Morph_42: 1058099713
+      Morph_43: 1744459281
+      Morph_44: -1699485113
+      Morph_45: -404448816
+      Morph_46: -20877951
+      Morph_47: 167773258
+      Morph_5: 888809706
+      Morph_6: 782909420
+      Morph_7: 1070240337
+      Morph_8: -1193516197
+      Morph_9: 1677767900
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
