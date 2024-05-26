@@ -26,9 +26,8 @@ public class Item : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             print("collision");
-            inventory.itemCount ++;
+            inventory.AddItem(this);
             Destroy(gameObject);
-            print(inventory.itemCount);
         }
     }
 }

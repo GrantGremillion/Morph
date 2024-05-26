@@ -41,7 +41,9 @@ public class InGameUI : MonoBehaviour
     {
         if (itemText != null)
         {
-            itemText.text = "Items: " + inventoryManager.itemCount.ToString();
+            itemText.text = inventoryManager.GetItemCount<Banana>().ToString() 
+            + "\n" + inventoryManager.GetItemCount<Blueberry>().ToString()
+            + "\n" + inventoryManager.GetItemCount<Cherry>().ToString();
         }
     }
 

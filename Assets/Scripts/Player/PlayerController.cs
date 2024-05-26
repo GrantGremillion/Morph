@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public int health;
     public int numOfHearts;
 
+    // Knockback variables
     public float knockbackForce = 10f;
     public float knockbackDuration = 0.5f;
     private bool isKnockedBack;
@@ -67,6 +68,12 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
+        PlayAnimations();
+        
+    }
+
+    void PlayAnimations()
+    {
         if (movementInput == Vector2.zero) 
         {
             switch (currentDirection)
@@ -158,6 +165,7 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             StartCoroutine(Knockback(collision));
+            
         }
     }
 
