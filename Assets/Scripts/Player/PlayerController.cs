@@ -6,12 +6,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public Animator animator; 
+    public Animator animator;
     private Rigidbody2D rb;
     private Vector2 movementInput;
     private Direction currentDirection;
     public InventoryManager inventory;
-    
+    public GameObject arrowPrefab;
+
 
     // Dash variables
     private bool canDash = true;
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
         Right
     }
 
-    [SerializeField] private float animationSpeed; 
+    [SerializeField] private float animationSpeed;
     [SerializeField] private float speed;
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private float dashingPower;
@@ -73,28 +74,68 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
+        // Left mouse = Shoot arrow
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canDash)
+        {
+            Quaternion rotation = Quaternion.identity;
+            Vector2 velocity = Vector2.zero;
+            Vector3 offset = Vector3.zero;
+            float offsetDistance = .15f; // Distance to offset the arrow from the player
+
+            switch (currentDirection)
+            {
+                case Direction.Up:
+                    rotation = Quaternion.Euler(0, 0, 90);
+                    velocity = new Vector2(0.0f, 1.0f);
+                    offset = new Vector3(0, offsetDistance, 0);
+                    break;
+                case Direction.Down:
+                    rotation = Quaternion.Euler(0, 0, -90);
+                    velocity = new Vector2(0.0f, -1.0f);
+                    offset = new Vector3(0, -offsetDistance, 0);
+                    break;
+                case Direction.Left:
+                    rotation = Quaternion.Euler(0, 0, 180);
+                    velocity = new Vector2(-1.0f, 0.0f);
+                    offset = new Vector3(-offsetDistance, 0, 0);
+                    break;
+                case Direction.Right:
+                    rotation = Quaternion.Euler(0, 0, 0);
+                    velocity = new Vector2(1.0f, 0.0f);
+                    offset = new Vector3(offsetDistance, 0, 0);
+                    break;
+            }
+
+            // Calculate the spawn position with the offset
+            Vector3 spawnPosition = transform.position + offset;
+
+            // Instantiate the arrow at the spawn position with the calculated rotation
+            GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
+            arrow.GetComponent<Rigidbody2D>().velocity = velocity;
+        }
+
         PlayAnimations();
-        
+
     }
 
     void PlayAnimations()
     {
-        if (movementInput == Vector2.zero) 
+        if (movementInput == Vector2.zero)
         {
             switch (currentDirection)
             {
                 case Direction.Up:
                     animator.Play("IdleUp");
-                    break; 
+                    break;
                 case Direction.Down:
                     animator.Play("IdleDown");
-                    break; 
+                    break;
                 case Direction.Left:
                     animator.Play("IdleHorizontal");
-                    break; 
+                    break;
                 case Direction.Right:
                     animator.Play("IdleHorizontal");
-                    break; 
+                    break;
             }
         }
     }
@@ -108,26 +149,26 @@ public class PlayerController : MonoBehaviour
             // Prioritize horizontal movement over vertical movement
             if (movementInput.x > 0)
             {
-                animator.Play("WalkHorizontal"); 
+                animator.Play("WalkHorizontal");
                 currentDirection = Direction.Right;
 
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
             else if (movementInput.x < 0)
             {
-                animator.Play("WalkHorizontal"); 
+                animator.Play("WalkHorizontal");
                 currentDirection = Direction.Left;
 
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
             else if (movementInput.y > 0)
             {
-                animator.Play("WalkUp"); 
+                animator.Play("WalkUp");
                 currentDirection = Direction.Up;
             }
             else if (movementInput.y < 0)
             {
-                animator.Play("WalkDown"); 
+                animator.Play("WalkDown");
                 currentDirection = Direction.Down;
             }
 
