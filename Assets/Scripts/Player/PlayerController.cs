@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     private bool canDash = true;
     private bool isDashing;
     private float dashingCooldown = 1f;
-    private bool isFacingRight = true;
     public int health;
     public int numOfHearts;
 
@@ -71,13 +70,13 @@ public class PlayerController : MonoBehaviour
             if (movementInput.x > 0)
             {
                 currentDirection = Direction.Right;
-                isFacingRight = true;
+
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
             else if (movementInput.x < 0)
             {
                 currentDirection = Direction.Left;
-                isFacingRight = false;
+
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
             else if (movementInput.y > 0)
@@ -123,4 +122,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject.CompareTag("Enemy"))
+    {
+        health --;
+    }
+}
 }

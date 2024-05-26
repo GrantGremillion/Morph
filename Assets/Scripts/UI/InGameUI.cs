@@ -32,7 +32,21 @@ public class InGameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateHealthUI(); 
+        UpdateItemText();
+    }
 
+     // Update the text value of the TextMeshPro component
+    public void UpdateItemText()
+    {
+        if (itemText != null)
+        {
+            itemText.text = "Items: " + inventoryManager.itemCount.ToString();
+        }
+    }
+
+    public void UpdateHealthUI()
+    {
         for (int i=0; i < hearts.Length; i++)
         {
 
@@ -58,16 +72,6 @@ public class InGameUI : MonoBehaviour
             {
                 hearts[i].enabled = false;
             }
-        }
-        
-    }
-
-     // Update the text value of the TextMeshPro component
-    public void UpdateItemText()
-    {
-        if (itemText != null)
-        {
-            itemText.text = "Items: " + inventoryManager.itemCount.ToString();
         }
     }
 }
