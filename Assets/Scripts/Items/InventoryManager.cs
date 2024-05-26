@@ -5,25 +5,58 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public List<Item> items = new List<Item>();
+    public List<string> items = new List<string>();
 
-    public void AddItem(Item item)
+    public GameObject banana; 
+    public GameObject blueberry; 
+    public GameObject cherry; 
+
+    public void AddItem(string item)
     {
-        items.Add(item);
-        Debug.Log("Item added: " + item.GetType().Name + ". Total items: " + items.Count);
+       if (item != null)
+        {
+            items.Add(item);
+            Debug.Log("Item added: " + item + ". Total items: " + items.Count);
+            
+        }
     }
 
-    public int GetItemCount<T>() where T : Item
+    public int GetItemCount(string itemName)
     {
         int count = 0;
-        foreach (Item item in items)
+        foreach (string item in items)
         {
-            if (item is T)
+            if (item == itemName)
             {
                 count++;
             }
         }
         return count;
+    }
+
+
+    public void DropItems()
+    {
+
+        if (items.Count == 0) return;
+
+        string randomItem = RandomElementSelector.GetRandomElement(items);
+        print("Randomly selected item: " + randomItem);
+
+        if (randomItem == "banana")
+        {
+            Instantiate(banana);
+        }
+        else if (randomItem == "blueberry")
+        {
+            Instantiate(blueberry);
+        }
+        else
+        {
+              Instantiate(cherry);
+        }
+        items.Remove(randomItem);
+        
     }
 
 }

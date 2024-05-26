@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,7 +10,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movementInput;
     private Direction currentDirection;
-
+    public InventoryManager inventory;
+    
 
     // Dash variables
     private bool canDash = true;
@@ -45,6 +47,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         animator.speed = animationSpeed;
+
+        // Start player facing the screen
+        currentDirection = Direction.Down;
     }
     void FixedUpdate()
     {
@@ -165,7 +170,7 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             StartCoroutine(Knockback(collision));
-            
+            inventory.DropItems();
         }
     }
 
@@ -182,6 +187,8 @@ public class PlayerController : MonoBehaviour
 
         isKnockedBack = false;
     }
+
+
 
 
 }

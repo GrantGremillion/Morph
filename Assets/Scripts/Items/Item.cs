@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,6 +8,8 @@ public class Item : MonoBehaviour
 {
 
     public InventoryManager inventory;
+
+    public String type;
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +25,11 @@ public class Item : MonoBehaviour
 
     void OnTriggerEnter2D (Collider2D collider)
     {
-        
+        inventory = FindObjectOfType<InventoryManager>();
+
         if (collider.CompareTag("Player"))
         {
-            print("collision");
-            inventory.AddItem(this);
+            inventory.AddItem(this.type);
             Destroy(gameObject);
         }
     }
