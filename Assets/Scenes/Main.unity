@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e63dff5bbbcd69047b5260422f452193, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bf9fc8d9665e8d409627663d29796ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2978,10 +2978,6 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1273676340}
-    - target: {fileID: 3031776390072044400, guid: 663afc09ff7f5b241820531850be0fec, type: 3}
-      propertyPath: itemPrefab
-      value: 
-      objectReference: {fileID: 3105558158463327667, guid: 663afc09ff7f5b241820531850be0fec, type: 3}
     - target: {fileID: 3105558158463327667, guid: 663afc09ff7f5b241820531850be0fec, type: 3}
       propertyPath: m_Name
       value: Banana
