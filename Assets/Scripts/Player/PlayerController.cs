@@ -170,7 +170,6 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             StartCoroutine(Knockback(collision));
-            inventory.DropItems();
         }
     }
 
@@ -186,6 +185,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(knockbackDuration);
 
         isKnockedBack = false;
+        // Wait until player has been knowcked back to drop items
+        inventory.DropItems();
     }
 
 
