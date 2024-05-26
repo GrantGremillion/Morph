@@ -8,13 +8,18 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movementInput;
     private Direction currentDirection;
-    private bool isFacingRight = true;
+
 
     // Dash variables
     private bool canDash = true;
     private bool isDashing;
     private float dashingCooldown = 1f;
+    private bool isFacingRight = true;
+    public int health;
+    public int numOfHearts;
 
+
+    // Facing Directions
     private enum Direction
     {
         Up,
@@ -57,36 +62,36 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnMove(InputValue inputValue)
-{
-    movementInput = inputValue.Get<Vector2>();
-
-    if (movementInput != Vector2.zero)
     {
-        // Prioritize horizontal movement over vertical movement
-        if (movementInput.x > 0)
-        {
-            currentDirection = Direction.Right;
-            isFacingRight = true;
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-        else if (movementInput.x < 0)
-        {
-            currentDirection = Direction.Left;
-            isFacingRight = false;
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-        else if (movementInput.y > 0)
-        {
-            currentDirection = Direction.Up;
-        }
-        else if (movementInput.y < 0)
-        {
-            currentDirection = Direction.Down;
-        }
+        movementInput = inputValue.Get<Vector2>();
 
-        //Debug.Log("Current Direction: " + currentDirection);
+        if (movementInput != Vector2.zero)
+        {
+            // Prioritize horizontal movement over vertical movement
+            if (movementInput.x > 0)
+            {
+                currentDirection = Direction.Right;
+                isFacingRight = true;
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else if (movementInput.x < 0)
+            {
+                currentDirection = Direction.Left;
+                isFacingRight = false;
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else if (movementInput.y > 0)
+            {
+                currentDirection = Direction.Up;
+            }
+            else if (movementInput.y < 0)
+            {
+                currentDirection = Direction.Down;
+            }
+
+            //Debug.Log("Current Direction: " + currentDirection);
+        }
     }
-}
 
 
     private IEnumerator Dash()
