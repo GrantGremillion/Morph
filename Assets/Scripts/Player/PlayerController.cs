@@ -15,7 +15,11 @@ public class PlayerController : MonoBehaviour
 
     // Shooting variables
     private bool canShoot = true;
+    public float holdTimeToShoot = 0.5f; // Time in seconds to hold the button to shoot
     public float shootCooldown = 1.0f;
+
+    private float holdTime = 0.0f;
+    private float currentShootCooldown = 0.0f;
 
 
     // Dash variables
@@ -88,57 +92,78 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        // Left mouse = Shoot arrow
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canShoot && canDash)
+
+        // Hold Left click
+        if (Input.GetKey(KeyCode.Mouse0) && canShoot && canDash)
         {
-            Quaternion rotation = Quaternion.identity;
-            Vector2 velocity = Vector2.zero;
-            Vector3 offset = Vector3.zero;
-            float offsetDistance = .15f; // Distance to offset the arrow from the player
-
-            switch (currentDirection)
-            {
-                case Direction.Up:
-                    rotation = Quaternion.Euler(0, 0, 90);
-                    velocity = new Vector2(0.0f, 1.0f);
-                    offset = new Vector3(0, offsetDistance, 0);
-                    break;
-                case Direction.Down:
-                    rotation = Quaternion.Euler(0, 0, -90);
-                    velocity = new Vector2(0.0f, -1.0f);
-                    offset = new Vector3(0, -offsetDistance, 0);
-                    break;
-                case Direction.Left:
-                    rotation = Quaternion.Euler(0, 0, 180);
-                    velocity = new Vector2(-1.0f, 0.0f);
-                    offset = new Vector3(-offsetDistance, 0, 0);
-                    break;
-                case Direction.Right:
-                    rotation = Quaternion.Euler(0, 0, 0);
-                    velocity = new Vector2(1.0f, 0.0f);
-                    offset = new Vector3(offsetDistance, 0, 0);
-                    break;
-            }
-
-            // Calculate the spawn position with the offset
-            Vector3 spawnPosition = transform.position + offset;
-
-            // Instantiate the arrow at the spawn position with the calculated rotation
-            GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
-            arrow.GetComponent<Rigidbody2D>().velocity = velocity;
-            canShoot = false;
+            holdTime += Time.deltaTime;
         }
 
-        else if (!canShoot)
+        // Release Left click
+        if (Input.GetKeyUp(KeyCode.Mouse0) && canShoot && canDash)
         {
-            shootCooldown -= Time.deltaTime;
-            if (shootCooldown  <= 0)
+            if (holdTime >= holdTimeToShoot)
+            {
+                ShootArrow();
+                canShoot = false;
+                holdTime = 0.0f; // Reset hold time after shooting
+            }
+            else
+            {
+                holdTime = 0.0f; // Reset hold time if not held long enough
+            }
+        }
+
+        // Handle cooldown logic
+        if (!canShoot)
+        {
+            currentShootCooldown -= Time.deltaTime;
+            if (currentShootCooldown <= 0)
             {
                 canShoot = true;
-                shootCooldown = 1.0f;
+                currentShootCooldown = shootCooldown;
             }
         }
 
+    }
+
+    void ShootArrow()
+    {
+        Quaternion rotation = Quaternion.identity;
+        Vector2 velocity = Vector2.zero;
+        Vector3 offset = Vector3.zero;
+        float offsetDistance = .15f; // Distance to offset the arrow from the player
+
+        switch (currentDirection)
+        {
+            case Direction.Up:
+                rotation = Quaternion.Euler(0, 0, 90);
+                velocity = new Vector2(0.0f, 1.0f);
+                offset = new Vector3(0, offsetDistance, 0);
+                break;
+            case Direction.Down:
+                rotation = Quaternion.Euler(0, 0, -90);
+                velocity = new Vector2(0.0f, -1.0f);
+                offset = new Vector3(0, -offsetDistance, 0);
+                break;
+            case Direction.Left:
+                rotation = Quaternion.Euler(0, 0, 180);
+                velocity = new Vector2(-1.0f, 0.0f);
+                offset = new Vector3(-offsetDistance, 0, 0);
+                break;
+            case Direction.Right:
+                rotation = Quaternion.Euler(0, 0, 0);
+                velocity = new Vector2(1.0f, 0.0f);
+                offset = new Vector3(offsetDistance, 0, 0);
+                break;
+        }
+
+        // Calculate the spawn position with the offset
+        Vector3 spawnPosition = transform.position + offset;
+
+        // Instantiate the arrow at the spawn position with the calculated rotation
+        GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
+        arrow.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     void PlayAnimations()

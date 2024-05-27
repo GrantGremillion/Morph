@@ -386,6 +386,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   inventory: {fileID: 1273676340}
   arrowPrefab: {fileID: 7022741825510326485, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
+  holdTimeToShoot: 0.5
   shootCooldown: 1
   health: 3
   numOfHearts: 3
