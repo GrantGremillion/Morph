@@ -5,12 +5,13 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
 
-    [SerializeField] private float destroyTime;
+    public float destroyTime = 1.0f;
+    public float damage = 2;
 
     // Start is called before the first frame update
     void Start()
     {
-        destroyTime = 1.0f;
+    
     }
 
     // Update is called once per frame
