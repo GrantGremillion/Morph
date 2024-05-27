@@ -7,6 +7,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+    public float speed;
+    public float smoothingFactor = 0.1f; // Determines how quickly the enemy changes direction
+    public PlayerAwarenessController playerAwarenessController;
+    public new Rigidbody2D rigidbody;
+    public Vector2 targetDirection;
+    public Vector2 currentDirection = Vector2.zero;
+
+
     // Health variables
     public float health;
     public float maxHealth;
@@ -26,11 +34,23 @@ public class Enemy : MonoBehaviour
     public float minSpawnDistance = 2f;
     public float maxSpawnDistance = 5f;
     public float moveSpeed = 1f; // Speed at which items move away from the player
-    public float maxDistanceFromPlayer = 10f; // Maximum distance from player before items stop moving
+    public float maxDistanceFromEnemy = 10f; // Maximum distance from player before items stop moving
+
+
+    public enum State
+    {
+        Left,
+        Right,
+        Idle
+    }
+
+    public State currentState;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        rigidbody = GetComponent<Rigidbody2D>();
+        playerAwarenessController = GetComponent<PlayerAwarenessController>();
         healthbarFill.fillAmount = health / maxHealth;
     }
 
@@ -105,7 +125,7 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator MoveItemAway(Transform itemTransform)
     {
-        while (Vector3.Distance(itemTransform.position, transform.position) < maxDistanceFromPlayer)
+        while (Vector3.Distance(itemTransform.position, transform.position) < maxDistanceFromEnemy)
         {
             // Move the item away from the player
             itemTransform.position += (itemTransform.position - transform.position).normalized * moveSpeed * Time.deltaTime;
