@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     public InventoryManager inventory;
     public GameObject arrowPrefab;
 
+    // Shooting variables
+    private bool canShoot = true;
+    public float shootCooldown = 1.0f;
+
 
     // Dash variables
     private bool canDash = true;
@@ -43,6 +47,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingPower;
     [SerializeField] private float dashingTime = 0.2f;
 
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -69,13 +74,22 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        CheckPlayerInput();
+        PlayAnimations();
+    }
+
+
+    void CheckPlayerInput()
+    {
+
+        // Left Shift = Dash
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
         }
 
         // Left mouse = Shoot arrow
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canDash)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canShoot && canDash)
         {
             Quaternion rotation = Quaternion.identity;
             Vector2 velocity = Vector2.zero;
@@ -112,9 +126,18 @@ public class PlayerController : MonoBehaviour
             // Instantiate the arrow at the spawn position with the calculated rotation
             GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
             arrow.GetComponent<Rigidbody2D>().velocity = velocity;
+            canShoot = false;
         }
 
-        PlayAnimations();
+        else if (!canShoot)
+        {
+            shootCooldown -= Time.deltaTime;
+            if (shootCooldown  <= 0)
+            {
+                canShoot = true;
+                shootCooldown = 1.0f;
+            }
+        }
 
     }
 
