@@ -4,12 +4,19 @@ using UnityEngine;
 public class MushroomEnemy : Enemy
 {
 
+    public Animator animator;
+
+    [SerializeField] private float animationSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
         dropType = "banana";
         maxHealth = 10;
         speed = 0.3f;
+
+        animator = GetComponent<Animator>();
+        animator.speed = animationSpeed;
     }
 
     // Update is called once per frame
