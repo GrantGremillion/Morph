@@ -52,6 +52,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashingTime = 0.2f;
 
 
+    // Shop trigger zone
+    public TriggerZone tz;
+    public Shop shop;
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -60,6 +65,9 @@ public class PlayerController : MonoBehaviour
 
         // Start player facing the screen
         currentDirection = Direction.Down;
+
+        tz = FindAnyObjectByType<TriggerZone>();
+        shop = FindAnyObjectByType<Shop>();
     }
     void FixedUpdate()
     {
@@ -92,6 +100,12 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
+        // Open/Close shop
+        if (Input.GetKeyDown(KeyCode.E) && tz.canUseShop)
+        {
+            if (!shop.usingShop) shop.OpenShop();
+            else shop.CloseShop();
+        }
 
         // Hold Left click
         if (Input.GetKey(KeyCode.Mouse0) && canShoot && canDash)
