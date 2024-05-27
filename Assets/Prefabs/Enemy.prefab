@@ -143,3 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9573c06088d6b044fa5f367bf9d16f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropType: 
+  numberOfDrops: 3
+  banana: {fileID: 3105558158463327667, guid: 663afc09ff7f5b241820531850be0fec, type: 3}
+  blueberry: {fileID: 6965595104004759051, guid: ae3a1e2a869417c4bba8c214d55d8c00, type: 3}
+  cherry: {fileID: 6642731324118583853, guid: 3c8c44ee6c7bef44d806e4f034ce6287, type: 3}
+  minSpawnDistance: 0.2
+  maxSpawnDistance: 0.25
+  moveSpeed: 0.25
+  maxDistanceFromPlayer: 0.3
