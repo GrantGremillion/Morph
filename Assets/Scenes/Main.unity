@@ -388,6 +388,7 @@ MonoBehaviour:
   arrowPrefab: {fileID: 7022741825510326485, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
   holdTimeToShoot: 0.5
   shootCooldown: 1
+  arrowSpeed: 0.9
   health: 3
   numOfHearts: 3
   knockbackForce: 1
@@ -2612,6 +2613,10 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 4731303094572505209, guid: cde61bb289dd4e1499a89fe74e41b8e2, type: 3}
+    - target: {fileID: 4731303094572505209, guid: cde61bb289dd4e1499a89fe74e41b8e2, type: 3}
+      propertyPath: moveSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5705198476227282040, guid: cde61bb289dd4e1499a89fe74e41b8e2, type: 3}
       propertyPath: m_Name
       value: Enemy

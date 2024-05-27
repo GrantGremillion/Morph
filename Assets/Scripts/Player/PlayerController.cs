@@ -17,9 +17,9 @@ public class PlayerController : MonoBehaviour
     private bool canShoot = true;
     public float holdTimeToShoot = 0.5f; // Time in seconds to hold the button to shoot
     public float shootCooldown = 1.0f;
-
     private float holdTime = 0.0f;
     private float currentShootCooldown = 0.0f;
+    public float arrowSpeed = 0.5f;
 
 
     // Dash variables
@@ -128,43 +128,33 @@ public class PlayerController : MonoBehaviour
     }
 
     void ShootArrow()
-    {
-        Quaternion rotation = Quaternion.identity;
-        Vector2 velocity = Vector2.zero;
-        Vector3 offset = Vector3.zero;
-        float offsetDistance = .15f; // Distance to offset the arrow from the player
+{
+    // Get the mouse position in world space
+    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    mousePosition.z = 0; // Ensure the z-coordinate is 0 since we're working in 2D
 
-        switch (currentDirection)
-        {
-            case Direction.Up:
-                rotation = Quaternion.Euler(0, 0, 90);
-                velocity = new Vector2(0.0f, 1.0f);
-                offset = new Vector3(0, offsetDistance, 0);
-                break;
-            case Direction.Down:
-                rotation = Quaternion.Euler(0, 0, -90);
-                velocity = new Vector2(0.0f, -1.0f);
-                offset = new Vector3(0, -offsetDistance, 0);
-                break;
-            case Direction.Left:
-                rotation = Quaternion.Euler(0, 0, 180);
-                velocity = new Vector2(-1.0f, 0.0f);
-                offset = new Vector3(-offsetDistance, 0, 0);
-                break;
-            case Direction.Right:
-                rotation = Quaternion.Euler(0, 0, 0);
-                velocity = new Vector2(1.0f, 0.0f);
-                offset = new Vector3(offsetDistance, 0, 0);
-                break;
-        }
+    // Calculate the direction from the player to the mouse position
+    Vector3 direction = (mousePosition - transform.position).normalized;
 
-        // Calculate the spawn position with the offset
-        Vector3 spawnPosition = transform.position + offset;
+    // Calculate the rotation angle
+    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
-        // Instantiate the arrow at the spawn position with the calculated rotation
-        GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
-        arrow.GetComponent<Rigidbody2D>().velocity = velocity;
-    }
+    // Set the velocity
+    Vector2 velocity = new Vector2(direction.x, direction.y);
+
+    // Set the offset (if needed, based on the direction)
+    Vector3 offset = direction * 0.15f; // Adjust this value if needed
+
+    // Calculate the spawn position with the offset
+    Vector3 spawnPosition = transform.position + offset;
+
+    // Instantiate the arrow at the spawn position with the calculated rotation
+    GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
+    arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrowSpeed; 
+}
+
+
 
     void PlayAnimations()
     {
