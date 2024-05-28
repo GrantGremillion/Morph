@@ -846,7 +846,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1258815919
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: cd321d9c1a1d8e047ac437612e810e80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3620,6 +3620,7 @@ GameObject:
   - component: {fileID: 1902802636}
   - component: {fileID: 1902802637}
   - component: {fileID: 1902802638}
+  - component: {fileID: 1902802639}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -3747,9 +3748,23 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0019446611, y: -0.0048615187}
+  m_Offset: {x: 0.0010395944, y: -0.0062190816}
   serializedVersion: 2
-  m_Radius: 0.05693561
+  m_Radius: 0.072773844
+--- !u!114 &1902802639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902802634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe9a26b86703b24c950e86fa9afab2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  sprite: {fileID: 0}
 --- !u!1 &1938778278
 GameObject:
   m_ObjectHideFlags: 0
@@ -4015,11 +4030,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6426508967389226672, guid: b0116b391a77525499571fe286d239df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.233
+      value: 1.329
       objectReference: {fileID: 0}
     - target: {fileID: 6426508967389226672, guid: b0116b391a77525499571fe286d239df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.135
+      value: -0.706
       objectReference: {fileID: 0}
     - target: {fileID: 6426508967389226672, guid: b0116b391a77525499571fe286d239df, type: 3}
       propertyPath: m_LocalPosition.z
