@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     // Health variables
     public float health;
     public float maxHealth;
+    public bool pauseAnimation;
+    public float immunityTime = 0.5f;
     public UnityEngine.UI.Image healthbarFill;
 
     // Drop variables
@@ -41,6 +43,10 @@ public class Enemy : MonoBehaviour
     {
         Left,
         Right,
+        Hurt,
+        Dead,
+        Root,
+        Uproot,
         Idle
     }
 
@@ -52,12 +58,30 @@ public class Enemy : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         playerAwarenessController = GetComponent<PlayerAwarenessController>();
         healthbarFill.fillAmount = health / maxHealth;
+        pauseAnimation = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateState();
+        print(currentState);
+    }
 
+    public void UpdateState()
+    {
+        if (targetDirection.x > 0 && !pauseAnimation)
+        {
+            currentState = State.Right;
+        }
+        else if (targetDirection.x < 0 && !pauseAnimation)
+        {
+            currentState = State.Left;
+        }
+        else if (!pauseAnimation)
+        {
+            currentState = State.Idle;
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -65,15 +89,30 @@ public class Enemy : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            health -= arrow.damage;
-            healthbarFill.fillAmount = health / maxHealth;
-            if (health == 0)
-            {
-                DropItems();
-                Destroy(gameObject);
-            }
+            StartCoroutine(TakeDamage());
             Destroy(collision.gameObject);
-            
+        }
+    }
+
+    private IEnumerator TakeDamage()
+    {
+
+        health -= arrow.damage;
+        healthbarFill.fillAmount = health / maxHealth;
+        if (health <= 0)
+        {
+            currentState = State.Dead;
+            pauseAnimation = true;
+            yield return new WaitForSeconds(immunityTime);
+            DropItems();
+            Destroy(gameObject);
+        }
+        else
+        {
+            currentState = State.Hurt;
+            pauseAnimation = true;
+            yield return new WaitForSeconds(immunityTime);
+            pauseAnimation = false;
         }
     }
 
@@ -98,7 +137,7 @@ public class Enemy : MonoBehaviour
                 case "cherry":
                     newItem = Instantiate(cherry, spawnPosition, Quaternion.identity);
                     break;
-           
+
             }
 
             StartCoroutine(MoveItemAway(newItem.transform));
@@ -132,4 +171,30 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
     }
+
+
+
+    // Function to handle changes in awareness
+    public void OnAwarenessChanged(bool newAwarenessState)
+    {
+        if (newAwarenessState)
+        {
+            currentState = State.Uproot;
+        }
+        else
+        {
+            currentState = State.Root;
+        }
+        StartCoroutine(PauseOtherAnimations());
+    }
+
+
+    public IEnumerator PauseOtherAnimations()
+    {
+        pauseAnimation = true;
+        yield return new WaitForSeconds(immunityTime);
+        pauseAnimation = false;
+    }
+
+
 }

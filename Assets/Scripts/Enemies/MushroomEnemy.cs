@@ -1,4 +1,5 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MushroomEnemy : Enemy
@@ -17,6 +18,7 @@ public class MushroomEnemy : Enemy
 
         animator = GetComponent<Animator>();
         animator.speed = animationSpeed;
+
     }
 
     // Update is called once per frame
@@ -24,19 +26,19 @@ public class MushroomEnemy : Enemy
     {
         UpdateTargetDirection();
         SetVelocity();
+        PlayAnimations();
     }
+
 
     private void UpdateTargetDirection()
     {
         if (playerAwarenessController.awareOfPlayer)
         {
             targetDirection = playerAwarenessController.directionToPlayer;
-            currentState = State.Left;
         }
         else
         {
             targetDirection = Vector2.zero;
-            currentState = State.Idle;
         }
     }
 
@@ -47,10 +49,45 @@ public class MushroomEnemy : Enemy
         {
             rigidbody.velocity = Vector2.zero;
         }
-        else
+
+        else if (currentState == State.Right)
         {
             rigidbody.velocity = targetDirection * speed;
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
+        else if (currentState == State.Left)
+        {
+            rigidbody.velocity = targetDirection * speed;
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+    }
+
+    void PlayAnimations()
+    {
+        switch (currentState)
+            {
+                case State.Left:
+                    animator.Play("Walk");
+                    break;
+                case State.Right:
+                    animator.Play("Walk");
+                    break;
+                case State.Hurt:
+                    animator.Play("Hurt");
+                    break;
+                case State.Dead:
+                    animator.Play("Dead");
+                    break;
+                case State.Root:
+                    animator.Play("Root");
+                    break;
+                case State.Uproot:
+                    animator.Play("Uproot");
+                    break;
+                case State.Idle:
+                    animator.Play("Idle");
+                    break;
+            }
     }
 
 }
