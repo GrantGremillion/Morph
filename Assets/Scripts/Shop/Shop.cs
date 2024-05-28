@@ -13,7 +13,6 @@ public class Shop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shopUI = FindAnyObjectByType<ShopUI>();
         shopUI.gameObject.SetActive(false);
     }
 
