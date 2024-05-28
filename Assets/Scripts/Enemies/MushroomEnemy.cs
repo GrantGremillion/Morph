@@ -7,6 +7,8 @@ public class MushroomEnemy : Enemy
 
     public Animator animator;
 
+    public Canvas healthbar;
+
     [SerializeField] private float animationSpeed;
 
     // Start is called before the first frame update
@@ -18,6 +20,8 @@ public class MushroomEnemy : Enemy
 
         animator = GetComponent<Animator>();
         animator.speed = animationSpeed;
+
+        healthbar = GetComponentInChildren<Canvas>();
 
     }
 
