@@ -23,8 +23,27 @@ public class InventoryManager : MonoBehaviour
         if (item != null)
         {
             items.Add(item);
-            Debug.Log("Item added: " + item + ". Total items: " + items.Count);
+            //Debug.Log("Item added: " + item + ". Total items: " + items.Count);
 
+        }
+    }
+
+    public void RemoveItems(string item, int amount)
+    {
+        //print("Removing" + ammount + " " + item + "'s from inventory");
+
+        int count = 0;
+        for (int i = items.Count - 1; i >= 0; i--) 
+        {
+            if (items[i] == item)
+            {
+                items.RemoveAt(i);
+                count++;
+                if (count == amount) 
+                {
+                    break;
+                }
+            }
         }
     }
 

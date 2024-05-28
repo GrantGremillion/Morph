@@ -28,6 +28,11 @@ public class Shop : MonoBehaviour
     public bool canUpgradeHealth;
 
 
+
+    public int levels;
+    public int maxLevels;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +49,9 @@ public class Shop : MonoBehaviour
     void Update()
     {
         GetPlayerItemCounts();
+        shopUI.UpdateUI();
+        CompareCounts();
+        GetUpgradeCosts();
     }
 
     public void OpenShop()
@@ -53,9 +61,6 @@ public class Shop : MonoBehaviour
         {
             shopUI.gameObject.SetActive(true);
         }
-        GetUpgradeCosts();
-        CompareCounts();
-        shopUI.UpdateUI();
     }
 
     public void CloseShop()
@@ -100,6 +105,12 @@ public class Shop : MonoBehaviour
             canUpgradeHealth = true;
         }
         else canUpgradeHealth = false;
+    }
+
+    public void Upgrade()
+    {
+        levels++;
+        player.currentBowLvl++;
     }
 
 }

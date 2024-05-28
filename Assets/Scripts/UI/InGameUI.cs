@@ -22,7 +22,6 @@ public class InGameUI : MonoBehaviour
     public PlayerController player;
 
 
-
     // Start is called before the first frame update
     void Start()
     {

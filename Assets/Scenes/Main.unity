@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 47896174}
   - component: {fileID: 47896173}
   m_Layer: 0
-  m_Name: UpgradeBowButton
+  m_Name: UpgradeHealthButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,6 +401,8 @@ MonoBehaviour:
   healthUpgradeCosts: 
   currentHealthUpgradeCost: 0
   canUpgradeHealth: 0
+  levels: 0
+  maxLevels: 3
 --- !u!1 &106035626
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,10 +3351,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e47150e027d0d64ba56b4de26f325c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lvlBoxes:
+  - {fileID: 107506849}
+  - {fileID: 379981602}
+  - {fileID: 1761781691}
+  fullLvlBox: {fileID: 361520548, guid: 6b0054d50b407504ba69617de1a7206e, type: 3}
+  emptyLvlBox: {fileID: 519727203, guid: 6b0054d50b407504ba69617de1a7206e, type: 3}
   shopHeaderText: {fileID: 1814795070}
   shop: {fileID: 95885793}
   bowCostText: {fileID: 1686244598}
   healthCostText: {fileID: 463528100}
+  upgradeBowButton: {fileID: 1167573109}
+  upgradeHealthButton: {fileID: 47896173}
+  inventory: {fileID: 1273676340}
 --- !u!114 &1251426927
 MonoBehaviour:
   m_ObjectHideFlags: 0
