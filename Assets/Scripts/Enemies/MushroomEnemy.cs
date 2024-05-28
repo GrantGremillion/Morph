@@ -60,6 +60,10 @@ public class MushroomEnemy : Enemy
             rigidbody.velocity = targetDirection * speed;
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
+        else if (currentState == State.Dead)
+        {
+            rigidbody.velocity = Vector2.zero;
+        }
     }
 
     void PlayAnimations()
