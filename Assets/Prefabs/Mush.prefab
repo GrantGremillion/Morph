@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 5705198476227282040}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.108, y: -0.663, z: 6.0027866}
+  m_LocalPosition: {x: 0.233, y: -0.135, z: 6.0027866}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -361,6 +361,8 @@ MonoBehaviour:
   currentDirection: {x: 0, y: 0}
   health: 4
   maxHealth: 4
+  pauseAnimation: 0
+  immunityTime: 0.5
   healthbarFill: {fileID: 9026680530229533825}
   dropType: 
   numberOfDrops: 2
@@ -374,7 +376,7 @@ MonoBehaviour:
   maxDistanceFromEnemy: 10
   currentState: 0
   animator: {fileID: 0}
-  animationSpeed: 0
+  animationSpeed: 0.1
 --- !u!114 &4573967968893964992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAwarenessDistance: 0.8
+  enemy: {fileID: 0}
 --- !u!95 &525571324553371610
 Animator:
   serializedVersion: 5

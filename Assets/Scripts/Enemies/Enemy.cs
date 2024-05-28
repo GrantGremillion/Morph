@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         UpdateState();
-        print(currentState);
+        //print(currentState);
     }
 
     public void UpdateState()

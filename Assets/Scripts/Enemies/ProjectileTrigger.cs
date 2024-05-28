@@ -46,6 +46,11 @@ public class ProjectileTrigger : MonoBehaviour
         {
             StartCoroutine(DisableColliderTemporarily());
         }
+
+        if (collider.CompareTag("Arrow") && enemy.health < 4)
+        {
+            enemy.rigidbody.mass = 100;
+        }
     }
 
     private IEnumerator DisableColliderTemporarily()
