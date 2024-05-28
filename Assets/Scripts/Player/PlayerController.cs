@@ -56,6 +56,10 @@ public class PlayerController : MonoBehaviour
     public TriggerZone tz;
     public Shop shop;
 
+    // Upgrade Levels
+    public int currentBowLvl;
+    public int currentHealthLvl;
+
 
     void Awake()
     {
@@ -68,6 +72,9 @@ public class PlayerController : MonoBehaviour
 
         tz = FindAnyObjectByType<TriggerZone>();
         shop = FindAnyObjectByType<Shop>();
+
+        currentBowLvl = 0;
+        currentHealthLvl = 0;
     }
     void FixedUpdate()
     {
