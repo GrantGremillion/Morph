@@ -59,6 +59,7 @@ public class Shop : MonoBehaviour
         usingShop = true;
         if (shopUI != null)
         {
+            player.canShoot = false;
             shopUI.gameObject.SetActive(true);
         }
     }
@@ -66,6 +67,7 @@ public class Shop : MonoBehaviour
     public void CloseShop()
     {
         usingShop = false;
+        player.canShoot = true;
         if (shopUI != null)
         {
             shopUI.gameObject.SetActive(false);

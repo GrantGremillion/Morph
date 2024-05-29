@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     public Bow bow; 
 
     // Shooting variables
-    private bool canShoot = true;
+    public bool canShoot = true;
     public float holdTimeToShoot = 0.5f; // Time in seconds to hold the button to shoot
-    public float shootCooldown = 1.0f;
+    public float shootCooldown = 0.5f;
     private float holdTime = 0.0f;
     private float currentShootCooldown = 0.0f;
     public float arrowSpeed = 0.5f;
@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Handle cooldown logic
-        if (!canShoot)
+        if (!canShoot & !shop.shopUI.isActiveAndEnabled)
         {
             currentShootCooldown -= Time.deltaTime;
             if (currentShootCooldown <= 0)
