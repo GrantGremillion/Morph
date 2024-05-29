@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class SortingOrder : MonoBehaviour
 {
     public PlayerController player;
 
     public SpriteRenderer sprite;
+
+    [SerializeField] float swapPointOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,7 @@ public class Fire : MonoBehaviour
     void Update()
     {
 
-        if (player.transform.position.y > transform.position.y + 0.05)
+        if (player.transform.position.y > transform.position.y + swapPointOffset)
         {
             sprite.sortingOrder = 2;
         }
