@@ -89,13 +89,14 @@ public class Enemy : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            StartCoroutine(TakeDamage());
-            Destroy(collision.gameObject);
+            StartCoroutine(TakeDamage(collision));
         }
     }
 
-    private IEnumerator TakeDamage()
+    private IEnumerator TakeDamage(Collision2D collision)
     {
+
+        arrow = collision.gameObject.GetComponent<Arrow>();
 
         health -= arrow.damage;
         healthbarFill.fillAmount = health / maxHealth;

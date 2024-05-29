@@ -369,13 +369,14 @@ MonoBehaviour:
   banana: {fileID: 3105558158463327667, guid: 663afc09ff7f5b241820531850be0fec, type: 3}
   blueberry: {fileID: 6965595104004759051, guid: ae3a1e2a869417c4bba8c214d55d8c00, type: 3}
   cherry: {fileID: 6642731324118583853, guid: 3c8c44ee6c7bef44d806e4f034ce6287, type: 3}
-  arrow: {fileID: -81170506000759548, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
+  arrow: {fileID: 0}
   minSpawnDistance: 0.2
   maxSpawnDistance: 0.25
   moveSpeed: 0.2
   maxDistanceFromEnemy: 10
   currentState: 0
   animator: {fileID: 0}
+  healthbar: {fileID: 0}
   animationSpeed: 0.1
 --- !u!114 &4573967968893964992
 MonoBehaviour:
