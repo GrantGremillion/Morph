@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public InventoryManager inventory;
     public GameObject arrowPrefab;
     public Transform bowTransform;
+    public Bow bow; 
 
     // Shooting variables
     private bool canShoot = true;
@@ -76,6 +77,8 @@ public class PlayerController : MonoBehaviour
 
         currentBowLvl = 0;
         currentHealthLvl = 0;
+
+        bow = bowTransform.gameObject.GetComponent<Bow>();
     }
     void FixedUpdate()
     {
@@ -119,6 +122,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0) && canShoot && canDash)
         {
             holdTime += Time.deltaTime;
+
+            if (holdTime > holdTimeToShoot)
+            {
+                bow.animator.Play("Hold");
+            }
+            else bow.animator.Play("Shoot");
         }
 
         // Release Left click
@@ -126,6 +135,7 @@ public class PlayerController : MonoBehaviour
         {
             if (holdTime >= holdTimeToShoot)
             {
+                bow.animator.Play("Still");
                 ShootArrow();
                 canShoot = false;
                 holdTime = 0.0f; // Reset hold time after shooting

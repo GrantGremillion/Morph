@@ -3184,6 +3184,7 @@ GameObject:
   - component: {fileID: 1242068839}
   - component: {fileID: 1242068840}
   - component: {fileID: 1242068841}
+  - component: {fileID: 1242068842}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
@@ -3271,8 +3272,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd196cefff046eb4a9774cc59ca73558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1242068842}
+  animationSpeed: 0.05
   arrow: {fileID: 7022741825510326485, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
   spawn: {fileID: 1660717300}
+--- !u!95 &1242068842
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242068838}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 856c1dee0194af54fa315356a73f1928, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1251426924
 GameObject:
   m_ObjectHideFlags: 0

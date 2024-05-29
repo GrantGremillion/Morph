@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bow : MonoBehaviour
 {
+
+    public Animator animator;
+    [SerializeField] private float animationSpeed;
     public GameObject arrow;
     public GameObject spawn;
     private Transform playerTransform;
@@ -12,8 +15,8 @@ public class Bow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Assuming the bow is a child of the player
         playerTransform = transform.parent;
+        animator.speed = animationSpeed;
     }
 
     // Update is called once per frame
