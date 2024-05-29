@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Direction currentDirection;
     public InventoryManager inventory;
     public GameObject arrowPrefab;
+    public Transform bowTransform;
 
     // Shooting variables
     private bool canShoot = true;
@@ -149,31 +150,31 @@ public class PlayerController : MonoBehaviour
     }
 
     void ShootArrow()
-{
-    // Get the mouse position in world space
-    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    mousePosition.z = 0; // Ensure the z-coordinate is 0 since we're working in 2D
+    {
+        // Get the mouse position in world space
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; // Ensure the z-coordinate is 0 since we're working in 2D
 
-    // Calculate the direction from the player to the mouse position
-    Vector3 direction = (mousePosition - transform.position).normalized;
+        // Calculate the direction from the player to the mouse position
+        Vector3 direction = (mousePosition - transform.position).normalized;
 
-    // Calculate the rotation angle
-    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    Quaternion rotation = Quaternion.Euler(0, 0, angle);
+        // Calculate the rotation angle
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
-    // Set the velocity
-    Vector2 velocity = new Vector2(direction.x, direction.y);
+        // Set the velocity
+        Vector2 velocity = new Vector2(direction.x, direction.y);
 
-    // Set the offset (if needed, based on the direction)
-    Vector3 offset = direction * 0.15f; // Adjust this value if needed
+        // Set the offset (if needed, based on the direction)
+        Vector3 offset = direction * 0.15f; // Adjust this value if needed
 
-    // Calculate the spawn position with the offset
-    Vector3 spawnPosition = transform.position + offset;
+        // Calculate the spawn position with the offset
+        Vector3 spawnPosition = transform.position + offset;
 
-    // Instantiate the arrow at the spawn position with the calculated rotation
-    GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
-    arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrowSpeed; 
-}
+        // Instantiate the arrow at the spawn position with the calculated rotation
+        GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
+        arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrowSpeed;
+    }
 
 
 
@@ -211,14 +212,19 @@ public class PlayerController : MonoBehaviour
                 animator.Play("WalkHorizontal");
                 currentDirection = Direction.Right;
 
+                bowTransform.SetParent(null);
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                bowTransform.SetParent(transform);
+                
             }
             else if (movementInput.x < 0)
             {
                 animator.Play("WalkHorizontal");
                 currentDirection = Direction.Left;
 
-                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                bowTransform.SetParent(null);
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                bowTransform.SetParent(transform);
             }
             else if (movementInput.y > 0)
             {
