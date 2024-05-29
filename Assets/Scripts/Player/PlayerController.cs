@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
                 currentDirection = Direction.Left;
 
                 bowTransform.SetParent(null);
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 bowTransform.SetParent(transform);
             }
             else if (movementInput.y > 0)

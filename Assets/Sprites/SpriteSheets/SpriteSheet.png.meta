@@ -247,8 +247,8 @@ TextureImporter:
       name: SpriteSheet_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
+        x: 112
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -268,7 +268,7 @@ TextureImporter:
       name: SpriteSheet_8
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 96
         width: 16
         height: 16
@@ -289,7 +289,7 @@ TextureImporter:
       name: SpriteSheet_9
       rect:
         serializedVersion: 2
-        x: 32
+        x: 16
         y: 96
         width: 16
         height: 16
@@ -302,6 +302,27 @@ TextureImporter:
       bones: []
       spriteID: d28fbc7caacb08d4da3195afe134b8c5
       internalID: -552824516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03830985ef4f60c45adb326b1226611f
+      internalID: -2079597354
       vertices: []
       indices: 
       edges: []
@@ -319,6 +340,7 @@ TextureImporter:
     nameFileIdTable:
       SpriteSheet_0: -1273887497
       SpriteSheet_1: 983293088
+      SpriteSheet_10: -2079597354
       SpriteSheet_2: -1350047175
       SpriteSheet_3: -1470900937
       SpriteSheet_4: -2056256071
