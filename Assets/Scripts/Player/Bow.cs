@@ -6,26 +6,29 @@ public class Bow : MonoBehaviour
 {
 
     public Animator animator;
-    [SerializeField] private float animationSpeed;
     public GameObject arrow;
     public GameObject spawn;
+    public PlayerController player;
     private Transform playerTransform;
+    public UpgradeSystem upgradeSystem; 
     private float distanceFromPlayer = 0.08f; // Distance of the bow from the player
 
     // Start is called before the first frame update
     void Start()
     {
-        playerTransform = transform.parent;
-        animator.speed = animationSpeed;
+        player = FindAnyObjectByType<PlayerController>();
+        playerTransform = player.transform;
+        upgradeSystem = player.GetComponentInChildren<UpgradeSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Turning();
+        BowRotation();
+        animator.speed = 0.4f;
     }
 
-    void Turning()
+    void BowRotation()
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);

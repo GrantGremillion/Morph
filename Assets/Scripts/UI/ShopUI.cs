@@ -26,7 +26,7 @@ public class ShopUI : MonoBehaviour
     void Start()
     {
         upgradeBowButton.onClick.AddListener(OnUpgradeBowButtonPressed);
-        upgradeBowButton.onClick.AddListener(OnUpgradeHealthButtonPressed);
+        upgradeHealthButton.onClick.AddListener(OnUpgradeHealthButtonPressed);
     }
 
     // Update is called once per frame
@@ -58,7 +58,7 @@ public class ShopUI : MonoBehaviour
         {
             print("Bow Upgraded");
             inventory.RemoveItems("banana",shop.currentBowUpgradeCost);
-            shop.Upgrade();
+            shop.Upgrade("Bow");
             
         }
         else return;
@@ -72,6 +72,8 @@ public class ShopUI : MonoBehaviour
         }
         else return;
     }
+
+
 
     public void UpdateLvlBoxUI()
     {

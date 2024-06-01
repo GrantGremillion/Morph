@@ -14,12 +14,14 @@ public class Shop : MonoBehaviour
     public ShopUI shopUI;
     public PlayerController player;
 
+
+    // Player item counts
     public int bananaCount;
     public int blueberryCount;
     public int cherryCount;
 
-    public List<string> upgrades;
 
+    // Upgrade variables
     public List<int> bowUpgradeCosts;
     public int currentBowUpgradeCost;
     public bool canUpgradeBow;
@@ -39,19 +41,20 @@ public class Shop : MonoBehaviour
         player = FindAnyObjectByType<PlayerController>();
         shopUI.gameObject.SetActive(false);
 
-        bowUpgradeCosts = new List<int> { 10, 20, 30 };
-        healthUpgradeCosts = new List<int> { 10, 20, 30 };
-
-        upgrades = new List<string> { "Bow", "Health" };
+        bowUpgradeCosts = new List<int> { 1, 2, 3, 4, 5 };
+        healthUpgradeCosts = new List<int> { 1, 2, 3, 4, 5 };
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetPlayerItemCounts();
-        shopUI.UpdateUI();
-        CompareCounts();
-        GetUpgradeCosts();
+        if (usingShop)
+        {
+            GetPlayerItemCounts();
+            shopUI.UpdateUI();
+            CompareCounts();
+            GetUpgradeCosts();
+        }
     }
 
     public void OpenShop()
@@ -109,10 +112,14 @@ public class Shop : MonoBehaviour
         else canUpgradeHealth = false;
     }
 
-    public void Upgrade()
+    public void Upgrade(string upgradeType)
     {
-        levels++;
-        player.currentBowLvl++;
+        if (upgradeType == "Bow")
+        {
+            levels++;
+            player.currentBowLvl++;
+        }
+
     }
 
 }

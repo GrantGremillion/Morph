@@ -13,15 +13,15 @@ public class PlayerController : MonoBehaviour
     public InventoryManager inventory;
     public GameObject arrowPrefab;
     public Transform bowTransform;
-    public Bow bow; 
+    public Bow bow;
+    public UpgradeSystem upgradeSystem;
 
     // Shooting variables
     public bool canShoot = true;
-    public float holdTimeToShoot = 0.5f; // Time in seconds to hold the button to shoot
+    public float holdTimeToShoot; // Time in seconds to hold the button to shoot
     public float shootCooldown = 0.5f;
     private float holdTime = 0.0f;
     private float currentShootCooldown = 0.0f;
-    public float arrowSpeed = 0.5f;
 
 
     // Dash variables
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        upgradeSystem = GetComponentInChildren<UpgradeSystem>();
         animator.speed = animationSpeed;
 
         // Start player facing the screen
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour
         currentHealthLvl = 0;
 
         bow = bowTransform.gameObject.GetComponent<Bow>();
+        holdTimeToShoot = 0.5f;
     }
     void FixedUpdate()
     {
@@ -123,37 +125,41 @@ public class PlayerController : MonoBehaviour
         {
             holdTime += Time.deltaTime;
 
-            if (holdTime > holdTimeToShoot)
+            if (holdTime >= holdTimeToShoot)
             {
-                bow.animator.Play("Hold");
+                if (bow.animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot") == false)
+                {
+                    bow.animator.Play("Shoot");
+                }
             }
-            else bow.animator.Play("Shoot");
+            else if (bow.animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot") == false)
+            {
+                bow.animator.Play("Shoot");
+            }
         }
 
         // Release Left click
         if (Input.GetKeyUp(KeyCode.Mouse0) && canShoot && canDash)
         {
+            print("Hold Time" + holdTimeToShoot);
+
+            // Bow can be shot
             if (holdTime >= holdTimeToShoot)
             {
-                bow.animator.Play("Still");
                 ShootArrow();
-                canShoot = false;
+                if (bow.animator.GetCurrentAnimatorStateInfo(0).IsName("Still") == false)
+                {
+                    bow.animator.Play("Still");
+                }
                 holdTime = 0.0f; // Reset hold time after shooting
             }
             else
             {
+                if (bow.animator.GetCurrentAnimatorStateInfo(0).IsName("Still") == false)
+                {
+                    bow.animator.Play("Still");
+                }
                 holdTime = 0.0f; // Reset hold time if not held long enough
-            }
-        }
-
-        // Handle cooldown logic
-        if (!canShoot & !shop.shopUI.isActiveAndEnabled)
-        {
-            currentShootCooldown -= Time.deltaTime;
-            if (currentShootCooldown <= 0)
-            {
-                canShoot = true;
-                currentShootCooldown = shootCooldown;
             }
         }
 
@@ -183,7 +189,7 @@ public class PlayerController : MonoBehaviour
 
         // Instantiate the arrow at the spawn position with the calculated rotation
         GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
-        arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrowSpeed;
+        arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrow.GetComponent<Arrow>().speed; ;
     }
 
 
@@ -225,7 +231,7 @@ public class PlayerController : MonoBehaviour
                 bowTransform.SetParent(null);
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 bowTransform.SetParent(transform);
-                
+
             }
             else if (movementInput.x < 0)
             {
