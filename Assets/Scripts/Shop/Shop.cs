@@ -30,11 +30,6 @@ public class Shop : MonoBehaviour
     public bool canUpgradeHealth;
 
 
-
-    public int levels;
-    public int maxLevels;
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -116,8 +111,12 @@ public class Shop : MonoBehaviour
     {
         if (upgradeType == "Bow")
         {
-            levels++;
             player.currentBowLvl++;
+        }
+        else if (upgradeType == "Health")
+        {
+            player.currentHealthLvl++;
+            player.numOfHearts++;
         }
 
     }

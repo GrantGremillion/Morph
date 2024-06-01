@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 public class ShopUI : MonoBehaviour
 {
 
+    public PlayerController player;
     public Image[] lvlBoxes;
     public Sprite fullLvlBox;
     public Sprite emptyLvlBox;
@@ -16,7 +17,9 @@ public class ShopUI : MonoBehaviour
     public Shop shop;
 
     public TextMeshProUGUI bowCostText;
+    public TextMeshProUGUI currentBowLevelText;
     public TextMeshProUGUI healthCostText;
+    public TextMeshProUGUI currentHealthLevelText;
     public Button upgradeBowButton;
     public Button upgradeHealthButton;
 
@@ -25,6 +28,7 @@ public class ShopUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = FindAnyObjectByType<PlayerController>();
         upgradeBowButton.onClick.AddListener(OnUpgradeBowButtonPressed);
         upgradeHealthButton.onClick.AddListener(OnUpgradeHealthButtonPressed);
     }
@@ -32,9 +36,10 @@ public class ShopUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateLvlBoxUI();
-        bowCostText.text = "Cost: " + shop.currentBowUpgradeCost;
-        healthCostText.text = "Cost: " + shop.currentHealthUpgradeCost;
+        bowCostText.text = "Cost: \n" + shop.currentBowUpgradeCost;
+        healthCostText.text = "Cost: \n" + shop.currentHealthUpgradeCost;
+        currentBowLevelText.text = "Bow lvl: \n" + player.currentBowLvl;
+        currentHealthLevelText.text = "Health lvl: \n" + player.currentHealthLvl;
     }
 
     public void UpdateUI()
@@ -69,39 +74,10 @@ public class ShopUI : MonoBehaviour
         if (shop.canUpgradeHealth)
         {
             print("Health Upgraded");
+            inventory.RemoveItems("blueberry",shop.currentHealthUpgradeCost);
+            shop.Upgrade("Health");
         }
         else return;
     }
 
-
-
-    public void UpdateLvlBoxUI()
-    {
-        for (int i=0; i < lvlBoxes.Length; i++)
-        {
-
-            if(shop.levels > shop.maxLevels)
-            {
-                shop.levels = shop.maxLevels;
-            }
-
-            if (i < shop.levels)
-            {
-                lvlBoxes[i].sprite = fullLvlBox;
-            }
-            else
-            {
-                lvlBoxes[i].sprite = emptyLvlBox;
-            }
-
-            if (i < shop.maxLevels)
-            {
-                lvlBoxes[i].enabled = true;
-            }
-            else
-            {
-                lvlBoxes[i].enabled = false;
-            }
-        }
-    }
 }

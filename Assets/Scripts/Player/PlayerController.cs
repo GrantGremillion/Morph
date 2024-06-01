@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     public float holdTimeToShoot; // Time in seconds to hold the button to shoot
     public float shootCooldown = 0.5f;
     private float holdTime = 0.0f;
-    private float currentShootCooldown = 0.0f;
 
 
     // Dash variables
