@@ -6,6 +6,7 @@ public class Bow : MonoBehaviour
 {
 
     public Animator animator;
+    public AnimatorOverrideController overrideController; // Used to update bow sprite
     public GameObject arrow;
     public GameObject spawn;
     public PlayerController player;
@@ -45,5 +46,15 @@ public class Bow : MonoBehaviour
         // Set the bow's position and rotation
         transform.position = bowPosition;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    public void UpdateSprite()
+    {
+        // Bow between level 5 and 10
+        if (player.currentBowLvl > 3 && player.currentBowLvl < 9)
+        {
+            animator.runtimeAnimatorController = overrideController;
+        }
+
     }
 }

@@ -13,6 +13,7 @@ public class Shop : MonoBehaviour
 
     public ShopUI shopUI;
     public PlayerController player;
+    public Bow bow;
 
 
     // Player item counts
@@ -34,6 +35,7 @@ public class Shop : MonoBehaviour
     void Start()
     {
         player = FindAnyObjectByType<PlayerController>();
+        bow = player.GetComponentInChildren<Bow>();
         shopUI.gameObject.SetActive(false);
 
         bowUpgradeCosts = new List<int> { 1, 2, 3, 4, 5 };
@@ -112,6 +114,10 @@ public class Shop : MonoBehaviour
         if (upgradeType == "Bow")
         {
             player.currentBowLvl++;
+            if (player.currentBowLvl % 4 == 0)
+            {
+                bow.UpdateSprite();
+            }
         }
         else if (upgradeType == "Health")
         {
