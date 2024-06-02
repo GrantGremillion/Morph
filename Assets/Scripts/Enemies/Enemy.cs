@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.Unity.VisualStudio.Editor;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -45,9 +48,10 @@ public class Enemy : MonoBehaviour
         Right,
         Hurt,
         Dead,
-        Root,
-        Uproot,
-        Idle
+        Agro,
+        Deagro,
+        Idle,
+        Attack
     }
 
     public State currentState;
@@ -65,12 +69,22 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         UpdateState();
-        //print(currentState);
+        print(currentState);
     }
 
     public void UpdateState()
     {
-        if (targetDirection.x > 0 && !pauseAnimation)
+        float distanceToTarget = Vector2.Distance(transform.position, targetDirection);
+
+        // Check if the enemy should be in the Attack state
+        if (distanceToTarget < 1.0f & playerAwarenessController.awareOfPlayer)
+        {
+            currentState = State.Attack;
+            //StartCoroutine(PauseOtherAnimations(0.1f));
+            //return;
+        }
+
+        else if (targetDirection.x > 0 && !pauseAnimation)
         {
             currentState = State.Right;
         }
@@ -174,26 +188,25 @@ public class Enemy : MonoBehaviour
     }
 
 
-
     // Function to handle changes in awareness
     public void OnAwarenessChanged(bool newAwarenessState)
     {
         if (newAwarenessState)
         {
-            currentState = State.Uproot;
+            currentState = State.Agro;
         }
         else
         {
-            currentState = State.Root;
+            currentState = State.Deagro;
         }
-        StartCoroutine(PauseOtherAnimations());
+        StartCoroutine(PauseOtherAnimations(immunityTime));
     }
 
 
-    public IEnumerator PauseOtherAnimations()
+    public IEnumerator PauseOtherAnimations(float time)
     {
         pauseAnimation = true;
-        yield return new WaitForSeconds(immunityTime);
+        yield return new WaitForSeconds(time);
         pauseAnimation = false;
     }
 

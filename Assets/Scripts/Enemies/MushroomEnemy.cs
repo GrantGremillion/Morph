@@ -16,7 +16,6 @@ public class MushroomEnemy : Enemy
     {
         dropType = "banana";
         maxHealth = 10;
-        speed = 0.3f;
 
         animator = GetComponent<Animator>();
         animator.speed = animationSpeed;
@@ -74,6 +73,9 @@ public class MushroomEnemy : Enemy
     {
         switch (currentState)
             {
+                case State.Attack:
+                    animator.Play("Attack");
+                    break;
                 case State.Left:
                     animator.Play("Walk");
                     break;
@@ -86,10 +88,10 @@ public class MushroomEnemy : Enemy
                 case State.Dead:
                     animator.Play("Dead");
                     break;
-                case State.Root:
+                case State.Deagro:
                     animator.Play("Root");
                     break;
-                case State.Uproot:
+                case State.Agro:
                     animator.Play("Uproot");
                     break;
                 case State.Idle:
