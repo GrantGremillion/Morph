@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     public int currentBowLvl;
     public int currentHealthLvl;
 
+    // Settings variables
+    private bool canMenu = true;
 
     void Awake()
     {
@@ -115,8 +117,23 @@ public class PlayerController : MonoBehaviour
         // Open/Close shop
         if (Input.GetKeyDown(KeyCode.E) && tz.canUseShop)
         {
+            print("Pressing E");
             if (!shop.usingShop) shop.OpenShop();
             else shop.CloseShop();
+        }
+
+        // Open/Close settings menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            
+            if (canMenu){
+                print("Entering the Menu");
+                canMenu = false;
+            }
+            else{
+                print("Exiting the Menu");
+                canMenu = true;
+            }
         }
 
         // Hold Left click
