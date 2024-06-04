@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             health--;
-            SoundFXManager.instance.PlaySoundFXClip(takeDamage, transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(takeDamage, transform, 1f, false);
             StartCoroutine(Knockback(collision));
         }
     }

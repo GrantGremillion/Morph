@@ -5511,6 +5511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundFXObject: {fileID: 688591402306138388, guid: 3aac0d1f391abf34cb9ec3adf8cccdb9, type: 3}
+  music: {fileID: 8300000, guid: 4038abe267872f54191a0a32e2650097, type: 3}
 --- !u!1 &1507251925
 GameObject:
   m_ObjectHideFlags: 0
