@@ -64,6 +64,10 @@ public class PlayerController : MonoBehaviour
     // Settings variables
     private bool canMenu = true;
 
+
+    // Player Sound Effects
+    [SerializeField] private AudioClip takeDamage;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -306,6 +310,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             health--;
+            SoundFXManager.instance.PlaySoundFXClip(takeDamage, transform, 1f);
             StartCoroutine(Knockback(collision));
         }
     }
