@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
 {
 
     public float speed;
-    public float smoothingFactor = 0.1f; // Determines how quickly the enemy changes direction
     public PlayerAwarenessController playerAwarenessController;
     public new Rigidbody2D rigidbody;
     public Vector2 targetDirection;
@@ -21,9 +20,10 @@ public class Enemy : MonoBehaviour
     // Health variables
     public float health;
     public float maxHealth;
-    public bool pauseAnimation;
     public float immunityTime = 0.5f;
     public UnityEngine.UI.Image healthbarFill;
+
+    public bool pauseAnimation;
 
     // Drop variables
     public string dropType;
@@ -69,22 +69,22 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         UpdateState();
-        // print(currentState);
+        print(currentState);
     }
 
     public void UpdateState()
     {
-        float distanceToTarget = Vector2.Distance(transform.position, targetDirection);
+        // float distanceToTarget = Vector2.Distance(transform.position, targetDirection);
 
-        // Check if the enemy should be in the Attack state
-        if (distanceToTarget < 1.0f & playerAwarenessController.awareOfPlayer)
-        {
-            currentState = State.Attack;
-            //StartCoroutine(PauseOtherAnimations(0.1f));
-            //return;
-        }
+        // // Check if the enemy should be in the Attack state
+        // if (distanceToTarget < 1.0f & playerAwarenessController.awareOfPlayer)
+        // {
+        //     currentState = State.Attack;
+        //     //StartCoroutine(PauseOtherAnimations(0.1f));
+        //     //return;
+        // }
 
-        else if (targetDirection.x > 0 && !pauseAnimation)
+        if (targetDirection.x > 0 && !pauseAnimation)
         {
             currentState = State.Right;
         }

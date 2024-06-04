@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
   type: 
+  pickupItemSound: {fileID: 8300000, guid: 0d05c18711ee89e42ba5a67514391303, type: 3}
 --- !u!58 &-2849532512461768191
 CircleCollider2D:
   m_ObjectHideFlags: 0

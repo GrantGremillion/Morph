@@ -10,6 +10,7 @@ public class Item : MonoBehaviour
     public InventoryManager inventory;
 
     public String type;
+    [SerializeField] private AudioClip pickupItemSound;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class Item : MonoBehaviour
 
         if (collider.CompareTag("Player"))
         {
+            SoundFXManager.instance.PlaySoundFXClip(pickupItemSound, transform, 1f, false);
             inventory.AddItem(this.type);
             Destroy(gameObject);
         }
