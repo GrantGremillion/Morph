@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     }
 
     [SerializeField] private float animationSpeed;
-    [SerializeField] private float speed;
+    protected float speed { get; set;}
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private float dashingPower;
     [SerializeField] private float dashingTime = 0.2f;
