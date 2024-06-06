@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
     }
 
     public State currentState;
+    public bool canAttack;
 
     // Start is called before the first frame update
     private void Awake()
@@ -63,28 +64,25 @@ public class Enemy : MonoBehaviour
         playerAwarenessController = GetComponent<PlayerAwarenessController>();
         healthbarFill.fillAmount = health / maxHealth;
         pauseAnimation = false;
+        canAttack = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateState();
-        print(currentState);
     }
 
     public void UpdateState()
     {
-        // float distanceToTarget = Vector2.Distance(transform.position, targetDirection);
+        // Check if the enemy should be in the Attack state
+        if (canAttack)
+        {
+            currentState = State.Attack;
+            StartCoroutine(PauseOtherAnimations(0.1f));
+        }
 
-        // // Check if the enemy should be in the Attack state
-        // if (distanceToTarget < 1.0f & playerAwarenessController.awareOfPlayer)
-        // {
-        //     currentState = State.Attack;
-        //     //StartCoroutine(PauseOtherAnimations(0.1f));
-        //     //return;
-        // }
-
-        if (targetDirection.x > 0 && !pauseAnimation)
+        else if (targetDirection.x > 0 && !pauseAnimation)
         {
             currentState = State.Right;
         }
