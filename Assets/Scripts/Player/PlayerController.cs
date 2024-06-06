@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     }
 
     [SerializeField] private float animationSpeed;
-    protected float speed { get; set;}
+    public float speed { get; set;}
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private float dashingPower;
     [SerializeField] private float dashingTime = 0.2f;
@@ -86,6 +86,8 @@ public class PlayerController : MonoBehaviour
 
         tz = FindAnyObjectByType<TriggerZone>();
         shop = FindAnyObjectByType<Shop>();
+
+        speed = 0.6f;
 
         currentBowLvl = 0;
         currentHealthLvl = 0;
