@@ -9,6 +9,8 @@ public class MushroomEnemy : Enemy
 
     public Canvas healthbar;
 
+    public Collider2D collider;
+
     [SerializeField] private float animationSpeed;
 
     // Start is called before the first frame update
@@ -21,6 +23,7 @@ public class MushroomEnemy : Enemy
         animator.speed = animationSpeed;
 
         healthbar = GetComponentInChildren<Canvas>();
+        collider = GetComponent<Collider2D>();
 
     }
 
@@ -30,6 +33,12 @@ public class MushroomEnemy : Enemy
         UpdateTargetDirection();
         SetVelocity();
         PlayAnimations();
+
+        if (currentState == State.Idle)
+        {
+            collider.enabled = false;
+        }
+        else collider.enabled = true;
     }
 
 
