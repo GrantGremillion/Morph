@@ -597,7 +597,8 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Standalone: LEVELPLAY_DEPENDENCIES_INSTALLED
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -704,11 +705,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 05a9cda2-a780-43d1-acab-0efa338a2657
+  cloudProjectId: d9af9610-d8d9-4476-b2b3-cf0c9e512d90
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Morph
-  organizationId: golden_harp
+  organizationId: coolerdust
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

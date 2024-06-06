@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Nathan.unity
+    guid: 6e49568bfa661b549a4efea9c8f4966f
+  - enabled: 1
+    path: Assets/Scenes/WaterLevel1.unity
+    guid: df0098e0b43941c419d0d8acb413f561
   m_configObjects: {}

@@ -23,9 +23,9 @@ public class Arrow : MonoBehaviour
 
         damage = upgradeSystem.arrowDamages[player.currentBowLvl];
         speed = upgradeSystem.arrowSpeeds[player.currentBowLvl];
-        print("Player's Bow Level: " + player.currentBowLvl);
-        print("Arrow Damage: " + damage);
-        print("Arrow Speed: " + speed);
+        //print("Player's Bow Level: " + player.currentBowLvl);
+        //print("Arrow Damage: " + damage);
+        //print("Arrow Speed: " + speed);
     }
 
     // Update is called once per frame

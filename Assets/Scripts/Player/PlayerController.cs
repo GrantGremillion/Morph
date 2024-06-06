@@ -64,6 +64,11 @@ public class PlayerController : MonoBehaviour
     // Settings variables
     private bool canMenu = true;
 
+    // Morph variables
+    [SerializeField] private bool canMorphToFish = false;
+    private bool touchingWater = false;
+    [SerializeField] FishController fish;
+
 
     // Player Sound Effects
     [SerializeField] private AudioClip takeDamage;
@@ -140,6 +145,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // morph
+        if (Input.GetKeyUp(KeyCode.M))
+        {
+            changeForm();
+        }
+
         // Hold Left click
         if (Input.GetKey(KeyCode.Mouse0) && canShoot && canDash)
         {
@@ -212,7 +223,13 @@ public class PlayerController : MonoBehaviour
         arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrow.GetComponent<Arrow>().speed; ;
     }
 
-
+    void changeForm()
+    {
+        if (canMorphToFish == true && touchingWater == true)
+        {
+            SceneManager.LoadScene(2);
+        }
+    }
 
     void PlayAnimations()
     {
@@ -312,6 +329,18 @@ public class PlayerController : MonoBehaviour
             health--;
             SoundFXManager.instance.PlaySoundFXClip(takeDamage, transform, 1f, false);
             StartCoroutine(Knockback(collision));
+        }
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            touchingWater = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            touchingWater = false;
         }
     }
 
