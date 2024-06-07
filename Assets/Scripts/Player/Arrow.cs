@@ -9,7 +9,7 @@ public class Arrow : MonoBehaviour
     public UpgradeSystem upgradeSystem; 
 
 
-    public float destroyTime = 1.0f;
+    public float destroyTime = 30.0f;
     public float damage;
     public float speed;
 
@@ -31,7 +31,11 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        destroyTime -= Time.deltaTime;
+
+        if(destroyTime <= 0) {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
