@@ -34,7 +34,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.11, y: 0.173, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,15 +80,17 @@ MonoBehaviour:
   animator: {fileID: 0}
   inventory: {fileID: 0}
   arrowPrefab: {fileID: 7022741825510326485, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
+  bowTransform: {fileID: 0}
+  bow: {fileID: 0}
+  upgradeSystem: {fileID: 0}
+  canShoot: 1
   holdTimeToShoot: 0.5
   shootCooldown: 1
-  arrowSpeed: 0.9
   health: 3
   numOfHearts: 3
   knockbackForce: 1
   knockbackDuration: 0.2
   animationSpeed: 0.175
-  speed: 0.7
   tr: {fileID: 5571544635593347495}
   dashingPower: 4
   dashingTime: 0.1
@@ -96,6 +98,9 @@ MonoBehaviour:
   shop: {fileID: 0}
   currentBowLvl: 0
   currentHealthLvl: 0
+  canMorphToFish: 0
+  fish: {fileID: 0}
+  takeDamage: {fileID: 0}
 --- !u!114 &684034674069803778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,7 +337,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01, y: -0.03}
+  m_Offset: {x: 0.01, y: -0.031}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}

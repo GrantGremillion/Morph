@@ -9,6 +9,10 @@ public class MushroomEnemy : Enemy
     public Canvas healthbar;
     public SpriteRenderer spriteRenderer;
     public new Collider2D collider;
+    private Trigger attackRadius;
+    private Trigger playerAwarenessRadius;
+    public bool playerAwarenessRadiusIsTriggered = false;
+    public bool attackRadiusIsTriggered = false;
 
     [SerializeField] private float animationSpeed;
 
@@ -21,6 +25,18 @@ public class MushroomEnemy : Enemy
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
 
+        attackRadius = transform.Find("AttackRadius").GetComponent<Trigger>();
+        if (attackRadius == null)
+        {
+            Debug.LogError("AttackRadius GameObject/Component not found!");
+        }
+
+        playerAwarenessRadius = transform.Find("PlayerAwarenessRadius").GetComponent<Trigger>();
+        if (playerAwarenessRadius == null)
+        {
+            Debug.LogError("playerAwarenessRadius GameObject/Component not found!");
+        }
+
         dropType = "banana";
         maxHealth = 10;
     }
@@ -28,6 +44,15 @@ public class MushroomEnemy : Enemy
     // Update is called once per frame
     private void FixedUpdate()
     {
+        attackRadiusIsTriggered = attackRadius.getTrigger();
+        playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
+
+        if(attackRadiusIsTriggered) {
+            canAttack = true;
+        } else {
+            canAttack = false;
+        }
+
         UpdateTargetDirection();
         SetVelocity();
         PlayAnimations();
@@ -39,12 +64,11 @@ public class MushroomEnemy : Enemy
         else collider.enabled = true;
     }
 
-
     private void UpdateTargetDirection()
     {
-        if (playerAwarenessController.awareOfPlayer)
+        if (playerAwarenessRadiusIsTriggered && !pauseAnimation)
         {
-            targetDirection = playerAwarenessController.directionToPlayer;
+            targetDirection = playerAwarenessRadius.getTriggerDir().normalized;
         }
         else
         {
@@ -59,7 +83,6 @@ public class MushroomEnemy : Enemy
         {
             rigidbody.velocity = Vector2.zero;
         }
-
         else if (currentState == State.Right)
         {
             rigidbody.velocity = targetDirection * speed;

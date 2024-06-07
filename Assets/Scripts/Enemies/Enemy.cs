@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
 {
 
     public float speed;
-    public PlayerAwarenessController playerAwarenessController;
+    //public PlayerAwarenessController playerAwarenessController;
     public new Rigidbody2D rigidbody;
     public Vector2 targetDirection;
     public Vector2 currentDirection = Vector2.zero;
@@ -61,7 +61,6 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        playerAwarenessController = GetComponent<PlayerAwarenessController>();
         healthbarFill.fillAmount = health / maxHealth;
         pauseAnimation = false;
         canAttack = false;
@@ -82,17 +81,14 @@ public class Enemy : MonoBehaviour
             StartCoroutine(PauseOtherAnimations(0.1f));
         }
 
-        else if (targetDirection.x > 0 && !pauseAnimation)
-        {
-            currentState = State.Right;
-        }
-        else if (targetDirection.x < 0 && !pauseAnimation)
-        {
-            currentState = State.Left;
-        }
-        else if (!pauseAnimation)
-        {
-            currentState = State.Idle;
+        if(!pauseAnimation) {
+            if(targetDirection.x > 0) {
+                currentState = State.Right;
+            } else if (targetDirection.x < 0) {
+                currentState = State.Left;
+            } else {
+                currentState = State.Idle;
+            }
         }
     }
 
@@ -136,7 +132,6 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < numberOfDrops; i++)
         {
             Vector3 spawnPosition = GetRandomSpawnPosition(transform.position);
-
             GameObject newItem = null;
 
             switch (dropType)
@@ -180,14 +175,14 @@ public class Enemy : MonoBehaviour
         while (Vector3.Distance(itemTransform.position, transform.position) < maxDistanceFromEnemy)
         {
             // Move the item away from the player
-            itemTransform.position += (itemTransform.position - transform.position).normalized * moveSpeed * Time.deltaTime;
+            itemTransform.position += (itemTransform.position - transform.position).normalized * moveSpeed;
             yield return null;
         }
     }
 
 
     // Function to handle changes in awareness
-    public void OnAwarenessChanged(bool newAwarenessState)
+    /*public void OnAwarenessChanged(bool newAwarenessState)
     {
         if (newAwarenessState)
         {
@@ -198,7 +193,7 @@ public class Enemy : MonoBehaviour
             currentState = State.Deagro;
         }
         StartCoroutine(PauseOtherAnimations(immunityTime));
-    }
+    }*/
 
 
     public IEnumerator PauseOtherAnimations(float time)

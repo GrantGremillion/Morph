@@ -40,12 +40,6 @@ public class Arrow : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        StartCoroutine(DestroyAfterDelay(destroyTime)); 
-    }
-
-    private IEnumerator DestroyAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
         Destroy(gameObject);
     }
 }
