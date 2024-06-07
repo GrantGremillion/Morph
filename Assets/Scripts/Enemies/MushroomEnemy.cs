@@ -9,7 +9,7 @@ public class MushroomEnemy : Enemy
 
     public Canvas healthbar;
 
-    public new Collider2D collider;
+    public Collider2D collider;
 
     [SerializeField] private float animationSpeed;
 
