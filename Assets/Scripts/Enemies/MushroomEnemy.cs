@@ -6,9 +6,8 @@ public class MushroomEnemy : Enemy
 {
 
     public Animator animator;
-
     public Canvas healthbar;
-
+    public SpriteRenderer spriteRenderer;
     public new Collider2D collider;
 
     [SerializeField] private float animationSpeed;
@@ -16,15 +15,14 @@ public class MushroomEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        dropType = "banana";
-        maxHealth = 10;
-
         animator = GetComponent<Animator>();
         animator.speed = animationSpeed;
-
         healthbar = GetComponentInChildren<Canvas>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
 
+        dropType = "banana";
+        maxHealth = 10;
     }
 
     // Update is called once per frame
@@ -65,12 +63,12 @@ public class MushroomEnemy : Enemy
         else if (currentState == State.Right)
         {
             rigidbody.velocity = targetDirection * speed;
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            spriteRenderer.flipX = true;
         }
         else if (currentState == State.Left)
         {
             rigidbody.velocity = targetDirection * speed;
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            spriteRenderer.flipX = false;
         }
         else if (currentState == State.Dead)
         {
