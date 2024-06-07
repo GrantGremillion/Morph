@@ -81,12 +81,18 @@ public class Enemy : MonoBehaviour
             StartCoroutine(PauseOtherAnimations(0.1f));
         }
 
-        if(!pauseAnimation) {
-            if(targetDirection.x > 0) {
+        if (!pauseAnimation)
+        {
+            if (targetDirection.x > 0)
+            {
                 currentState = State.Right;
-            } else if (targetDirection.x < 0) {
+            }
+            else if (targetDirection.x < 0)
+            {
                 currentState = State.Left;
-            } else {
+            }
+            else
+            {
                 currentState = State.Idle;
             }
         }
@@ -99,6 +105,7 @@ public class Enemy : MonoBehaviour
         {
             StartCoroutine(TakeDamage(collision));
         }
+
     }
 
     private IEnumerator TakeDamage(Collision2D collision)
@@ -182,7 +189,7 @@ public class Enemy : MonoBehaviour
 
 
     // Function to handle changes in awareness
-    /*public void OnAwarenessChanged(bool newAwarenessState)
+    public void OnAwarenessChanged(bool newAwarenessState)
     {
         if (newAwarenessState)
         {
@@ -193,7 +200,7 @@ public class Enemy : MonoBehaviour
             currentState = State.Deagro;
         }
         StartCoroutine(PauseOtherAnimations(immunityTime));
-    }*/
+    }
 
 
     public IEnumerator PauseOtherAnimations(float time)

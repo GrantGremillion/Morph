@@ -5,6 +5,7 @@ using UnityEngine;
 public class MushroomEnemy : Enemy
 {
 
+    public PlayerController player;
     public Animator animator;
     public Canvas healthbar;
     public SpriteRenderer spriteRenderer;
@@ -19,6 +20,7 @@ public class MushroomEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        player = FindAnyObjectByType<PlayerController>();
         animator = GetComponent<Animator>();
         animator.speed = animationSpeed;
         healthbar = GetComponentInChildren<Canvas>();
@@ -56,6 +58,8 @@ public class MushroomEnemy : Enemy
         UpdateTargetDirection();
         SetVelocity();
         PlayAnimations();
+
+        print(currentState);
 
         if (currentState == State.Idle)
         {
@@ -128,6 +132,12 @@ public class MushroomEnemy : Enemy
                     animator.Play("Idle");
                     break;
             }
+    }
+
+    // Called via event set up in attack animation 
+    public void DealDamage()
+    {
+        player.TakeDamage(collider);
     }
 
 }

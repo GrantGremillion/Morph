@@ -327,12 +327,6 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            health--;
-            SoundFXManager.instance.PlaySoundFXClip(takeDamage, transform, 1f, false);
-            StartCoroutine(Knockback(collision));
-        }
         if (collision.gameObject.CompareTag("Water"))
         {
             touchingWater = true;
@@ -347,7 +341,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator Knockback(Collision2D collision)
+    public IEnumerator Knockback(Collider2D collision)
     {
         isKnockedBack = true;
 
@@ -361,6 +355,13 @@ public class PlayerController : MonoBehaviour
         isKnockedBack = false;
         // Wait until player has been knowcked back to drop items
         inventory.DropItems();
+    }
+
+    public void TakeDamage(Collider2D collider)
+    {
+        health--;
+        SoundFXManager.instance.PlaySoundFXClip(takeDamage, transform, 1f, false);
+        StartCoroutine(Knockback(collider));
     }
 
 
