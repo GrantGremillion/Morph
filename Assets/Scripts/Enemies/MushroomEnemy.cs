@@ -59,13 +59,6 @@ public class MushroomEnemy : Enemy
         SetVelocity();
         PlayAnimations();
 
-        //print(currentState);
-
-        if (currentState == State.Idle)
-        {
-            collider.enabled = false;
-        }
-        else collider.enabled = true;
     }
 
     private void UpdateTargetDirection()

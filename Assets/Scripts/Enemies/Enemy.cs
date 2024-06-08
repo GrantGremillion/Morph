@@ -74,6 +74,8 @@ public class Enemy : MonoBehaviour
     {
         UpdateState();
 
+
+        // Needed for the enemy uproot and root animations
         if (currentState == State.Idle) awareOfPlayer = false;
         else awareOfPlayer = true;
 
@@ -116,7 +118,7 @@ public class Enemy : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            StartCoroutine(TakeDamage(collision));
+            if (currentState != State.Idle) StartCoroutine(TakeDamage(collision));
         }
 
     }
