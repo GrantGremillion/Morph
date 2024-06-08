@@ -138,13 +138,13 @@ public class Enemy : MonoBehaviour
             DropItems();
             Destroy(gameObject);
         }
-        else
-        {
-            currentState = State.Hurt;
-            pauseAnimation = true;
-            yield return new WaitForSeconds(immunityTime);
-            pauseAnimation = false;
-        }
+        // else
+        // {
+        //     currentState = State.Hurt;
+        //     pauseAnimation = true;
+        //     yield return new WaitForSeconds(1.0f);
+        //     pauseAnimation = false;
+        // }
     }
 
     public void DropItems()
