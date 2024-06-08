@@ -65,9 +65,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0144433975, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.776927
 --- !u!114 &1017426150409595047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc3755401aa433478ae665765198732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  enemy: {fileID: 0}
   targetTag: Player
 --- !u!1 &1377629821119422273
 GameObject:
@@ -270,6 +272,7 @@ GameObject:
   - component: {fileID: 2594250852070854150}
   - component: {fileID: 1890417834380799713}
   - component: {fileID: 6187148486023649282}
+  - component: {fileID: 5761195157493362345}
   m_Layer: 0
   m_Name: AttackRadius
   m_TagString: Untagged
@@ -339,6 +342,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc3755401aa433478ae665765198732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  targetTag: Player
+--- !u!114 &5761195157493362345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287935946570851794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc3755401aa433478ae665765198732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  enemy: {fileID: 0}
   targetTag: Player
 --- !u!1 &5705198476227282040
 GameObject:
@@ -537,6 +557,7 @@ MonoBehaviour:
   maxDistanceFromEnemy: 10
   currentState: 0
   canAttack: 0
+  player: {fileID: 0}
   animator: {fileID: 0}
   healthbar: {fileID: 0}
   spriteRenderer: {fileID: 0}

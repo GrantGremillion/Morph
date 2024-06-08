@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
         // Release Left click
         if (Input.GetKeyUp(KeyCode.Mouse0) && canShoot && canDash)
         {
-            print("Hold Time" + holdTimeToShoot);
+            //print("Hold Time" + holdTimeToShoot);
 
             // Bow can be shot
             if (holdTime >= holdTimeToShoot)

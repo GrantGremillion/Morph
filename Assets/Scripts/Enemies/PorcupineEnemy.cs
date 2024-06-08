@@ -2,7 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MushroomEnemy : Enemy
+public class Porcupine : Enemy
 {
 
     public PlayerController player;

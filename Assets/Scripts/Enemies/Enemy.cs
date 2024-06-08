@@ -9,37 +9,36 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
-
-    public float speed;
-    //public PlayerAwarenessController playerAwarenessController;
     public new Rigidbody2D rigidbody;
     public Vector2 targetDirection;
     public Vector2 currentDirection = Vector2.zero;
-
-
-    // Health variables
-    public float health;
-    public float maxHealth;
-    public float immunityTime = 0.5f;
     public UnityEngine.UI.Image healthbarFill;
-
-    public bool pauseAnimation;
-
-    // Drop variables
-    public string dropType;
-    public int numberOfDrops;
-
     // Item prefabs
     public GameObject banana;
     public GameObject blueberry;
     public GameObject cherry;
     public Arrow arrow;
 
+    public State currentState;
+
+
+    public float speed;
+    public float health;
+    public float maxHealth;
+    public float immunityTime = 0.5f;
+    public bool pauseAnimation;
+    
     // Item drop variabels
+    public string dropType;
+    public int numberOfDrops;
     public float minSpawnDistance = 2f;
     public float maxSpawnDistance = 5f;
     public float moveSpeed = 1f; // Speed at which items move away from the player
     public float maxDistanceFromEnemy = 10f; // Maximum distance from player before items stop moving
+
+    public bool canAttack;
+    private bool previousAwareOfPlayer;
+    public bool awareOfPlayer { get; private set; }
 
 
     public enum State
@@ -54,12 +53,6 @@ public class Enemy : MonoBehaviour
         Attack
     }
 
-    public State currentState;
-    public bool canAttack;
-    private bool previousAwareOfPlayer;
-    public bool awareOfPlayer { get; private set; }
-
-    // Start is called before the first frame update
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -74,7 +67,6 @@ public class Enemy : MonoBehaviour
     {
         UpdateState();
 
-
         // Needed for the enemy uproot and root animations
         if (currentState == State.Idle) awareOfPlayer = false;
         else awareOfPlayer = true;
@@ -87,40 +79,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void UpdateState()
+    public virtual void UpdateState()
     {
-        // Check if the enemy should be in the Attack state
-        if (canAttack)
-        {
-            currentState = State.Attack;
-            StartCoroutine(PauseOtherAnimations(0.1f));
-        }
-
-        if (!pauseAnimation)
-        {
-            if (targetDirection.x > 0)
-            {
-                currentState = State.Right;
-            }
-            else if (targetDirection.x < 0)
-            {
-                currentState = State.Left;
-            }
-            else
-            {
-                currentState = State.Idle;
-            }
-        }
+        // Override method
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-
         if (collision.gameObject.CompareTag("Arrow"))
         {
             if (currentState != State.Idle) StartCoroutine(TakeDamage(collision));
         }
-
     }
 
     private IEnumerator TakeDamage(Collision2D collision)
@@ -138,18 +107,10 @@ public class Enemy : MonoBehaviour
             DropItems();
             Destroy(gameObject);
         }
-        // else
-        // {
-        //     currentState = State.Hurt;
-        //     pauseAnimation = true;
-        //     yield return new WaitForSeconds(1.0f);
-        //     pauseAnimation = false;
-        // }
     }
 
     public void DropItems()
     {
-
         // Drop all enemy items
         for (int i = 0; i < numberOfDrops; i++)
         {
@@ -173,7 +134,6 @@ public class Enemy : MonoBehaviour
             StartCoroutine(MoveItemAway(newItem.transform));
         }
     }
-
 
     public Vector3 GetRandomSpawnPosition(Vector3 pos)
     {
@@ -217,7 +177,6 @@ public class Enemy : MonoBehaviour
         }
         StartCoroutine(PauseOtherAnimations(0.2f));
     }
-
 
     public IEnumerator PauseOtherAnimations(float time)
     {
