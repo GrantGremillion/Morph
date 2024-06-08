@@ -59,7 +59,7 @@ public class MushroomEnemy : Enemy
         SetVelocity();
         PlayAnimations();
 
-        print(currentState);
+        //print(currentState);
 
         if (currentState == State.Idle)
         {

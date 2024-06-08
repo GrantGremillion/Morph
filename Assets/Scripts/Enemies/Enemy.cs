@@ -56,6 +56,8 @@ public class Enemy : MonoBehaviour
 
     public State currentState;
     public bool canAttack;
+    private bool previousAwareOfPlayer;
+    public bool awareOfPlayer { get; private set; }
 
     // Start is called before the first frame update
     private void Awake()
@@ -64,12 +66,23 @@ public class Enemy : MonoBehaviour
         healthbarFill.fillAmount = health / maxHealth;
         pauseAnimation = false;
         canAttack = false;
+        previousAwareOfPlayer = awareOfPlayer;  
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateState();
+
+        if (currentState == State.Idle) awareOfPlayer = false;
+        else awareOfPlayer = true;
+
+
+        if (awareOfPlayer != previousAwareOfPlayer)
+        {
+            OnAwarenessChanged(awareOfPlayer);
+            previousAwareOfPlayer = awareOfPlayer;  
+        }
     }
 
     public void UpdateState()
@@ -191,6 +204,7 @@ public class Enemy : MonoBehaviour
     // Function to handle changes in awareness
     public void OnAwarenessChanged(bool newAwarenessState)
     {
+        print("Awarness Changed");
         if (newAwarenessState)
         {
             currentState = State.Agro;
@@ -199,7 +213,7 @@ public class Enemy : MonoBehaviour
         {
             currentState = State.Deagro;
         }
-        StartCoroutine(PauseOtherAnimations(immunityTime));
+        StartCoroutine(PauseOtherAnimations(0.2f));
     }
 
 
