@@ -56,6 +56,8 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+
+        healthbarFill = transform.Find("Canvas").GetComponentInChildren<Transform>().Find("Fill").GetComponent<UnityEngine.UI.Image>();
         healthbarFill.fillAmount = health / maxHealth;
         pauseAnimation = false;
         canAttack = false;
@@ -92,7 +94,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private IEnumerator TakeDamage(Collision2D collision)
+    public IEnumerator TakeDamage(Collision2D collision)
     {
 
         arrow = collision.gameObject.GetComponent<Arrow>();
@@ -166,7 +168,7 @@ public class Enemy : MonoBehaviour
     // Function to handle changes in awareness
     public void OnAwarenessChanged(bool newAwarenessState)
     {
-        print("Awarness Changed");
+        //print("Awarness Changed");
         if (newAwarenessState)
         {
             currentState = State.Agro;

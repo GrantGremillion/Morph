@@ -536,30 +536,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9573c06088d6b044fa5f367bf9d16f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.4
   rigidbody: {fileID: 0}
   targetDirection: {x: 0, y: 0}
   currentDirection: {x: 0, y: 0}
-  health: 10
-  maxHealth: 4
-  immunityTime: 0.5
   healthbarFill: {fileID: 9026680530229533825}
-  pauseAnimation: 0
-  dropType: 
-  numberOfDrops: 2
   banana: {fileID: 3105558158463327667, guid: 663afc09ff7f5b241820531850be0fec, type: 3}
   blueberry: {fileID: 6965595104004759051, guid: ae3a1e2a869417c4bba8c214d55d8c00, type: 3}
   cherry: {fileID: 6642731324118583853, guid: 3c8c44ee6c7bef44d806e4f034ce6287, type: 3}
   arrow: {fileID: 0}
+  currentState: 0
+  speed: 0.4
+  health: 10
+  maxHealth: 10
+  immunityTime: 0.5
+  pauseAnimation: 0
+  dropType: 
+  numberOfDrops: 2
   minSpawnDistance: 0.2
   maxSpawnDistance: 0.25
   moveSpeed: 0.2
   maxDistanceFromEnemy: 10
-  currentState: 0
   canAttack: 0
   player: {fileID: 0}
   animator: {fileID: 0}
-  healthbar: {fileID: 0}
   spriteRenderer: {fileID: 0}
   collider: {fileID: 0}
   playerAwarenessRadiusIsTriggered: 0

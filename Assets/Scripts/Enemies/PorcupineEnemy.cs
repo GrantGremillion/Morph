@@ -6,7 +6,7 @@ public class Porcupine : Enemy
 {
 
     public PlayerController player;
-    public Animator animator;
+    //public Animator animator;
 
     public SpriteRenderer spriteRenderer;
     public new Collider2D collider;
@@ -23,11 +23,11 @@ public class Porcupine : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        dropType = "banana";
-        maxHealth = 10;
+        dropType = "blueberry";
+        maxHealth = 15;
         player = FindAnyObjectByType<PlayerController>();
-        animator = GetComponent<Animator>();
-        animator.speed = animationSpeed;
+        //animator = GetComponent<Animator>();
+        //animator.speed = animationSpeed;
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
 
@@ -55,7 +55,8 @@ public class Porcupine : Enemy
         
         UpdateTargetDirection();
         SetVelocity();
-        PlayAnimations();
+        //PlayAnimations();
+        print(currentState);
     }
 
     private void UpdateTargetDirection()
@@ -93,36 +94,36 @@ public class Porcupine : Enemy
         }
     }
 
-    void PlayAnimations()
-    {
-        switch (currentState)
-            {
-                case State.Attack:
-                    animator.Play("Attack");
-                    break;
-                case State.Left:
-                    animator.Play("Walk");
-                    break;
-                case State.Right:
-                    animator.Play("Walk");
-                    break;
-                case State.Hurt:
-                    animator.Play("Hurt");
-                    break;
-                case State.Dead:
-                    animator.Play("Dead");
-                    break;
-                case State.Deagro:
-                    animator.Play("Root");
-                    break;
-                case State.Agro:
-                    animator.Play("Uproot");
-                    break;
-                case State.Idle:
-                    animator.Play("Idle");
-                    break;
-            }
-    }
+    // void PlayAnimations()
+    // {
+    //     switch (currentState)
+    //         {
+    //             case State.Attack:
+    //                 animator.Play("Attack");
+    //                 break;
+    //             case State.Left:
+    //                 animator.Play("Walk");
+    //                 break;
+    //             case State.Right:
+    //                 animator.Play("Walk");
+    //                 break;
+    //             case State.Hurt:
+    //                 animator.Play("Hurt");
+    //                 break;
+    //             case State.Dead:
+    //                 animator.Play("Dead");
+    //                 break;
+    //             case State.Deagro:
+    //                 animator.Play("Root");
+    //                 break;
+    //             case State.Agro:
+    //                 animator.Play("Uproot");
+    //                 break;
+    //             case State.Idle:
+    //                 animator.Play("Idle");
+    //                 break;
+    //         }
+    // }
 
     // Called via event set up in attack animation 
     public void DealDamage()
