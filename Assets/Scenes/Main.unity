@@ -9049,6 +9049,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2341846986932870912, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
+      propertyPath: m_Radius
+      value: 0.12590027
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341846986932870912, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0027000047
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160024214826244817, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
+      propertyPath: jumpSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160024214826244817, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
+      propertyPath: circleSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160024214826244817, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
+      propertyPath: quillPrefab
+      value: 
+      objectReference: {fileID: 7686880624945232472, guid: 3afa02e99108d9c41989fbc1b219a2cc, type: 3}
+    - target: {fileID: 4160024214826244817, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
+      propertyPath: jumpDistance
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5095190570236125144, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
       propertyPath: m_Name
       value: Porcupine

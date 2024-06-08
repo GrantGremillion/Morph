@@ -1,10 +1,8 @@
-
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Porcupine : Enemy
 {
-
     public PlayerController player;
     //public Animator animator;
 
@@ -12,13 +10,23 @@ public class Porcupine : Enemy
     public new Collider2D collider;
     private Trigger attackRadius;
     private Trigger playerAwarenessRadius;
-
+    public GameObject quillPrefab;
 
     public bool playerAwarenessRadiusIsTriggered = false;
     public bool attackRadiusIsTriggered = false;
     [SerializeField] private float animationSpeed;
+    [SerializeField] private float circleRadius = 2.0f; // Radius of the circling path
+    [SerializeField] private float circleSpeed = 2.0f; // Speed of circling
+    [SerializeField] private float directionChangeInterval = 3.0f; // Interval for changing circling direction
 
-
+    private bool isCircling = false;
+    private float angle = 0f; // Current angle for circling
+    private float jumpCooldownTimer = 0f;
+    private float directionChangeTimer = 0f;
+    private bool isClockwise = false; // Flag to store circling direction
+    private float attackCooldown = 1.0f;
+    public float quillSpeed = 1.0f;
+    public bool hasThrownProjectile;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +50,9 @@ public class Porcupine : Enemy
         {
             Debug.LogError("playerAwarenessRadius GameObject/Component not found!");
         }
+
+        // Initialize the circling direction randomly
+        isClockwise = Random.value > 0.5f;
     }
 
     // Update is called once per frame
@@ -50,13 +61,54 @@ public class Porcupine : Enemy
         attackRadiusIsTriggered = attackRadius.getTrigger();
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
-        if (attackRadiusIsTriggered) canAttack = true;
-         else canAttack = false;
-        
-        UpdateTargetDirection();
+        if (jumpCooldownTimer > 0)
+        {
+            jumpCooldownTimer -= Time.fixedDeltaTime;
+        }
+
+        if (attackRadiusIsTriggered)
+        {
+            isCircling = true;
+            CirclingAroundPlayer();
+            directionChangeTimer += Time.fixedDeltaTime;
+
+            // Change circling direction at specified intervals
+            if (directionChangeTimer >= directionChangeInterval)
+            {
+                directionChangeTimer = 0f;
+                isClockwise = Random.value > 0.5f;
+            }
+        }
+        else
+        {
+            isCircling = false;
+        }
+
+        if (!isCircling)
+        {
+            UpdateTargetDirection();
+        }
+
         SetVelocity();
         //PlayAnimations();
-        print(currentState);
+        //print(currentState);
+
+        if (attackCooldown > 0)
+        {
+            attackCooldown -= Time.fixedDeltaTime;
+        }
+
+        // Ensure that the enemy can only attack when the cooldown is finished
+        if (attackCooldown <= 0 && attackRadiusIsTriggered)
+        {
+            canAttack = true;
+        }
+        else
+        {
+            canAttack = false;
+        }
+
+
     }
 
     private void UpdateTargetDirection()
@@ -64,33 +116,63 @@ public class Porcupine : Enemy
         if (playerAwarenessRadiusIsTriggered && !pauseAnimation)
         {
             targetDirection = playerAwarenessRadius.getTriggerDir().normalized;
+            canAttack = true;
         }
         else
         {
             targetDirection = Vector2.zero;
+            canAttack = false;
         }
     }
 
- 
     private void SetVelocity()
     {
-        if (targetDirection == Vector2.zero)
+        if (currentState != State.Attack)
         {
-            rigidbody.velocity = Vector2.zero;
+            if (isCircling)
+            {
+                // Calculate the target position on the circular path
+                Vector2 playerPosition = player.transform.position;
+                Vector2 circlePosition = playerPosition + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * circleRadius;
+
+                // Smoothly interpolate towards the target position
+                Vector2 targetVelocity = (circlePosition - (Vector2)rigidbody.position).normalized * circleSpeed;
+                rigidbody.velocity = Vector2.Lerp(rigidbody.velocity, targetVelocity, Time.fixedDeltaTime * circleSpeed * 2); // Adjust the interpolation speed as needed
+            }
+            else if (targetDirection == Vector2.zero)
+            {
+                rigidbody.velocity = Vector2.zero;
+            }
+            else if (currentState == State.Right)
+            {
+                rigidbody.velocity = targetDirection * speed;
+                spriteRenderer.flipX = true;
+            }
+            else if (currentState == State.Left)
+            {
+                rigidbody.velocity = targetDirection * speed;
+                spriteRenderer.flipX = false;
+            }
+            else if (currentState == State.Dead)
+            {
+                rigidbody.velocity = Vector2.zero;
+            }
         }
-        else if (currentState == State.Right)
+
+    }
+
+
+    private void CirclingAroundPlayer()
+    {
+        float deltaAngle = isClockwise ? -circleSpeed * Time.fixedDeltaTime : circleSpeed * Time.fixedDeltaTime;
+        angle += deltaAngle;
+        if (angle >= 2 * Mathf.PI)
         {
-            rigidbody.velocity = targetDirection * speed;
-            spriteRenderer.flipX = true;
+            angle -= 2 * Mathf.PI;
         }
-        else if (currentState == State.Left)
+        else if (angle < 0)
         {
-            rigidbody.velocity = targetDirection * speed;
-            spriteRenderer.flipX = false;
-        }
-        else if (currentState == State.Dead)
-        {
-            rigidbody.velocity = Vector2.zero;
+            angle += 2 * Mathf.PI;
         }
     }
 
@@ -135,10 +217,20 @@ public class Porcupine : Enemy
     public override void UpdateState()
     {
         // Check if the enemy should be in the Attack state
-        if (canAttack)
+        if (canAttack && !hasThrownProjectile)
         {
             currentState = State.Attack;
+            ThrowProjectile();
             StartCoroutine(PauseOtherAnimations(0.1f));
+            currentState = State.None; // Reset state after attacking
+            attackCooldown = 1.0f; // Reset the cooldown timer
+            hasThrownProjectile = true; // Set the flag to indicate that a projectile has been thrown
+        }
+
+        // Reset the flag if the enemy is not attacking
+        if (!canAttack)
+        {
+            hasThrownProjectile = false;
         }
 
         if (!pauseAnimation)
@@ -158,4 +250,25 @@ public class Porcupine : Enemy
         }
     }
 
+    public void ThrowProjectile()
+    {
+        // Instantiate the Quill projectile
+        GameObject quillInstance = Instantiate(quillPrefab, transform.position, Quaternion.identity);
+
+        // Calculate the direction towards the player's initial position
+        Vector2 playerInitialPosition = player.transform.position;
+        Vector2 direction = (playerInitialPosition - (Vector2)transform.position).normalized;
+
+        // Get the Rigidbody2D component of the projectile
+        Rigidbody2D quillRigidbody = quillInstance.GetComponent<Rigidbody2D>();
+        if (quillRigidbody != null)
+        {
+            // Set the velocity of the projectile to move towards the player's initial position
+            quillRigidbody.velocity = direction * quillSpeed;
+        }
+        else
+        {
+            Debug.LogError("Quill prefab does not have a Rigidbody2D component.");
+        }
+    }
 }

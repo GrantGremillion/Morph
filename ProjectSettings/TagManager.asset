@@ -8,6 +8,7 @@ TagManager:
   - Arrow
   - Water
   - Fish
+  - Quill
   layers:
   - Default
   - TransparentFX

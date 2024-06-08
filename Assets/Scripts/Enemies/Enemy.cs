@@ -50,7 +50,8 @@ public class Enemy : MonoBehaviour
         Agro,
         Deagro,
         Idle,
-        Attack
+        Attack,
+        None
     }
 
     private void Awake()
