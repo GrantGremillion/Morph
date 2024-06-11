@@ -14,7 +14,6 @@ public class FishController : PlayerController
     // Start is called before the first frame update
     void Awake()
     {
-        Debug.Log("Child Awake");
         rotationSpeedInDegrees = 180f;
         speed = 5f; 
     }
@@ -59,9 +58,8 @@ public class FishController : PlayerController
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeedInDegrees * Time.deltaTime);
     }
 
-    void MoveFish() 
+    void MoveFish()
     {
-
         // calculate the vector from the inputs (since in 2d obj rotates on z)
         float currentAngleInDegrees = transform.eulerAngles.z;
         float radianAngle = currentAngleInDegrees * Mathf.Deg2Rad;
