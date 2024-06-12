@@ -7,6 +7,7 @@ public class WaterGun : MonoBehaviour
 {  
     // reference the controller (Note: this is referenced from the inspector)
     public GameObject fishController;
+    public GameObject bullet;
     [SerializeField] float cooldownTimeInSeconds = 1f;
     [SerializeField] float gunRotationSpeed = 620f;
     private float cooldownTimer = 0f;
@@ -100,9 +101,16 @@ public class WaterGun : MonoBehaviour
             cooldownTimer += (1/FPS);
             if (cooldownTimer > cooldownTimeInSeconds)
             {
+                Shoot();
                 cooldownTimer = 0f;
             }
               
         }
+    }
+
+    void Shoot()
+    {
+        Instantiate(bullet, transform.position, transform.rotation);
+
     }
 }
