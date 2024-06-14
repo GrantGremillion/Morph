@@ -6427,11 +6427,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374901134}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -6671,6 +6671,37 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1 &730832192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 730832193}
+  m_Layer: 0
+  m_Name: FiringPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &730832193
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730832192}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.0082899, z: -0, w: 0.99996567}
+  m_LocalPosition: {x: 2.8400002, y: 0.028000114, z: -0.39999998}
+  m_LocalScale: {x: 0.49005386, y: 0.49999994, z: 6.665445}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 781599345}
+  m_LocalEulerAnglesHint: {x: 0, y: -0.95, z: 0}
 --- !u!1 &781599343
 GameObject:
   m_ObjectHideFlags: 0
@@ -6753,7 +6784,8 @@ Transform:
   m_LocalPosition: {x: 0.092, y: 0, z: 0}
   m_LocalScale: {x: 0.050000004, y: 0.050000004, z: 0.15}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 730832193}
   m_Father: {fileID: 374901139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &781599346
@@ -6769,9 +6801,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishController: {fileID: 374901134}
-  waterBullet: {fileID: 0}
-  cooldownTimeInSeconds: 1
   gunRotationSpeed: 180
+  bulletPrefab: {fileID: 118689419558745291, guid: 3c699c35ebc490f498a8e0ec48d08642, type: 3}
+  firePoint: {fileID: 730832193}
+  fireRate: 0
 --- !u!1 &1563591688
 GameObject:
   m_ObjectHideFlags: 0

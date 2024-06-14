@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class WaterGun : MonoBehaviour
 {
+    // parent reference
     public GameObject fishController;
-    [SerializeField] float cooldownTimeInSeconds = 1f;
+
+    // Gun variables
     [SerializeField] float gunRotationSpeed = 620f;
-    private float cooldownTimer = 0f;
-    private float lastShotTime = 0f;
+
+    // Bullet variables
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firePoint;
+    [Range(0.1f, 1f)]
+    [SerializeField] private float fireRate;
 
     void Start()
     {
@@ -87,16 +93,12 @@ public class WaterGun : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            if (Time.time - lastShotTime > cooldownTimeInSeconds)
-            {
-                shoot();
-                lastShotTime = Time.time;
-            }
+            Shoot();
         }
     }
 
-    void shoot()
+    void Shoot()
     {
-        
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }
