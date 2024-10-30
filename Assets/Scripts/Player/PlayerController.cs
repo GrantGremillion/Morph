@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public Bow bow;
     public UpgradeSystem upgradeSystem;
 
+    public bool canPlay = false;
+
     // Shooting variables
     public bool canShoot = true;
     public float holdTimeToShoot; // Time in seconds to hold the button to shoot
@@ -97,6 +99,8 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!canPlay) return;
+
         if (isDashing || isKnockedBack)
         {
             return;
@@ -107,6 +111,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!canPlay) return;
+
         if (isDashing || isKnockedBack)
         {
             return;
