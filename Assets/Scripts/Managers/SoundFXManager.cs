@@ -7,7 +7,8 @@ public class SoundFXManager : MonoBehaviour
     public static SoundFXManager instance;
 
     [SerializeField] private AudioSource soundFXObject;
-    [SerializeField] private AudioClip music;
+    [SerializeField] private AudioClip defaultMusic;
+    private AudioSource currentMusicSource;
 
     void Awake()
     {
@@ -17,23 +18,34 @@ public class SoundFXManager : MonoBehaviour
         }
 
         // Start background music
-        PlaySoundFXClip(music,transform,1f,true);
+        PlayMusic(defaultMusic, 1f, true);
+    }
+
+    public void PlayMusic(AudioClip musicClip, float volume, bool loop)
+    {
+        // Stop current music if it is playing
+        if (currentMusicSource != null)
+        {
+            currentMusicSource.Stop();
+            Destroy(currentMusicSource.gameObject);
+        }
+
+        // Spawn and play the new music
+        currentMusicSource = Instantiate(soundFXObject, transform.position, Quaternion.identity);
+        currentMusicSource.clip = musicClip;
+        currentMusicSource.volume = volume;
+        currentMusicSource.loop = loop;
+        currentMusicSource.Play();
     }
 
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, bool loop)
     {
-        // spawn audio gameObject
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
-
         audioSource.clip = audioClip;
         audioSource.volume = volume;
-        if (loop) audioSource.loop = true;
-        else audioSource.loop = false;
+        audioSource.loop = loop;
         audioSource.Play();
 
-        float clipLength = audioSource.clip.length;
-
-        if (!loop) Destroy(audioSource.gameObject, clipLength);
-
+        if (!loop) Destroy(audioSource.gameObject, audioSource.clip.length);
     }
 }

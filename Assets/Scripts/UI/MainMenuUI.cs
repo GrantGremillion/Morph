@@ -12,6 +12,7 @@ public class MainMenuUI : MonoBehaviour
     public Button StartButton;
     public Button OptionsButton;
     public Button QuitButton;
+    public AudioClip mainMusic;
     
 
     // Start is called before the first frame update
@@ -23,20 +24,16 @@ public class MainMenuUI : MonoBehaviour
         QuitButton.onClick.AddListener(OnQuitButtonPressed);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnStartButtonPressed()
     {
         gameObject.SetActive(false);
         player.canPlay = true;
+
+        SoundFXManager.instance.PlayMusic(mainMusic,1f,true);
     }
     public void OnOptionsButtonPressed()
     {
-        
+    
     }
     public void OnQuitButtonPressed()
     {
