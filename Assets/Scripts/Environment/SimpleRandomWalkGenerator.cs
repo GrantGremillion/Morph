@@ -22,7 +22,7 @@ public class SimpleRandomWalkGenerator : MonoBehaviour
     public void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
-
+        
         tilemapVisualizer.PaintFloorTiles(floorPositions);
     }
 

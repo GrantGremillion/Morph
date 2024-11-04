@@ -24,7 +24,6 @@ public class MushroomEnemy : Enemy
     void Start()
     {
         dropType = "banana";
-        maxHealth = 10;
         player = FindAnyObjectByType<PlayerController>();
         animator = GetComponent<Animator>();
         animator.speed = animationSpeed;

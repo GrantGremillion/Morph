@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (!canPlay) return;
+        if (SceneManager.GetActiveScene().name == "Main" && !canPlay) return;
 
         if (isDashing || isKnockedBack)
         {
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!canPlay) return;
+        if (SceneManager.GetActiveScene().name == "Main" && !canPlay) return;
 
         if (isDashing || isKnockedBack)
         {

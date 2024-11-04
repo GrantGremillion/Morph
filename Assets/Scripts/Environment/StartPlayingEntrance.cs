@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartPlayingEntrance : MonoBehaviour
 {
-    [SerializeField]
-    public SimpleRandomWalkGenerator simpleRandomWalkGenerator;
 
     void OnTriggerEnter2D(Collider2D collider)
     {
    
         if (collider.CompareTag("Player"))
         {
-            simpleRandomWalkGenerator.RunProceduralGeneration();
+            SceneManager.LoadScene("Lvl1");
+
         }
     }
 }

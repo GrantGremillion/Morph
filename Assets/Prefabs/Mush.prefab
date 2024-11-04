@@ -546,8 +546,8 @@ MonoBehaviour:
   arrow: {fileID: 0}
   currentState: 0
   speed: 0.4
-  health: 10
-  maxHealth: 10
+  health: 2
+  maxHealth: 2
   immunityTime: 0.5
   pauseAnimation: 0
   dropType: 

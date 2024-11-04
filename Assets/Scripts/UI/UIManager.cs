@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -20,7 +21,18 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         player = FindAnyObjectByType<PlayerController>();
-        mainMenuUI.gameObject.SetActive(true);
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            mainMenuUI.gameObject.SetActive(true);
+        }
+        else
+        {
+            mainMenuUI.gameObject.SetActive(false);
+            inGameUI.gameObject.SetActive(true);
+            player.canPlay = true;
+        } 
+        
+
         shopUI.gameObject.SetActive(false);
         inGameUI.gameObject.SetActive(false);
     }
@@ -28,7 +40,12 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.canPlay) inGameUI.gameObject.SetActive(true);
+       
+        if (player.canPlay)
+        {
+            inGameUI.gameObject.SetActive(true);
+        }
+        
     }
 
 }
