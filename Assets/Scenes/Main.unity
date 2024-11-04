@@ -14553,6 +14553,51 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6426508966007017058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16622189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef85da0d290e81444980668afcb801d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 0}
+  targetDirection: {x: 0, y: 0}
+  currentDirection: {x: 0, y: 0}
+  healthbarFill: {fileID: 0}
+  banana: {fileID: 0}
+  blueberry: {fileID: 0}
+  cherry: {fileID: 0}
+  arrow: {fileID: 0}
+  currentState: 0
+  speed: 0.21
+  health: 8
+  maxHealth: 8
+  immunityTime: 0.5
+  pauseAnimation: 0
+  dropType: 
+  numberOfDrops: 0
+  minSpawnDistance: 2
+  maxSpawnDistance: 5
+  moveSpeed: 1
+  maxDistanceFromEnemy: 10
+  canAttack: 0
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  collider: {fileID: 0}
+  quillPrefab: {fileID: 7686880624945232472, guid: 3afa02e99108d9c41989fbc1b219a2cc, type: 3}
+  playerAwarenessRadiusIsTriggered: 0
+  attackRadiusIsTriggered: 0
+  animationSpeed: 0
+  circleRadius: 2
+  circleSpeed: 2
+  directionChangeInterval: 3
+  quillSpeed: 1
+  hasThrownProjectile: 0
 --- !u!1001 &8310096046582074558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14694,13 +14739,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 5402.04
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4160024214826244817, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5095190570236125144, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6426508966007017057}
+    - targetCorrespondingSourceObject: {fileID: 5095190570236125144, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6426508966007017058}
   m_SourcePrefab: {fileID: 100100000, guid: 3b6daebb2a5219f48aadc4c952444e4d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -51,6 +51,8 @@ public class Enemy : MonoBehaviour
         Deagro,
         Idle,
         Attack,
+        Up,
+        Down,
         None
     }
 

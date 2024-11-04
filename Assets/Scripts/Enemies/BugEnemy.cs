@@ -16,7 +16,7 @@ public class Porcupine : Enemy
     public bool attackRadiusIsTriggered = false;
     [SerializeField] private float animationSpeed;
     [SerializeField] private float circleRadius = 2.0f; // Radius of the circling path
-    [SerializeField] private float circleSpeed = 2.0f; // Speed of circling
+    [SerializeField] private float circleSpeed = 1.0f; // Speed of circling
     [SerializeField] private float directionChangeInterval = 3.0f; // Interval for changing circling direction
 
     private bool isCircling = false;
@@ -140,15 +140,15 @@ public class Porcupine : Enemy
             {
                 rigidbody.velocity = Vector2.zero;
             }
-            else if (currentState == State.Right)
+            else if (currentState == State.Up)
             {
                 rigidbody.velocity = targetDirection * speed;
-                spriteRenderer.flipX = true;
+                spriteRenderer.flipY = false;
             }
-            else if (currentState == State.Left)
+            else if (currentState == State.Down)
             {
                 rigidbody.velocity = targetDirection * speed;
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipY = true;
             }
             else if (currentState == State.Dead)
             {
@@ -232,13 +232,13 @@ public class Porcupine : Enemy
 
         if (!pauseAnimation)
         {
-            if (targetDirection.x > 0)
+            if (targetDirection.y > 0)
             {
-                currentState = State.Right;
+                currentState = State.Up;
             }
-            else if (targetDirection.x < 0)
+            else if (targetDirection.y < 0)
             {
-                currentState = State.Left;
+                currentState = State.Down;
             }
             else
             {
