@@ -207,30 +207,29 @@ public class PlayerController : MonoBehaviour
 
     void ShootArrow()
     {
-        // Get the mouse position in world space
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Ensure the z-coordinate is 0 since we're working in 2D
 
-        // Calculate the direction from the player to the mouse position
+        mousePosition.z = 0; 
+
         Vector3 direction = (mousePosition - transform.position).normalized;
+        Vector2 direction2D = new Vector2(direction.x, direction.y);
 
-        // Calculate the rotation angle
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
-
-        // Set the velocity
-        Vector2 velocity = new Vector2(direction.x, direction.y);
-
-        // Set the offset (if needed, based on the direction)
-        Vector3 offset = direction * 0.15f; // Adjust this value if needed
-
-        // Calculate the spawn position with the offset
+        Vector3 offset = direction * 0.15f;
         Vector3 spawnPosition = transform.position + offset;
-
-        // Instantiate the arrow at the spawn position with the calculated rotation
         GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
-        arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrow.GetComponent<Arrow>().speed; ;
+        Rigidbody2D arrowRb = arrow.GetComponent<Rigidbody2D>();
+
+        // add player velocityi
+        Vector2 arrowVelocity = rb.velocity + direction2D * arrow.GetComponent<Arrow>().speed;
+
+        arrowRb.velocity = arrowVelocity;
     }
+
+
+
 
     void changeForm()
     {
@@ -273,20 +272,13 @@ public class PlayerController : MonoBehaviour
             {
                 animator.Play("WalkHorizontal");
                 currentDirection = Direction.Right;
-
-                bowTransform.SetParent(null);
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                bowTransform.SetParent(transform);
-
             }
             else if (movementInput.x < 0)
             {
                 animator.Play("WalkHorizontal");
                 currentDirection = Direction.Left;
-
-                bowTransform.SetParent(null);
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                bowTransform.SetParent(transform);
             }
             else if (movementInput.y > 0)
             {
@@ -369,8 +361,4 @@ public class PlayerController : MonoBehaviour
         SoundFXManager.instance.PlaySoundFXClip(takeDamage, transform, 1f, false);
         StartCoroutine(Knockback(collider));
     }
-
-
-
-
 }

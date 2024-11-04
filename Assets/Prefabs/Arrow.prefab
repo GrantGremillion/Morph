@@ -175,4 +175,4 @@ MonoBehaviour:
   upgradeSystem: {fileID: 0}
   destroyTime: 30
   damage: 2
-  speed: 0.7
+  speed: 1
