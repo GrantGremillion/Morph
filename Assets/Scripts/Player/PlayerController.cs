@@ -70,8 +70,6 @@ public class PlayerController : MonoBehaviour
     // Morph variables
     [SerializeField] private bool canMorphToFish = false;
     private bool touchingWater = false;
-    [SerializeField] FishController fish;
-
 
     // Player Sound Effects
     [SerializeField] private AudioClip takeDamage;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2447459464360487367}
   - component: {fileID: 2227280973147036274}
   m_Layer: 0
-  m_Name: Quill
+  m_Name: BugProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2705091284493514034}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.359, y: 0.879, z: -6.0086565}
+  m_LocalPosition: {x: 1.353, y: 0.505, z: -6.0086565}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49,18 +49,16 @@ MonoBehaviour:
   usingShop: 0
   shopUI: {fileID: 0}
   player: {fileID: 0}
+  bow: {fileID: 0}
   bananaCount: 0
   blueberryCount: 0
   cherryCount: 0
-  bowStats: 
   bowUpgradeCosts: 
   currentBowUpgradeCost: 0
   canUpgradeBow: 0
   healthUpgradeCosts: 
   currentHealthUpgradeCost: 0
   canUpgradeHealth: 0
-  levels: 0
-  maxLevels: 3
 --- !u!1 &4815527951171827235
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +87,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.026162148, y: 0.0047903657, z: 6.0086565}
-  m_LocalScale: {x: 0.485446, y: 0.14844547, z: 0.48145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8217688325209186608}
@@ -135,12 +133,12 @@ SpriteRenderer:
   m_SortingLayerID: 1258815919
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3207547, g: 0.2226696, b: 0.0050432803, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 564ea1be66d693f49a83f663553f162e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8, y: 0.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -178,18 +176,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0016335994, y: -0.22373903}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.8, y: 0.8}
+    newSize: {x: 0.8, y: 0.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.47520778, y: 0.34727383}
   m_EdgeRadius: 0
 --- !u!1 &4936845169148413768
 GameObject:
@@ -256,7 +254,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012824565, y: -0.008805215}
+  m_Offset: {x: 0.012824565, y: -0.27071363}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -267,7 +265,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.48934704, y: 0.10356486}
+  m_Size: {x: 0.48934704, y: 0.14647365}
   m_EdgeRadius: 0
 --- !u!114 &3126970971747061681
 MonoBehaviour:

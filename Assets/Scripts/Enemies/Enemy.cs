@@ -9,10 +9,16 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
+    [HideInInspector]
     public new Rigidbody2D rigidbody;
+    [HideInInspector]
     public Vector2 targetDirection;
+    [HideInInspector]
     public Vector2 currentDirection = Vector2.zero;
+    [HideInInspector]
     public UnityEngine.UI.Image healthbarFill;
+
+    
     // Item prefabs
     public GameObject banana;
     public GameObject blueberry;
