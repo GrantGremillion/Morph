@@ -222,8 +222,8 @@ public class PlayerController : MonoBehaviour
         GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
         Rigidbody2D arrowRb = arrow.GetComponent<Rigidbody2D>();
 
-        // add player velocityi
-        Vector2 arrowVelocity = rb.velocity + direction2D * arrow.GetComponent<Arrow>().speed;
+        // add player velocity
+        Vector2 arrowVelocity = rb.velocity + (direction2D * arrow.GetComponent<Arrow>().speed);
 
         arrowRb.velocity = arrowVelocity;
     }
@@ -272,13 +272,17 @@ public class PlayerController : MonoBehaviour
             {
                 animator.Play("WalkHorizontal");
                 currentDirection = Direction.Right;
+                bowTransform.SetParent(null);
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                bowTransform.SetParent(transform);
             }
             else if (movementInput.x < 0)
             {
                 animator.Play("WalkHorizontal");
                 currentDirection = Direction.Left;
+                bowTransform.SetParent(null);
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                bowTransform.SetParent(transform);
             }
             else if (movementInput.y > 0)
             {
