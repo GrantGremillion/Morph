@@ -17,7 +17,11 @@ public class TilemapVisualizer : MonoBehaviour
     private TileBase floorTile4;
     [SerializeField]
     private TileBase floorTile5;
-    private List<TileBase> tiles = null;
+    private List<TileBase> tiles;
+
+    public GameObject enemyPrefab;           // Enemy prefab to spawn
+    public int enemyCount = 10;              // Number of enemies to spawn
+    
 
     public void Start()
     {
@@ -37,10 +41,12 @@ public class TilemapVisualizer : MonoBehaviour
         
         tiles = new List<TileBase> { floorTile1, floorTile2, floorTile3, floorTile4, floorTile5 };
         foreach (var position in positions)
-        {
+        {   
             TileBase randomTile = tiles[Random.Range(0, tiles.Count)];
             PaintSingleTile(tilemap, randomTile, position);
         }
+
+
     }
 
     private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
