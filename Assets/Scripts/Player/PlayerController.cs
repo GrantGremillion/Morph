@@ -207,29 +207,30 @@ public class PlayerController : MonoBehaviour
 
     void ShootArrow()
     {
+        // Get the mouse position in world space
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; // Ensure the z-coordinate is 0 since we're working in 2D
 
-        mousePosition.z = 0; 
-
+        // Calculate the direction from the player to the mouse position
         Vector3 direction = (mousePosition - transform.position).normalized;
-        Vector2 direction2D = new Vector2(direction.x, direction.y);
 
+        // Calculate the rotation angle
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
-        Vector3 offset = direction * 0.15f;
+
+        // Set the velocity
+        Vector2 velocity = new Vector2(direction.x, direction.y);
+
+        // Set the offset (if needed, based on the direction)
+        Vector3 offset = direction * 0.15f; // Adjust this value if needed
+
+        // Calculate the spawn position with the offset
         Vector3 spawnPosition = transform.position + offset;
+
+        // Instantiate the arrow at the spawn position with the calculated rotation
         GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
-        Rigidbody2D arrowRb = arrow.GetComponent<Rigidbody2D>();
-
-        // add player velocity
-        Vector2 arrowVelocity = rb.velocity + (direction2D * arrow.GetComponent<Arrow>().speed);
-
-        arrowRb.velocity = arrowVelocity;
+        arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrow.GetComponent<Arrow>().speed; ;
     }
-
-
-
 
     void changeForm()
     {
