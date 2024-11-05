@@ -31,12 +31,8 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
-        if (primCurHealth > desiredHealth)
-        {
-            primCurHealth = Math.Max(0, Math.Max(desiredHealth, primCurHealth - healthBarReductionSpeed));
-        } else if (secCurHealth > desiredHealth) {
-            secCurHealth = Math.Max(0, Math.Max(desiredHealth, secCurHealth - healthBarReductionSpeed));
-        } 
+
+        secCurHealth = Math.Max(0, Math.Max(desiredHealth, secCurHealth - healthBarReductionSpeed));
 
         primaryHealthBar.fillAmount = primCurHealth / maxHealth;
         secondaryHealthBar.fillAmount = secCurHealth / maxHealth;
@@ -63,5 +59,6 @@ public class HealthBar : MonoBehaviour
     {
         Print.Log(debug, "healthbar take damage");
         desiredHealth = Math.Max(0, primCurHealth - damage);
+        primCurHealth = desiredHealth;
     }
 }

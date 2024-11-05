@@ -194,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   maxHealth: 100
-  healthBarReductionSpeed: 2
+  healthBarReductionSpeed: 4
   primCurHealth: 0
   secCurHealth: 0
   desiredHealth: 0
