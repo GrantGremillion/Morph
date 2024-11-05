@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class BugEnemy : Enemy
     public float projectileSpeed = 1.0f;
     public bool hasThrownProjectile;
 
+    public Canvas healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +43,8 @@ public class BugEnemy : Enemy
         {
             Debug.LogError("playerAwarenessRadius GameObject/Component not found!");
         }
+
+        healthBar = GetComponentInChildren<Canvas>();
     }
 
     // Update is called once per frame
@@ -63,7 +68,66 @@ public class BugEnemy : Enemy
         {
             canAttack = false;
         }
+
+        UpdateTargetDirection();
+        SetVelocity();
+
+        // Reset the health bar's rotation to keep it upright
+        if (healthBar != null)
+        {
+            healthBar.transform.rotation = Quaternion.identity;
+        }
     }
+
+    private void UpdateTargetDirection()
+    {
+        if (playerAwarenessRadiusIsTriggered && !pauseAnimation)
+        {
+            targetDirection = playerAwarenessRadius.getTriggerDir().normalized;
+        }
+        else
+        {
+            targetDirection = Vector2.zero;
+        }
+    }
+
+ 
+    private void SetVelocity()
+    {
+        if (targetDirection == Vector2.zero)
+        {
+            rigidbody.velocity = Vector2.zero;
+        }
+
+        switch (currentState)
+        {
+            case State.Up:
+                rigidbody.velocity = targetDirection * speed;
+                //spriteRenderer.flipY = false;
+                transform.rotation = Quaternion.Euler(0, 0, 0); // No rotation
+                break;
+            case State.Down:
+                rigidbody.velocity = targetDirection * speed;
+                //spriteRenderer.flipY = true;
+                transform.rotation = Quaternion.Euler(0, 0, 180); // 180-degree rotation (upside down)
+                break;
+            case State.Right:
+                rigidbody.velocity = targetDirection * speed;
+                //spriteRenderer.flipX = false;
+                transform.rotation = Quaternion.Euler(0, 0, -90); // Rotate 90 degrees to the right
+                break;
+            case State.Left:
+                rigidbody.velocity = targetDirection * speed;
+                //spriteRenderer.flipY = false;
+                transform.rotation = Quaternion.Euler(0, 0, 90); // Rotate 90 degrees to the left
+                break;
+            case State.Dead:
+                rigidbody.velocity = Vector2.zero;
+                break;
+        }
+
+    }
+
 
     // Called via event set up in attack animation 
     public void DealDamage()
@@ -74,6 +138,27 @@ public class BugEnemy : Enemy
     // Called in base Class Update function
     public override void UpdateState()
     {
+        if (!pauseAnimation)
+        {
+            if (Math.Abs(targetDirection.y) > Math.Abs(targetDirection.x) && targetDirection.y > 0)
+            {
+                currentState = State.Up;
+            }
+            else if (Math.Abs(targetDirection.y) > Math.Abs(targetDirection.x) && targetDirection.y < 0)
+            {
+                currentState = State.Down;
+            }
+            else if (Math.Abs(targetDirection.y) < Math.Abs(targetDirection.x) && targetDirection.x > 0)
+            {
+                currentState = State.Right;
+            }
+            else if (Math.Abs(targetDirection.y) < Math.Abs(targetDirection.x) && targetDirection.x < 0)
+            {
+                currentState = State.Left;
+            }
+            else currentState = State.Idle;
+        }
+
         // Check if the enemy should be in the Attack state
         if (canAttack && !hasThrownProjectile)
         {
