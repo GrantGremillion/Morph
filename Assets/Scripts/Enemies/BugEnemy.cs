@@ -138,6 +138,7 @@ public class BugEnemy : Enemy
     {
         if (!pauseAnimation)
         {
+            gameObject.layer = LayerMask.NameToLayer("Default");
             if (Math.Abs(targetDirection.y) > Math.Abs(targetDirection.x) && targetDirection.y > 0)
             {
                 currentState = State.Up;
@@ -154,7 +155,12 @@ public class BugEnemy : Enemy
             {
                 currentState = State.Left;
             }
-            else currentState = State.Idle;
+            else 
+            {
+                currentState = State.Idle;
+                // Change layer to one that will not collide with player projectiles
+                gameObject.layer = LayerMask.NameToLayer("IdleEnemy");
+            }
         }
 
         // Check if the enemy should be in the Attack state

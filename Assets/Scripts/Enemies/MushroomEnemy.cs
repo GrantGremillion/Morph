@@ -138,6 +138,7 @@ public class MushroomEnemy : Enemy
 
         if (!pauseAnimation)
         {
+            gameObject.layer = LayerMask.NameToLayer("Default");
             if (targetDirection.x > 0)
             {
                 currentState = State.Right;
@@ -149,6 +150,8 @@ public class MushroomEnemy : Enemy
             else
             {
                 currentState = State.Idle;
+                // Change layer to one that will not collide with player projectiles
+                gameObject.layer = LayerMask.NameToLayer("IdleEnemy");
             }
         }
     }
