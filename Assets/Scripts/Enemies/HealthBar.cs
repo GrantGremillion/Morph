@@ -10,31 +10,38 @@ public class HealthBar : MonoBehaviour
     public bool debug = false;
     public float maxHealth = 100;
     public float healthBarReductionSpeed = 0.1f;
-    public float curHealth;
+    public float primCurHealth;
+    public float secCurHealth;
     public float desiredHealth;
 
-    public Image healthBar;
+    public Image primaryHealthBar;
+    public Image secondaryHealthBar;
 
     void Start()
     {
-        curHealth = maxHealth;
-        desiredHealth = curHealth;
+        primCurHealth = maxHealth;
+        secCurHealth = maxHealth;
+        desiredHealth = primCurHealth;
 
-        healthBar.fillAmount = curHealth / maxHealth;
+        primaryHealthBar.fillAmount = primCurHealth / maxHealth;
+        secondaryHealthBar.fillAmount = primCurHealth / maxHealth;
 
-        Print.Log(debug, "start fill amount: " + healthBar.fillAmount);
+        Print.Log(debug, "start fill amount: " + primaryHealthBar.fillAmount);
     }
 
     void Update()
     {
-        if (curHealth > desiredHealth)
+        if (primCurHealth > desiredHealth)
         {
-            curHealth = Math.Max(0, Math.Max(desiredHealth, curHealth - healthBarReductionSpeed));
+            primCurHealth = Math.Max(0, Math.Max(desiredHealth, primCurHealth - healthBarReductionSpeed));
+        } else if (secCurHealth > desiredHealth) {
+            secCurHealth = Math.Max(0, Math.Max(desiredHealth, secCurHealth - healthBarReductionSpeed));
         }
 
-        healthBar.fillAmount = curHealth / maxHealth;
+        primaryHealthBar.fillAmount = primCurHealth / maxHealth;
+        secondaryHealthBar.fillAmount = secCurHealth / maxHealth;
 
-        Print.Log(debug, "update fill amount: " + healthBar.fillAmount);
+        Print.Log(debug, "update fill amount: " + primaryHealthBar.fillAmount);
     }
 
     public void SetMaxHealth(float maxHealth)
@@ -55,6 +62,6 @@ public class HealthBar : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Print.Log(debug, "healthbar take damage");
-        desiredHealth = Math.Max(0, curHealth - damage);
+        desiredHealth = Math.Max(0, primCurHealth - damage);
     }
 }
