@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.Unity.VisualStudio.Editor;
+using TMPro.Examples;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Helpers;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,15 +17,16 @@ public class Enemy : MonoBehaviour
     public Vector2 targetDirection;
     [HideInInspector]
     public Vector2 currentDirection = Vector2.zero;
-    public UnityEngine.UI.Image healthbarFill;
+    [HideInInspector]
+    private HealthBar healthBar;
+
     // Item prefabs
     public GameObject banana;
     public GameObject blueberry;
     public GameObject cherry;
     public Arrow arrow;
-
     public State currentState;
-
+    public Canvas healthBarCanvas;
 
     public float speed;
     public float health;
@@ -31,19 +34,17 @@ public class Enemy : MonoBehaviour
     public float immunityTime = 0.5f;
     public bool pauseAnimation;
     
-    // Item drop variabels
+    // Item drop variables
     public string dropType;
     public int numberOfDrops;
     public float minSpawnDistance = 2f;
     public float maxSpawnDistance = 5f;
-    public float moveSpeed = 1f; // Speed at which items move away from the player
-    public float maxDistanceFromEnemy = 10f; // Maximum distance from player before items stop moving
+    public float moveSpeed = 1f;
+    public float maxDistanceFromEnemy = 10f;
 
     public bool canAttack;
-    private bool previousAwareOfPlayer;
-    public bool awareOfPlayer { get; private set; }
-
-
+    private bool previousAwareOfPlayer = false;
+    public bool awareOfPlayer = false;
     public enum State
     {
         Left,
@@ -62,15 +63,14 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        healthBar = healthBarCanvas.GetComponent<HealthBar>();
 
-        healthbarFill = transform.Find("Canvas").GetComponentInChildren<Transform>().Find("Fill").GetComponent<UnityEngine.UI.Image>();
-        healthbarFill.fillAmount = health / maxHealth;
+        healthBar.SetMaxHealth(health);
         pauseAnimation = false;
         canAttack = false;
         previousAwareOfPlayer = awareOfPlayer;  
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateState();
@@ -82,15 +82,14 @@ public class Enemy : MonoBehaviour
 
         if (awareOfPlayer != previousAwareOfPlayer)
         {
+            print("swapped");
             OnAwarenessChanged(awareOfPlayer);
-            previousAwareOfPlayer = awareOfPlayer;  
         }
+
+        previousAwareOfPlayer = awareOfPlayer;
     }
 
-    public virtual void UpdateState()
-    {
-        // Override method
-    }
+    public virtual void UpdateState() { }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -102,19 +101,21 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator TakeDamage(Collision2D collision)
     {
-
         arrow = collision.gameObject.GetComponent<Arrow>();
 
-        health -= arrow.damage;
-        healthbarFill.fillAmount = health / maxHealth;
-        if (health <= 0)
+        print("take damage: " + arrow.damage);
+
+        healthBar.TakeDamage(arrow.damage);
+        if (healthBar.GetDesiredHealth() <= 0)
         {
+            healthBar.gameObject.SetActive(false);
             currentState = State.Dead;
             pauseAnimation = true;
             yield return new WaitForSeconds(immunityTime);
             DropItems();
             Destroy(gameObject);
         }
+        yield return new WaitForSeconds(1);
     }
 
     public void DropItems()
@@ -145,16 +146,9 @@ public class Enemy : MonoBehaviour
 
     public Vector3 GetRandomSpawnPosition(Vector3 pos)
     {
-        // Get random distance within the min and max spawn distances
         float randomDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
-
-        // Get random angle around the player
         float randomAngle = Random.Range(0f, 2f * Mathf.PI);
-
-        // Calculate spawn position offset
         Vector3 spawnOffset = new Vector3(Mathf.Cos(randomAngle) * randomDistance, Mathf.Sin(randomAngle) * randomDistance, 0f);
-
-        // Calculate final spawn position
         Vector3 spawnPosition = pos + spawnOffset;
 
         return spawnPosition;
@@ -174,7 +168,6 @@ public class Enemy : MonoBehaviour
     // Function to handle changes in awareness
     public void OnAwarenessChanged(bool newAwarenessState)
     {
-        //print("Awarness Changed");
         if (newAwarenessState)
         {
             currentState = State.Agro;
@@ -192,6 +185,4 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(time);
         pauseAnimation = false;
     }
-
-
 }

@@ -10,18 +10,16 @@ public class BugEnemy : Enemy
     private Trigger attackRadius;
     private Trigger playerAwarenessRadius;
     public GameObject bugProjectilePrefab;
+    public Transform spriteTransform;
 
     public bool playerAwarenessRadiusIsTriggered = false;
     public bool attackRadiusIsTriggered = false;
-    [SerializeField] private float animationSpeed;
+    public float animationSpeed;
     
-    [SerializeField]
-    private float attackCooldown;
+    public float attackCooldown;
     private float initialAttackCooldown;
     public float projectileSpeed = 1.0f;
     public bool hasThrownProjectile;
-
-    public Canvas healthBar;
 
     // Start is called before the first frame update
     void Start()
@@ -43,14 +41,12 @@ public class BugEnemy : Enemy
         {
             Debug.LogError("playerAwarenessRadius GameObject/Component not found!");
         }
-
-        healthBar = GetComponentInChildren<Canvas>();
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        player = FindAnyObjectByType<PlayerController>(); // Update the player reference
+        player = FindAnyObjectByType<PlayerController>();
         attackRadiusIsTriggered = attackRadius.getTrigger();
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
@@ -71,12 +67,6 @@ public class BugEnemy : Enemy
 
         UpdateTargetDirection();
         SetVelocity();
-
-        // Reset the health bar's rotation to keep it upright
-        if (healthBar != null)
-        {
-            healthBar.transform.rotation = Quaternion.identity;
-        }
     }
 
     private void UpdateTargetDirection()
@@ -104,28 +94,27 @@ public class BugEnemy : Enemy
             case State.Up:
                 rigidbody.velocity = targetDirection * speed;
                 //spriteRenderer.flipY = false;
-                transform.rotation = Quaternion.Euler(0, 0, 0); // No rotation
+                spriteTransform.rotation = Quaternion.Euler(0, 0, 0); // No rotation
                 break;
             case State.Down:
                 rigidbody.velocity = targetDirection * speed;
                 //spriteRenderer.flipY = true;
-                transform.rotation = Quaternion.Euler(0, 0, 180); // 180-degree rotation (upside down)
+                spriteTransform.rotation = Quaternion.Euler(0, 0, 180); // 180-degree rotation (upside down)
                 break;
             case State.Right:
                 rigidbody.velocity = targetDirection * speed;
                 //spriteRenderer.flipX = false;
-                transform.rotation = Quaternion.Euler(0, 0, -90); // Rotate 90 degrees to the right
+                spriteTransform.rotation = Quaternion.Euler(0, 0, -90); // Rotate 90 degrees to the right
                 break;
             case State.Left:
                 rigidbody.velocity = targetDirection * speed;
                 //spriteRenderer.flipY = false;
-                transform.rotation = Quaternion.Euler(0, 0, 90); // Rotate 90 degrees to the left
+                spriteTransform.rotation = Quaternion.Euler(0, 0, 90); // Rotate 90 degrees to the left
                 break;
             case State.Dead:
                 rigidbody.velocity = Vector2.zero;
                 break;
         }
-
     }
 
 

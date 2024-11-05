@@ -7,9 +7,9 @@ public class Arrow : MonoBehaviour
     public UpgradeSystem upgradeSystem;
 
     public float destroyTime = 20.0f;
-    public float damage;
+    public float damage = 50;
     public float speed;
-    private bool hasCollided = false; // Flag to check if arrow has already collided
+    private bool hasCollided = false;
 
     // Start is called before the first frame update
     void Start()

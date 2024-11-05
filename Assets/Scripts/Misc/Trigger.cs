@@ -33,11 +33,11 @@ public class Trigger : MonoBehaviour
     {
         if (other.CompareTag(targetTag))
         {
-            //print("trigger enter");
+            print("trigger enter");
             triggerCollider2D = other;
             triggerDir = triggerCollider2D.transform.position - transform.position;
             trigger = true;
-        }
+        } 
 
     }
 
@@ -46,7 +46,7 @@ public class Trigger : MonoBehaviour
     {
         if (other.CompareTag(targetTag))
         {
-            //print("trigger exit");
+            print("trigger exit");
             triggerCollider2D = other;
             triggerDir = Vector2.zero;
             trigger = false;

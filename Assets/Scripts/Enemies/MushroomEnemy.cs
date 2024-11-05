@@ -1,10 +1,10 @@
-
 using Unity.VisualScripting;
 using UnityEngine;
+using Helpers;
 
 public class MushroomEnemy : Enemy
 {
-
+    public bool debug = false;
     public PlayerController player;
     public Animator animator;
 
@@ -13,14 +13,10 @@ public class MushroomEnemy : Enemy
     private Trigger attackRadius;
     private Trigger playerAwarenessRadius;
 
-
     public bool playerAwarenessRadiusIsTriggered = false;
     public bool attackRadiusIsTriggered = false;
-    [SerializeField] private float animationSpeed;
+    public float animationSpeed;
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         dropType = "banana";
@@ -33,24 +29,27 @@ public class MushroomEnemy : Enemy
         attackRadius = transform.Find("AttackRadius").GetComponent<Trigger>();
         if (attackRadius == null)
         {
-            Debug.LogError("AttackRadius GameObject/Component not found!");
+            Print.LogError(debug, "AttackRadius GameObject/Component not found!");
         }
 
         playerAwarenessRadius = transform.Find("PlayerAwarenessRadius").GetComponent<Trigger>();
         if (playerAwarenessRadius == null)
         {
-            Debug.LogError("playerAwarenessRadius GameObject/Component not found!");
+            Print.LogError(debug, "playerAwarenessRadius GameObject/Component not found!");
         }
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         attackRadiusIsTriggered = attackRadius.getTrigger();
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
-        if (attackRadiusIsTriggered) canAttack = true;
-         else canAttack = false;
+        if (attackRadiusIsTriggered)
+        { 
+            canAttack = true;
+        } else { 
+            canAttack = false;
+        }
         
         UpdateTargetDirection();
         SetVelocity();
@@ -129,10 +128,8 @@ public class MushroomEnemy : Enemy
         player.TakeDamage(collider);
     }
 
-    // Called in base Class Update function
     public override void UpdateState()
     {
-        // Check if the enemy should be in the Attack state
         if (canAttack)
         {
             currentState = State.Attack;

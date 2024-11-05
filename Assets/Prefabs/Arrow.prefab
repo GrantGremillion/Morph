@@ -174,5 +174,5 @@ MonoBehaviour:
   player: {fileID: 0}
   upgradeSystem: {fileID: 0}
   destroyTime: 30
-  damage: 2
+  damage: 50
   speed: 2

@@ -14,7 +14,7 @@ public class UpgradeSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        arrowDamages = new List<int>  { 1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 7 };
+        arrowDamages = new List<int>  { 20, 30, 40, 41, 42, 45, 50, 60, 65, 70, 75 };
         arrowSpeeds = new List<float> { 0.7f, 0.7f, 0.8f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 0.9f, 0.9f };
     }
 
