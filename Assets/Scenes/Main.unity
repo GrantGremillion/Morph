@@ -14553,6 +14553,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 88148777}
     m_Modifications:
+    - target: {fileID: 415661208102779295, guid: 035da0baf06c1fb4b831058bda0fa365, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6c41af5f501831b4c876f62205121355, type: 3}
     - target: {fileID: 2705091284493514034, guid: 035da0baf06c1fb4b831058bda0fa365, type: 3}
       propertyPath: m_Name
       value: Shop
