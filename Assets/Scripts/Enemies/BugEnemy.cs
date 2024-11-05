@@ -21,7 +21,6 @@ public class BugEnemy : Enemy
     public float projectileSpeed = 1.0f;
     public bool hasThrownProjectile;
 
-    public Canvas healthBar;
     public Animator animator;
 
     // Start is called before the first frame update
@@ -73,9 +72,9 @@ public class BugEnemy : Enemy
         PlayAnimations();
 
         // Reset the health bar's rotation to keep it upright
-        if (healthBar != null)
+        if (healthBarCanvas != null)
         {
-            healthBar.transform.rotation = Quaternion.identity;
+            healthBarCanvas.transform.rotation = Quaternion.identity;
         }
     }
 
