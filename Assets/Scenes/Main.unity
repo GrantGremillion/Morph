@@ -14492,6 +14492,10 @@ PrefabInstance:
       propertyPath: currentBowLvl
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 830617799617426931, guid: c103d08b02bd28843a1a3a83f61e4eed, type: 3}
+      propertyPath: holdTimeToShoot
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4328472351636355032, guid: c103d08b02bd28843a1a3a83f61e4eed, type: 3}
       propertyPath: m_Name
       value: Player
