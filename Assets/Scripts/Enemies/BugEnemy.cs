@@ -115,7 +115,7 @@ public class BugEnemy : Enemy
 
         if (!pauseAnimation && !isAttacking)
         {
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
 
             if (Math.Abs(targetDirection.y) > Math.Abs(targetDirection.x) && targetDirection.y > 0)
             {
@@ -170,11 +170,7 @@ public class BugEnemy : Enemy
 
     void PlayAnimations()
     {
-        if (currentState == State.Attack)
-        {
-            animator.Play("Attack");
-        }
-        else if (currentState != State.Idle)
+        if (currentState != State.Idle)
         {
             animator.Play("Walk");
         }

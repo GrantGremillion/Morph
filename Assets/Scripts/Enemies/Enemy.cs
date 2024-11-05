@@ -43,12 +43,12 @@ public class Enemy : MonoBehaviour
     public float maxDistanceFromEnemy = 10f;
 
     public bool canAttack;
-
     public bool isAttacking;
     private bool previousAwareOfPlayer = false;
     public bool awareOfPlayer = false;
     public enum State
     {
+
         Left,
         Right,
         Hurt,

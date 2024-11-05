@@ -138,7 +138,7 @@ public class MushroomEnemy : Enemy
 
         if (!pauseAnimation)
         {
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
             if (targetDirection.x > 0)
             {
                 currentState = State.Right;
