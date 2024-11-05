@@ -41,7 +41,6 @@ public class Trigger : MonoBehaviour
 
     }
 
-
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag(targetTag))

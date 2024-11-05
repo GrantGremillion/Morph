@@ -56,7 +56,6 @@ public class BigJohnny : MonoBehaviour
         // Check if the collider belongs to the player
         if (collider.CompareTag("Player"))
         {
-            print("fdsa");
             isPlayerInRange = true;
         }
     }
