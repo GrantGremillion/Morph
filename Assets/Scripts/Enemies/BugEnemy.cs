@@ -21,6 +21,9 @@ public class BugEnemy : Enemy
     public float projectileSpeed = 1.0f;
     public bool hasThrownProjectile;
 
+    public Canvas healthBar;
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +70,13 @@ public class BugEnemy : Enemy
 
         UpdateTargetDirection();
         SetVelocity();
+        PlayAnimations();
+
+        // Reset the health bar's rotation to keep it upright
+        if (healthBar != null)
+        {
+            healthBar.transform.rotation = Quaternion.identity;
+        }
     }
 
     private void UpdateTargetDirection()
@@ -189,5 +199,11 @@ public class BugEnemy : Enemy
         {
             Debug.LogError("Quill prefab does not have a Rigidbody2D component.");
         }
+    }
+
+    void PlayAnimations()
+    {
+        if (currentState != State.Idle) animator.Play("Walk");
+        else animator.Play("Idle");
     }
 }

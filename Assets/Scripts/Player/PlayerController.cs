@@ -67,12 +67,11 @@ public class PlayerController : MonoBehaviour
     // Settings variables
     private bool canMenu = true;
 
-    // Morph variables
-    [SerializeField] private bool canMorphToFish = false;
-    private bool touchingWater = false;
 
     // Player Sound Effects
     [SerializeField] private AudioClip takeDamage;
+
+    private bool slowed;
 
     void Awake()
     {
@@ -88,6 +87,7 @@ public class PlayerController : MonoBehaviour
         shop = FindAnyObjectByType<Shop>();
 
         speed = 0.6f;
+        slowed = false;
 
         currentBowLvl = 0;
         currentHealthLvl = 0;
@@ -150,12 +150,6 @@ public class PlayerController : MonoBehaviour
                 print("Exiting the Menu");
                 canMenu = true;
             }
-        }
-
-        // morph
-        if (Input.GetKeyUp(KeyCode.M))
-        {
-            changeForm();
         }
 
         // Hold Left click
@@ -230,13 +224,6 @@ public class PlayerController : MonoBehaviour
         arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrow.GetComponent<Arrow>().speed; ;
     }
 
-    void changeForm()
-    {
-        if (canMorphToFish == true && touchingWater == true)
-        {
-            SceneManager.LoadScene(2);
-        }
-    }
 
     void PlayAnimations()
     {
@@ -326,22 +313,6 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Water"))
-        {
-            touchingWater = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Water"))
-        {
-            touchingWater = false;
-        }
-    }
-
     public IEnumerator Knockback(Collider2D collision)
     {
         isKnockedBack = true;
@@ -363,5 +334,25 @@ public class PlayerController : MonoBehaviour
         health--;
         SoundFXManager.instance.PlaySoundFXClip(takeDamage, transform, 1f, false);
         StartCoroutine(Knockback(collider));
+    }
+
+    public void WebProjectileCollision(int slowedTime)
+    {
+        if (!slowed)
+    {
+        StartCoroutine(SlowDown(slowedTime));
+    }
+    }
+
+    public IEnumerator SlowDown(int slowedTime)
+    {
+        float originalSpeed = speed; 
+        speed = originalSpeed * 0.5f; 
+        slowed = true; 
+
+        yield return new WaitForSeconds(slowedTime); 
+
+        speed = originalSpeed; 
+        slowed = false; 
     }
 }

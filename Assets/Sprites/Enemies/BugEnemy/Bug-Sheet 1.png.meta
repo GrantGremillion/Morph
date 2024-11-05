@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3c753cf159ba1d141b9f2c3aeb51fdbf
+guid: 4e377625020017b4ba4015f5d9bbbf0b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bug-Sheet_0
+      name: Bug-Sheet 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55ecc70920d21b14f9f999a269ff70bb
-      internalID: 1992324894
+      spriteID: 83891a19ec28d5c41babfa817cff688c
+      internalID: 188824740
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bug-Sheet_1
+      name: Bug-Sheet 1_1
       rect:
         serializedVersion: 2
         x: 16
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bdaaf8e53f0a6e4aa5db2315b6e2f7e
-      internalID: 1068868030
+      spriteID: 826b3de3063891e4497c02947706f1cb
+      internalID: 609479771
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bug-Sheet_2
+      name: Bug-Sheet 1_2
       rect:
         serializedVersion: 2
         x: 32
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d168936e74027d44b92194e780f615f
-      internalID: 1039761546
+      spriteID: 433bdc4d9ff82194c8da7deee115e98d
+      internalID: -219752273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bug-Sheet_3
+      name: Bug-Sheet 1_3
       rect:
         serializedVersion: 2
         x: 48
@@ -174,92 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9a749e2112922040a5bb9653008c327
-      internalID: 388103692
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bug-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9a5db5b6fa305240891f838b1ae4e65
-      internalID: 906749962
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bug-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af759fc77141e144186277f0aa38c272
-      internalID: -118309814
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bug-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d119a1f856dce2b41b18e3afc7fb149f
-      internalID: -1576592571
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bug-Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58c1d1a8485883845a8dce1ecebdcefb
-      internalID: 393549880
+      spriteID: 90a50128ec4e3a74091a38954310d372
+      internalID: -220565353
       vertices: []
       indices: 
       edges: []
@@ -275,14 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bug-Sheet_0: 1992324894
-      Bug-Sheet_1: 1068868030
-      Bug-Sheet_2: 1039761546
-      Bug-Sheet_3: 388103692
-      Bug-Sheet_4: 906749962
-      Bug-Sheet_5: -118309814
-      Bug-Sheet_6: -1576592571
-      Bug-Sheet_7: 393549880
+      Bug-Sheet 1_0: 188824740
+      Bug-Sheet 1_1: 609479771
+      Bug-Sheet 1_2: -219752273
+      Bug-Sheet 1_3: -220565353
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
