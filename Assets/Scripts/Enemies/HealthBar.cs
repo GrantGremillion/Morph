@@ -36,7 +36,7 @@ public class HealthBar : MonoBehaviour
             primCurHealth = Math.Max(0, Math.Max(desiredHealth, primCurHealth - healthBarReductionSpeed));
         } else if (secCurHealth > desiredHealth) {
             secCurHealth = Math.Max(0, Math.Max(desiredHealth, secCurHealth - healthBarReductionSpeed));
-        }
+        } 
 
         primaryHealthBar.fillAmount = primCurHealth / maxHealth;
         secondaryHealthBar.fillAmount = secCurHealth / maxHealth;

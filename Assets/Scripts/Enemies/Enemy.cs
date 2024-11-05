@@ -66,6 +66,8 @@ public class Enemy : MonoBehaviour
         healthBar = healthBarCanvas.GetComponent<HealthBar>();
 
         healthBar.SetMaxHealth(health);
+        healthBar.gameObject.SetActive(false);
+
         pauseAnimation = false;
         canAttack = false;
         previousAwareOfPlayer = awareOfPlayer;  
@@ -170,10 +172,12 @@ public class Enemy : MonoBehaviour
     {
         if (newAwarenessState)
         {
+            healthBar.gameObject.SetActive(true);
             currentState = State.Agro;
         }
         else
         {
+            healthBar.gameObject.SetActive(false);
             currentState = State.Deagro;
         }
         StartCoroutine(PauseOtherAnimations(0.2f));
