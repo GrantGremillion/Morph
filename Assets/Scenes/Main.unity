@@ -11491,6 +11491,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.00006
       objectReference: {fileID: 0}
+    - target: {fileID: 1890417834380799713, guid: b0116b391a77525499571fe286d239df, type: 3}
+      propertyPath: m_Radius
+      value: 0.14773758
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890417834380799713, guid: b0116b391a77525499571fe286d239df, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.005786374
+      objectReference: {fileID: 0}
     - target: {fileID: 2483395146284687969, guid: b0116b391a77525499571fe286d239df, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0.096115

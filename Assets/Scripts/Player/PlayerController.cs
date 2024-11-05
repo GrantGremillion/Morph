@@ -93,7 +93,6 @@ public class PlayerController : MonoBehaviour
         currentHealthLvl = 0;
 
         bow = bowTransform.gameObject.GetComponent<Bow>();
-        holdTimeToShoot = 0.5f;
     }
     void FixedUpdate()
     {
