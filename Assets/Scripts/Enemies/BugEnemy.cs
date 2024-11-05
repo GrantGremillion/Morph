@@ -23,9 +23,12 @@ public class BugEnemy : Enemy
 
     public Canvas healthBar;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         initialAttackCooldown = attackCooldown;
         dropType = "blueberry";
         player = FindAnyObjectByType<PlayerController>();
@@ -71,6 +74,7 @@ public class BugEnemy : Enemy
 
         UpdateTargetDirection();
         SetVelocity();
+        PlayAnimations();
 
         // Reset the health bar's rotation to keep it upright
         if (healthBar != null)
@@ -125,7 +129,6 @@ public class BugEnemy : Enemy
                 rigidbody.velocity = Vector2.zero;
                 break;
         }
-
     }
 
 
@@ -200,5 +203,11 @@ public class BugEnemy : Enemy
         {
             Debug.LogError("Quill prefab does not have a Rigidbody2D component.");
         }
+    }
+
+    void PlayAnimations()
+    {
+        if (currentState != State.Idle) animator.Play("Walk");
+        else animator.Play("Idle");
     }
 }

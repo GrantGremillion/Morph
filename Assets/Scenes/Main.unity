@@ -14805,6 +14805,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.0006
       objectReference: {fileID: 0}
+    - target: {fileID: 5018111897476795292, guid: 999eb443971dd3141a95804831f70384, type: 3}
+      propertyPath: m_Size.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018111897476795292, guid: 999eb443971dd3141a95804831f70384, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 188824740, guid: 4e377625020017b4ba4015f5d9bbbf0b, type: 3}
+    - target: {fileID: 5018111897476795292, guid: 999eb443971dd3141a95804831f70384, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5095190570236125144, guid: 999eb443971dd3141a95804831f70384, type: 3}
       propertyPath: m_Name
       value: Bug
@@ -14825,6 +14837,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8720606825501251208, guid: 999eb443971dd3141a95804831f70384, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e19c37e4c62c7454f983979485feaf17, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
