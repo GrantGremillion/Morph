@@ -21,6 +21,8 @@ public class BugEnemy : Enemy
     public float projectileSpeed = 1.0f;
     public bool hasThrownProjectile;
 
+    public Transform attackPoint;
+
     public Animator animator;
 
     // Start is called before the first frame update
@@ -187,14 +189,11 @@ public class BugEnemy : Enemy
         Vector2 playerPosition = player.transform.position;
         Vector2 direction = (playerPosition - (Vector2)transform.position).normalized;
 
-        // Offset position to instantiate the projectile slightly in front of the enemy
-        Vector2 offsetPosition = (Vector2)transform.position + direction * 0.2f; // Adjust the offset distance as needed
-
-        // Instantiate the Quill projectile at the offset position
-        GameObject quillInstance = Instantiate(bugProjectilePrefab, offsetPosition, Quaternion.identity);
+        // Instantiate the projectile at the offset position
+        GameObject projectileInstance = Instantiate(bugProjectilePrefab, attackPoint.position, Quaternion.identity);
 
         // Get the Rigidbody2D component of the projectile
-        Rigidbody2D quillRigidbody = quillInstance.GetComponent<Rigidbody2D>();
+        Rigidbody2D quillRigidbody = projectileInstance.GetComponent<Rigidbody2D>();
         if (quillRigidbody != null)
         {
             // Set the velocity of the projectile to move towards the player's current position
