@@ -19,13 +19,10 @@ public class BugEnemy : Enemy
     public float attackCooldown;
     private float initialAttackCooldown;
     public float projectileSpeed = 1.0f;
-    public bool hasThrownProjectile;
-
+    
     public Transform attackPoint;
-
     public Animator animator;
 
-    // Start is called before the first frame update
     void Start()
     {
         initialAttackCooldown = attackCooldown;
@@ -35,19 +32,9 @@ public class BugEnemy : Enemy
         collider = GetComponent<Collider2D>();
 
         attackRadius = transform.Find("AttackRadius").GetComponent<Trigger>();
-        if (attackRadius == null)
-        {
-            Debug.LogError("AttackRadius GameObject/Component not found!");
-        }
-
         playerAwarenessRadius = transform.Find("PlayerAwarenessRadius").GetComponent<Trigger>();
-        if (playerAwarenessRadius == null)
-        {
-            Debug.LogError("playerAwarenessRadius GameObject/Component not found!");
-        }
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         player = FindAnyObjectByType<PlayerController>();
@@ -59,8 +46,7 @@ public class BugEnemy : Enemy
             attackCooldown -= Time.fixedDeltaTime;
         }
 
-        // Ensure that the enemy can only attack when the cooldown is finished
-        if (attackCooldown <= 0 && attackRadiusIsTriggered)
+        if (attackCooldown <= 0 && attackRadiusIsTriggered && !isAttacking)
         {
             canAttack = true;
         }
@@ -72,12 +58,6 @@ public class BugEnemy : Enemy
         UpdateTargetDirection();
         SetVelocity();
         PlayAnimations();
-
-        // Reset the health bar's rotation to keep it upright
-        if (healthBarCanvas != null)
-        {
-            healthBarCanvas.transform.rotation = Quaternion.identity;
-        }
     }
 
     private void UpdateTargetDirection()
@@ -92,7 +72,6 @@ public class BugEnemy : Enemy
         }
     }
 
- 
     private void SetVelocity()
     {
         if (targetDirection == Vector2.zero)
@@ -104,23 +83,19 @@ public class BugEnemy : Enemy
         {
             case State.Up:
                 rigidbody.velocity = targetDirection * speed;
-                //spriteRenderer.flipY = false;
-                spriteTransform.rotation = Quaternion.Euler(0, 0, 0); // No rotation
+                spriteTransform.rotation = Quaternion.Euler(0, 0, 0);
                 break;
             case State.Down:
                 rigidbody.velocity = targetDirection * speed;
-                //spriteRenderer.flipY = true;
-                spriteTransform.rotation = Quaternion.Euler(0, 0, 180); // 180-degree rotation (upside down)
+                spriteTransform.rotation = Quaternion.Euler(0, 0, 180);
                 break;
             case State.Right:
                 rigidbody.velocity = targetDirection * speed;
-                //spriteRenderer.flipX = false;
-                spriteTransform.rotation = Quaternion.Euler(0, 0, -90); // Rotate 90 degrees to the right
+                spriteTransform.rotation = Quaternion.Euler(0, 0, -90);
                 break;
             case State.Left:
                 rigidbody.velocity = targetDirection * speed;
-                //spriteRenderer.flipY = false;
-                spriteTransform.rotation = Quaternion.Euler(0, 0, 90); // Rotate 90 degrees to the left
+                spriteTransform.rotation = Quaternion.Euler(0, 0, 90);
                 break;
             case State.Dead:
                 rigidbody.velocity = Vector2.zero;
@@ -128,19 +103,20 @@ public class BugEnemy : Enemy
         }
     }
 
-
-    // Called via event set up in attack animation 
-    public void DealDamage()
-    {
-        player.TakeDamage(collider);
-    }
-
-    // Called in base Class Update function
     public override void UpdateState()
     {
-        if (!pauseAnimation)
+        if (canAttack && !isAttacking)
+        {
+            currentState = State.Attack;
+            isAttacking = true;
+            ThrowProjectile();
+            attackCooldown = initialAttackCooldown;
+        }
+
+        if (!pauseAnimation && !isAttacking)
         {
             gameObject.layer = LayerMask.NameToLayer("Default");
+
             if (Math.Abs(targetDirection.y) > Math.Abs(targetDirection.x) && targetDirection.y > 0)
             {
                 currentState = State.Up;
@@ -157,57 +133,54 @@ public class BugEnemy : Enemy
             {
                 currentState = State.Left;
             }
-            else 
+            else if (!isAttacking)
             {
                 currentState = State.Idle;
-                // Change layer to one that will not collide with player projectiles
                 gameObject.layer = LayerMask.NameToLayer("IdleEnemy");
             }
         }
 
-        // Check if the enemy should be in the Attack state
-        if (canAttack && !hasThrownProjectile)
-        {
-            currentState = State.Attack;
-            ThrowProjectile();
-            StartCoroutine(PauseOtherAnimations(0.1f));
-            currentState = State.None; // Reset state after attacking
-            attackCooldown = initialAttackCooldown; // Reset the cooldown timer
-            hasThrownProjectile = true; // Set the flag to indicate that a projectile has been thrown
-        }
-
-        // Reset the flag if the enemy is not attacking
         if (!canAttack)
         {
-            hasThrownProjectile = false;
+            isAttacking = false;
         }
     }
 
     public void ThrowProjectile()
     {
-        // Ensure to fetch the current position of the player at the time of instantiation
         Vector2 playerPosition = player.transform.position;
         Vector2 direction = (playerPosition - (Vector2)transform.position).normalized;
 
-        // Instantiate the projectile at the offset position
         GameObject projectileInstance = Instantiate(bugProjectilePrefab, attackPoint.position, Quaternion.identity);
 
-        // Get the Rigidbody2D component of the projectile
         Rigidbody2D quillRigidbody = projectileInstance.GetComponent<Rigidbody2D>();
         if (quillRigidbody != null)
         {
-            // Set the velocity of the projectile to move towards the player's current position
             quillRigidbody.velocity = direction * projectileSpeed;
         }
-        else
-        {
-            Debug.LogError("Quill prefab does not have a Rigidbody2D component.");
-        }
+
+        // Trigger an animation event or coroutine to reset `isAttacking` after a delay
+        Invoke("EndAttack", 0.5f); // Adjust the delay to match the attack animation duration
+    }
+
+    private void EndAttack()
+    {
+        isAttacking = false;
     }
 
     void PlayAnimations()
     {
-        if (currentState != State.Idle) animator.Play("Walk");
-        else animator.Play("Idle");
+        if (currentState == State.Attack)
+        {
+            animator.Play("Attack");
+        }
+        else if (currentState != State.Idle)
+        {
+            animator.Play("Walk");
+        }
+        else
+        {
+            animator.Play("Idle");
+        }
     }
 }
