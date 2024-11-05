@@ -405,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7933019925841028311, guid: 999eb443971dd3141a95804831f70384, type: 3}
       propertyPath: healthBarReductionSpeed
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 9057715030174051462, guid: 999eb443971dd3141a95804831f70384, type: 3}
       propertyPath: m_Sprite
@@ -11542,7 +11542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8931788591955948794, guid: b0116b391a77525499571fe286d239df, type: 3}
       propertyPath: healthBarReductionSpeed
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
