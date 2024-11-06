@@ -313,11 +313,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 734736600788380724, guid: 999eb443971dd3141a95804831f70384, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.655
+      value: -0.46
       objectReference: {fileID: 0}
     - target: {fileID: 734736600788380724, guid: 999eb443971dd3141a95804831f70384, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.988
+      value: -1.128
       objectReference: {fileID: 0}
     - target: {fileID: 734736600788380724, guid: 999eb443971dd3141a95804831f70384, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1985,12 +1985,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d302841adc6df4d9b125849a50cd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilemapVisualizer: {fileID: 1858490532}
   startPosition: {x: 0, y: 0}
   floorTilemap: {fileID: 0}
   iterations: 100
   walkLength: 100
   startRandomlyEachIteration: 0
-  tilemapVisualizer: {fileID: 1858490532}
   enemyPrefab: {fileID: 0}
   maxEnemyCount: 10
   minSpawnDelay: 1

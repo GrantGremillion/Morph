@@ -10,7 +10,7 @@ public class SceneLoader : MonoBehaviour
 
     void Start()
     {
-        simpleRandomWalkGenerator.RunProceduralGeneration();
+        //simpleRandomWalkGenerator.RunProceduralGeneration();
         
     }
 

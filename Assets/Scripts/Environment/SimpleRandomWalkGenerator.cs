@@ -5,23 +5,15 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
-public class SimpleRandomWalkGenerator : MonoBehaviour
+public class SimpleRandomWalkGenerator : AbstractLevelGenerator
 {
-    [SerializeField]
-    protected Vector2Int startPosition = Vector2Int.zero;
-    
+   
     [SerializeField]
     private Tilemap floorTilemap;
     
     [SerializeField]
-    private int iterations = 10;
-    [SerializeField]
-    public int walkLength = 10;
-    [SerializeField]
-    public bool startRandomlyEachIteration = true;
+    private SimpleRandomWalkData randomWalkParameters;
 
-    [SerializeField]
-    private TilemapVisualizer tilemapVisualizer;
     public GameObject enemyPrefab;           
     public int maxEnemyCount = 10;     
     private int currentEnemyCount = 0;   
@@ -29,13 +21,14 @@ public class SimpleRandomWalkGenerator : MonoBehaviour
     public float maxSpawnDelay = 5f;
     private List<Vector3> walkablePositions = new List<Vector3>();      
 
-    public void RunProceduralGeneration()
+    protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
-        
+        //tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTiles(floorPositions);
-        GenerateEnemies();
+        //GenerateEnemies();
     }
+
 
     private void GenerateEnemies()
     {
@@ -78,11 +71,11 @@ public class SimpleRandomWalkGenerator : MonoBehaviour
     {
         var currentPosition = startPosition;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
-        for (int i = 0; i < iterations; i++)
+        for (int i = 0; i < randomWalkParameters.iterations; i++)
         {
-            var path = ProceduralGenerationAlgorithms.SimpleRandomWalk(currentPosition, walkLength);
+            var path = ProceduralGenerationAlgorithms.SimpleRandomWalk(currentPosition, randomWalkParameters.walkLength);
             floorPositions.UnionWith(path);
-            if(startRandomlyEachIteration)
+            if(randomWalkParameters.startRandomlyEachIteration)
             {
                 currentPosition = floorPositions.ElementAt(Random.Range(0,floorPositions.Count));
             }

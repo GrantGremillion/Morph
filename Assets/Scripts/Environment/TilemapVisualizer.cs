@@ -56,4 +56,9 @@ public class TilemapVisualizer : MonoBehaviour
         tilemap.SetTile(tilePosition, tile);
     }
 
+    public void Clear()
+    {
+        floorTilemap.ClearAllTiles();
+    }
+
 }
