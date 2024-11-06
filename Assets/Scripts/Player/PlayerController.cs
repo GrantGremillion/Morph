@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
 
     // Player Sound Effects
     [SerializeField] private AudioClip takeDamage;
+    [SerializeField] private AudioClip shootBow;
 
     private bool slowed;
 
@@ -220,7 +221,8 @@ public class PlayerController : MonoBehaviour
 
         // Instantiate the arrow at the spawn position with the calculated rotation
         GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
-        arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrow.GetComponent<Arrow>().speed; ;
+        arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrow.GetComponent<Arrow>().speed; 
+        SoundFXManager.instance.PlaySoundFXClip(shootBow, transform, 1f, false);
     }
 
 
