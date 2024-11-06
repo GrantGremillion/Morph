@@ -24,8 +24,9 @@ public class SimpleRandomWalkGenerator : AbstractLevelGenerator
     protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
-        //tilemapVisualizer.Clear();
+        tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTiles(floorPositions);
+        WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
         //GenerateEnemies();
     }
 

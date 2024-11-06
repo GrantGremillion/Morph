@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap floorTilemap;
+    private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
     private TileBase floorTile1;
     [SerializeField]
@@ -17,6 +17,8 @@ public class TilemapVisualizer : MonoBehaviour
     private TileBase floorTile4;
     [SerializeField]
     private TileBase floorTile5;
+    [SerializeField]
+    private TileBase wallTop;
     private List<TileBase> tiles;
 
     public GameObject enemyPrefab;           // Enemy prefab to spawn
@@ -56,9 +58,14 @@ public class TilemapVisualizer : MonoBehaviour
         tilemap.SetTile(tilePosition, tile);
     }
 
-    public void Clear()
+    internal void PaintSingleBasicWall(Vector2Int position)
     {
-        floorTilemap.ClearAllTiles();
+        PaintSingleTile(wallTilemap,wallTop, position);
     }
 
+        public void Clear()
+    {
+        floorTilemap.ClearAllTiles();
+        wallTilemap.ClearAllTiles();
+    }
 }
