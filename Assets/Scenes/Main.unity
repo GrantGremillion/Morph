@@ -1988,9 +1988,7 @@ MonoBehaviour:
   tilemapVisualizer: {fileID: 1858490532}
   startPosition: {x: 0, y: 0}
   floorTilemap: {fileID: 0}
-  iterations: 100
-  walkLength: 100
-  startRandomlyEachIteration: 0
+  randomWalkParameters: {fileID: 0}
   enemyPrefab: {fileID: 0}
   maxEnemyCount: 10
   minSpawnDelay: 1
@@ -11244,11 +11242,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorTilemap: {fileID: 918565544}
+  wallTilemap: {fileID: 0}
   floorTile1: {fileID: 11400000, guid: 1fd2c1d414625734ab1f709d40334e56, type: 2}
   floorTile2: {fileID: 0}
   floorTile3: {fileID: 0}
   floorTile4: {fileID: 0}
   floorTile5: {fileID: 0}
+  wallTop: {fileID: 0}
   enemyPrefab: {fileID: 0}
   enemyCount: 10
 --- !u!1 &1870107020
@@ -11410,7 +11410,7 @@ Transform:
   m_GameObject: {fileID: 1902802634}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.155, y: 0.201, z: 0.0189892}
+  m_LocalPosition: {x: -0.155, y: 0.178, z: 0.0189892}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11457,7 +11457,7 @@ SpriteRenderer:
   m_SortingLayerID: 1258815919
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -641711474, guid: 6f81d8682489b864db09a7152a67f14f, type: 3}
+  m_Sprite: {fileID: 944888217, guid: cbf98bab78f70cd4dadba92ab4a352ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
