@@ -123,7 +123,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: StatsBoard
     originalName: 
-    pivot: {x: 0.5, y: -0.10344827}
+    pivot: {x: 0.48454112, y: 0.1524252}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
