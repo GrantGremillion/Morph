@@ -26,7 +26,7 @@ public class BugEnemy : Enemy
     void Start()
     {
         initialAttackCooldown = attackCooldown;
-        dropType = "blueberry";
+        itemDropType = "blueberry";
         player = FindAnyObjectByType<PlayerController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
@@ -43,26 +43,25 @@ public class BugEnemy : Enemy
             return;
         }
         player = FindAnyObjectByType<PlayerController>();
-        attackRadiusIsTriggered = attackRadius.getTrigger();
-        playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
-        if (attackCooldown > 0)
-        {
-            attackCooldown -= Time.fixedDeltaTime;
-        }
-
-        if (attackCooldown <= 0 && attackRadiusIsTriggered && !isAttacking)
-        {
-            canAttack = true;
-        }
-        else
-        {
-            canAttack = false;
-        }
-
+        CheckIfCanAttack();
         UpdateTargetDirection();
         SetVelocity();
         PlayAnimations();
+    }
+
+    private void CheckIfCanAttack()
+    {
+        attackRadiusIsTriggered = attackRadius.getTrigger();
+        playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
+
+        if (attackCooldown > 0) attackCooldown -= Time.fixedDeltaTime;
+
+            if (attackCooldown <= 0 && attackRadiusIsTriggered && !isAttacking) 
+            {
+            canAttack = true;
+            }
+            else canAttack = false;
     }
 
     private void UpdateTargetDirection()

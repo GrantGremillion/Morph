@@ -18,7 +18,7 @@ public class MushroomEnemy : Enemy
 
     void Start()
     {
-        dropType = "banana";
+        itemDropType = "banana";
         player = FindAnyObjectByType<PlayerController>();
         animator = GetComponent<Animator>();
         animator.speed = animationSpeed;
@@ -57,12 +57,12 @@ public class MushroomEnemy : Enemy
         attackRadiusIsTriggered = attackRadius.getTrigger();
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
-        if (attackRadiusIsTriggered)
+        if (attackRadiusIsTriggered || isAttacking)
         { 
             canAttack = true;
-        } else { 
-            canAttack = false;
-        }
+        } 
+        else canAttack = false;
+
     }
 
     private void UpdateTargetDirection()

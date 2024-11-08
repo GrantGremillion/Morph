@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Helpers;
+using UnityEngine.Tilemaps;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class ItemSpawner : MonoBehaviour
 
     public float minSpawnDistance = .1f;
     public float maxSpawnDistance = .15f;
+    public Tilemap spawnableTiles;
 
     private void Awake()
     {
@@ -31,7 +33,6 @@ public class ItemSpawner : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 
     public void SpawnEnemyDrops(string dropType, Vector3 spawnPosition)
     {
@@ -48,14 +49,27 @@ public class ItemSpawner : MonoBehaviour
                     newItem = Instantiate(cherry, spawnPosition, Quaternion.identity);
                     break;
             }
-
     }
+
     public Vector3 GetRandomSpawnPosition(Vector3 pos)
     {
-        float randomDistance = UnityEngine.Random.Range(minSpawnDistance, maxSpawnDistance);
-        float randomAngle = Random.Range(0f, 2f * Mathf.PI);
-        Vector3 spawnOffset = new Vector3(Mathf.Cos(randomAngle) * randomDistance, Mathf.Sin(randomAngle) * randomDistance, 0f);
-        Vector3 spawnPosition = pos + spawnOffset;
+        Vector3 spawnPosition = pos;
+        bool positionIsValid = false;
+
+        while (!positionIsValid)
+        {
+            float randomDistance = UnityEngine.Random.Range(minSpawnDistance, maxSpawnDistance);
+            float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+            Vector3 spawnOffset = new Vector3(Mathf.Cos(randomAngle) * randomDistance, Mathf.Sin(randomAngle) * randomDistance, 0f);
+            spawnPosition = pos + spawnOffset;
+
+            Vector3Int cellPosition = spawnableTiles.WorldToCell(spawnPosition);
+
+            if (spawnableTiles.HasTile(cellPosition))
+            {
+                positionIsValid = true;
+            }
+        }
 
         return spawnPosition;
     }

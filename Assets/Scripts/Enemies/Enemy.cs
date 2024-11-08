@@ -23,24 +23,20 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Vector2 currentDirection = Vector2.zero;
     public State currentState;
     public Canvas healthBarCanvas;
-
     public float speed;
     public float health;
     public float maxHealth;
     public float immunityTime = 0.5f;
     public bool pauseAnimation;
-    
-    // Item drop variables
-    public string dropType;
+    public string itemDropType;
     public int numberOfDrops;
 
-    public bool canAttack;
+    [HideInInspector] public bool canAttack;     ///
     public bool isAttacking;
     private bool previousAwareOfPlayer = false;
     public bool awareOfPlayer = false;
     public enum State
     {
-
         Left,
         Right,
         Hurt,
@@ -120,7 +116,7 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < numberOfDrops; i++)
         {
             Vector3 spawnPosition = ItemSpawner.Instance.GetRandomSpawnPosition(transform.position);
-            ItemSpawner.Instance.SpawnEnemyDrops(dropType, spawnPosition);
+            ItemSpawner.Instance.SpawnEnemyDrops(itemDropType, spawnPosition);
         }
     }
 
