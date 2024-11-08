@@ -11,20 +11,16 @@ using Helpers;
 
 public class Enemy : MonoBehaviour
 {
-    [HideInInspector]
-    public new Rigidbody2D rigidbody;
-    [HideInInspector]
-    public Vector2 targetDirection;
-    [HideInInspector]
-    public Vector2 currentDirection = Vector2.zero;
-    [HideInInspector]
+    public bool debug = false;
+    
+    // Object references
+    [HideInInspector] public new Rigidbody2D rigidbody;
     private HealthBar healthBar;
-
-    // Item prefabs
-    public GameObject banana;
-    public GameObject blueberry;
-    public GameObject cherry;
     public Arrow arrow;
+
+
+    [HideInInspector] public Vector2 targetDirection;
+    [HideInInspector] public Vector2 currentDirection = Vector2.zero;
     public State currentState;
     public Canvas healthBarCanvas;
 
@@ -37,10 +33,6 @@ public class Enemy : MonoBehaviour
     // Item drop variables
     public string dropType;
     public int numberOfDrops;
-    public float minSpawnDistance = 2f;
-    public float maxSpawnDistance = 5f;
-    public float moveSpeed = 1f;
-    public float maxDistanceFromEnemy = 10f;
 
     public bool canAttack;
     public bool isAttacking;
@@ -112,6 +104,7 @@ public class Enemy : MonoBehaviour
         healthBar.TakeDamage(arrow.damage);
         if (healthBar.GetDesiredHealth() <= 0)
         {
+
             healthBar.gameObject.SetActive(false);
             currentState = State.Dead;
             pauseAnimation = true;
@@ -124,50 +117,12 @@ public class Enemy : MonoBehaviour
 
     public void DropItems()
     {
-        // Drop all enemy items
         for (int i = 0; i < numberOfDrops; i++)
         {
-            Vector3 spawnPosition = GetRandomSpawnPosition(transform.position);
-            GameObject newItem = null;
-
-            switch (dropType)
-            {
-                case "banana":
-                    newItem = Instantiate(banana, spawnPosition, Quaternion.identity);
-                    break;
-                case "blueberry":
-                    newItem = Instantiate(blueberry, spawnPosition, Quaternion.identity);
-                    break;
-                case "cherry":
-                    newItem = Instantiate(cherry, spawnPosition, Quaternion.identity);
-                    break;
-
-            }
-
-            StartCoroutine(MoveItemAway(newItem.transform));
+            Vector3 spawnPosition = ItemSpawner.Instance.GetRandomSpawnPosition(transform.position);
+            ItemSpawner.Instance.SpawnEnemyDrops(dropType, spawnPosition);
         }
     }
-
-    public Vector3 GetRandomSpawnPosition(Vector3 pos)
-    {
-        float randomDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
-        float randomAngle = Random.Range(0f, 2f * Mathf.PI);
-        Vector3 spawnOffset = new Vector3(Mathf.Cos(randomAngle) * randomDistance, Mathf.Sin(randomAngle) * randomDistance, 0f);
-        Vector3 spawnPosition = pos + spawnOffset;
-
-        return spawnPosition;
-    }
-
-    public IEnumerator MoveItemAway(Transform itemTransform)
-    {
-        while (Vector3.Distance(itemTransform.position, transform.position) < maxDistanceFromEnemy)
-        {
-            // Move the item away from the player
-            itemTransform.position += (itemTransform.position - transform.position).normalized * moveSpeed;
-            yield return null;
-        }
-    }
-
 
     // Function to handle changes in awareness
     public void OnAwarenessChanged(bool newAwarenessState)

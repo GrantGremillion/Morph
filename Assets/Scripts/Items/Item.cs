@@ -12,18 +12,6 @@ public class Item : MonoBehaviour
     public String type;
     [SerializeField] private AudioClip pickupItemSound;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter2D (Collider2D collider)
     {
         inventory = FindObjectOfType<InventoryManager>();
@@ -35,4 +23,5 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }

@@ -4,12 +4,11 @@ using Helpers;
 
 public class MushroomEnemy : Enemy
 {
-    public bool debug = false;
-    public PlayerController player;
-    public Animator animator;
-
-    public SpriteRenderer spriteRenderer;
-    public new Collider2D collider;
+    // Object references
+    private PlayerController player;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private new Collider2D collider;
     private Trigger attackRadius;
     private Trigger playerAwarenessRadius;
 
@@ -46,6 +45,15 @@ public class MushroomEnemy : Enemy
         {   rigidbody.velocity = Vector2.zero;
             return;
         }
+        
+        CheckIfCanAttack();
+        UpdateTargetDirection();
+        SetVelocity();
+        PlayAnimations();
+    }
+
+    private void CheckIfCanAttack()
+    {
         attackRadiusIsTriggered = attackRadius.getTrigger();
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
@@ -55,10 +63,6 @@ public class MushroomEnemy : Enemy
         } else { 
             canAttack = false;
         }
-        
-        UpdateTargetDirection();
-        SetVelocity();
-        PlayAnimations();
     }
 
     private void UpdateTargetDirection()
