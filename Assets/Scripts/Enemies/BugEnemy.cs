@@ -80,6 +80,7 @@ public class BugEnemy : Enemy
         if (targetDirection == Vector2.zero)
         {
             rigidbody.velocity = Vector2.zero;
+            healthBar.gameObject.SetActive(false);
         }
 
         switch (currentState)
@@ -87,18 +88,22 @@ public class BugEnemy : Enemy
             case State.Up:
                 rigidbody.velocity = targetDirection * speed;
                 spriteTransform.rotation = Quaternion.Euler(0, 0, 0);
+                healthBar.gameObject.SetActive(true);
                 break;
             case State.Down:
                 rigidbody.velocity = targetDirection * speed;
                 spriteTransform.rotation = Quaternion.Euler(0, 0, 180);
+                healthBar.gameObject.SetActive(true);
                 break;
             case State.Right:
                 rigidbody.velocity = targetDirection * speed;
                 spriteTransform.rotation = Quaternion.Euler(0, 0, -90);
+                healthBar.gameObject.SetActive(true);
                 break;
             case State.Left:
                 rigidbody.velocity = targetDirection * speed;
                 spriteTransform.rotation = Quaternion.Euler(0, 0, 90);
+                healthBar.gameObject.SetActive(true);
                 break;
             case State.Dead:
                 rigidbody.velocity = Vector2.zero;

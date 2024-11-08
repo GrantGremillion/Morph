@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 
@@ -8,7 +9,7 @@ public class Enemy : MonoBehaviour
     
     // Object references
     [HideInInspector] public new Rigidbody2D rigidbody;
-    private HealthBar healthBar;
+    public HealthBar healthBar;
     public Arrow arrow;
 
 
@@ -61,14 +62,6 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         UpdateState();
-
-
-        if (awareOfPlayer != previousAwareOfPlayer)
-        {
-            OnAwarenessChanged(awareOfPlayer);
-        }
-
-        previousAwareOfPlayer = awareOfPlayer;
     }
 
     public virtual void UpdateState() { }
@@ -86,19 +79,21 @@ public class Enemy : MonoBehaviour
     {
         arrow = collision.gameObject.GetComponent<Arrow>();
 
-        print("Current health:" + health + "take damage: " + arrow.damage);
+        //print("Current health:" + health + "take damage: " + arrow.damage);
 
         healthBar.TakeDamage(arrow.damage);
         if (healthBar.GetDesiredHealth() <= 0)
         {
-
+            animator.SetBool("Damaged",false);
+            animator.SetBool("Dead",true);
             healthBar.gameObject.SetActive(false);
-            pauseAnimation = true;
-            yield return new WaitForSeconds(immunityTime);
             DropItems();
+            yield return new WaitForSeconds(immunityTime);
             Destroy(gameObject);
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(immunityTime);
+        animator.SetBool("Damaged",false);
+
     }
 
     public void DropItems()
@@ -109,19 +104,4 @@ public class Enemy : MonoBehaviour
             ItemSpawner.Instance.SpawnEnemyDrops(itemDropType, spawnPosition);
         }
     }
-
-    // Function to handle changes in awareness
-    public void OnAwarenessChanged(bool newAwarenessState)
-    {
-        if (newAwarenessState)
-        {
-            healthBar.gameObject.SetActive(true);
-            
-        }
-        else
-        {
-            healthBar.gameObject.SetActive(false);
-        }
-    }
-
 }

@@ -74,12 +74,14 @@ public class MushroomEnemy : Enemy
         {
             animator.SetBool("Agro", false);
             animator.SetBool("Deagro", true);
+            healthBar.gameObject.SetActive(false);
             rigidbody.velocity = Vector2.zero;
         }
         else if (currentState == State.Right)
         {
             animator.SetBool("Agro", true);
             animator.SetBool("Deagro", false);
+            healthBar.gameObject.SetActive(true);
             rigidbody.velocity = targetDirection * speed;
             spriteRenderer.flipX = true;
         }
@@ -87,6 +89,7 @@ public class MushroomEnemy : Enemy
         {
             animator.SetBool("Agro", true);
             animator.SetBool("Deagro", false);
+            healthBar.gameObject.SetActive(true);
             rigidbody.velocity = targetDirection * speed;
             spriteRenderer.flipX = false;
         }

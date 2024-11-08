@@ -43,6 +43,9 @@ public class HealthBar : MonoBehaviour
     public void SetMaxHealth(float maxHealth)
     {
         this.maxHealth = maxHealth;
+        secCurHealth = maxHealth;
+        desiredHealth = maxHealth;
+        primCurHealth = maxHealth;
     }
 
     public float GetDesiredHealth()
