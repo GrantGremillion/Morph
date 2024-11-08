@@ -37,6 +37,11 @@ public class BugEnemy : Enemy
 
     private void FixedUpdate()
     {
+        //print(GameManager.Instance.CurrentGameState);
+        if (GameManager.Instance.CurrentGameState != GameManager.GameState.Playing) 
+        {   rigidbody.velocity = Vector2.zero;
+            return;
+        }
         player = FindAnyObjectByType<PlayerController>();
         attackRadiusIsTriggered = attackRadius.getTrigger();
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();

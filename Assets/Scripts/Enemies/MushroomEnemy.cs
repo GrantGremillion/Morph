@@ -41,6 +41,11 @@ public class MushroomEnemy : Enemy
 
     private void FixedUpdate()
     {
+        //print(GameManager.Instance.CurrentGameState);
+        if (GameManager.Instance.CurrentGameState != GameManager.GameState.Playing) 
+        {   rigidbody.velocity = Vector2.zero;
+            return;
+        }
         attackRadiusIsTriggered = attackRadius.getTrigger();
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
@@ -71,6 +76,7 @@ public class MushroomEnemy : Enemy
  
     private void SetVelocity()
     {
+        
         if (targetDirection == Vector2.zero)
         {
             rigidbody.velocity = Vector2.zero;

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,10 +13,17 @@ public class UIManager : MonoBehaviour
     public MainMenuUI mainMenuUI;
     public ShopUI shopUI;
     public InGameUI inGameUI;
+    public PausedMenuUI pausedMenuUI;
 
     public PlayerController player;
 
-    
+    internal void PauseMenuUI(bool v)
+    {
+        if (v) pausedMenuUI.gameObject.SetActive(true);
+        else pausedMenuUI.gameObject.SetActive(false);
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +37,6 @@ public class UIManager : MonoBehaviour
         {
             mainMenuUI.gameObject.SetActive(false);
             inGameUI.gameObject.SetActive(true);
-            player.canPlay = true;
         } 
         
 
@@ -41,7 +48,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
        
-        if (player.canPlay)
+        if (GameManager.Instance.CurrentGameState == GameManager.GameState.Playing)
         {
             inGameUI.gameObject.SetActive(true);
         }

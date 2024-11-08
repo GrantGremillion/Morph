@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     public Bow bow;
     public UpgradeSystem upgradeSystem;
 
-    public bool canPlay = false;
-
     // Shooting variables
     public bool canShoot = true;
     public float holdTimeToShoot; // Time in seconds to hold the button to shoot
@@ -64,15 +62,17 @@ public class PlayerController : MonoBehaviour
     public int currentBowLvl;
     public int currentHealthLvl;
 
-    // Settings variables
-    private bool canMenu = true;
-
 
     // Player Sound Effects
     [SerializeField] private AudioClip takeDamage;
     [SerializeField] private AudioClip shootBow;
 
     private bool slowed;
+
+    private bool paused;
+
+    [SerializeField]
+    private UIManager uiManager;
 
     void Awake()
     {
@@ -97,29 +97,41 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (SceneManager.GetActiveScene().name == "Main" && !canPlay) return;
-
-        if (isDashing || isKnockedBack)
-        {
-            return;
-        }
+        if (GameManager.Instance.CurrentGameState != GameManager.GameState.Playing) return;
+        if (isDashing || isKnockedBack) return;
 
         rb.velocity = movementInput.normalized * speed;
     }
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Main" && !canPlay) return;
-
-        if (isDashing || isKnockedBack)
-        {
-            return;
-        }
-
+        CheckPlayerPause();
+        if (GameManager.Instance.CurrentGameState != GameManager.GameState.Playing) return;
         CheckPlayerInput();
         PlayAnimations();
     }
 
+    void CheckPlayerPause()
+    {
+        // Open/Close settings menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!paused)  
+            {
+                //print ("Pause"); 
+                GameManager.Instance.PauseGame();
+                paused = true;
+                uiManager.PauseMenuUI(true);
+            }
+            else 
+            {
+                //print ("Unpause");
+                GameManager.Instance.StartGame();
+                paused = false;
+                uiManager.PauseMenuUI(false);
+            }
+        }
+    }
 
     void CheckPlayerInput()
     {
@@ -136,20 +148,6 @@ public class PlayerController : MonoBehaviour
             print("Pressing E");
             if (!shop.usingShop) shop.OpenShop();
             else shop.CloseShop();
-        }
-
-        // Open/Close settings menu
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            
-            if (canMenu){
-                print("Entering the Menu");
-                canMenu = false;
-            }
-            else{
-                print("Exiting the Menu");
-                canMenu = true;
-            }
         }
 
         // Hold Left click
@@ -250,6 +248,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnMove(InputValue inputValue)
     {
+
+        if (GameManager.Instance.CurrentGameState != GameManager.GameState.Playing) return;
+
         movementInput = inputValue.Get<Vector2>();
 
         if (movementInput != Vector2.zero)

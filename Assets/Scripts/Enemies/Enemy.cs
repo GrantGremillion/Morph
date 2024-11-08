@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
 
         if (awareOfPlayer != previousAwareOfPlayer)
         {
-            print("swapped");
+            //print("swapped");
             OnAwarenessChanged(awareOfPlayer);
         }
 
@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour
     {
         arrow = collision.gameObject.GetComponent<Arrow>();
 
-        print("take damage: " + arrow.damage);
+        //print("take damage: " + arrow.damage);
 
         healthBar.TakeDamage(arrow.damage);
         if (healthBar.GetDesiredHealth() <= 0)
