@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BugEnemy : Enemy
@@ -21,7 +20,6 @@ public class BugEnemy : Enemy
     public float projectileSpeed = 1.0f;
     
     public Transform attackPoint;
-    public Animator animator;
 
     void Start()
     {
@@ -47,17 +45,15 @@ public class BugEnemy : Enemy
         CheckIfCanAttack();
         UpdateTargetDirection();
         SetVelocity();
-        PlayAnimations();
     }
 
     private void CheckIfCanAttack()
     {
         attackRadiusIsTriggered = attackRadius.getTrigger();
-        playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
         if (attackCooldown > 0) attackCooldown -= Time.fixedDeltaTime;
 
-            if (attackCooldown <= 0 && attackRadiusIsTriggered && !isAttacking) 
+            if (attackCooldown <= 0 && attackRadiusIsTriggered) 
             {
             canAttack = true;
             }
@@ -66,12 +62,15 @@ public class BugEnemy : Enemy
 
     private void UpdateTargetDirection()
     {
-        if (playerAwarenessRadiusIsTriggered && !pauseAnimation)
+        playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
+        if (playerAwarenessRadiusIsTriggered)
         {
+            animator.SetTrigger("Agro");
             targetDirection = playerAwarenessRadius.getTriggerDir().normalized;
         }
         else
         {
+            animator.SetTrigger("Deagro");
             targetDirection = Vector2.zero;
         }
     }
@@ -111,13 +110,12 @@ public class BugEnemy : Enemy
     {
         if (canAttack && !isAttacking)
         {
-            currentState = State.Attack;
             isAttacking = true;
             ThrowProjectile();
             attackCooldown = initialAttackCooldown;
         }
 
-        if (!pauseAnimation && !isAttacking)
+        if (!isAttacking)
         {
             gameObject.layer = LayerMask.NameToLayer("Enemy");
 
@@ -157,30 +155,10 @@ public class BugEnemy : Enemy
 
         GameObject projectileInstance = Instantiate(bugProjectilePrefab, attackPoint.position, Quaternion.identity);
 
-        Rigidbody2D quillRigidbody = projectileInstance.GetComponent<Rigidbody2D>();
-        if (quillRigidbody != null)
+        Rigidbody2D projectileRigidbody = projectileInstance.GetComponent<Rigidbody2D>();
+        if (projectileRigidbody != null)
         {
-            quillRigidbody.velocity = direction * projectileSpeed;
-        }
-
-        // Trigger an animation event or coroutine to reset `isAttacking` after a delay
-        Invoke("EndAttack", 0.5f); // Adjust the delay to match the attack animation duration
-    }
-
-    private void EndAttack()
-    {
-        isAttacking = false;
-    }
-
-    void PlayAnimations()
-    {
-        if (currentState != State.Idle)
-        {
-            animator.Play("Walk");
-        }
-        else
-        {
-            animator.Play("Idle");
+            projectileRigidbody.velocity = direction * projectileSpeed;
         }
     }
 }

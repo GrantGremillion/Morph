@@ -1,13 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using Microsoft.Unity.VisualStudio.Editor;
-using TMPro.Examples;
-using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
-using Helpers;
+
 
 public class Enemy : MonoBehaviour
 {
@@ -30,6 +23,8 @@ public class Enemy : MonoBehaviour
     public bool pauseAnimation;
     public string itemDropType;
     public int numberOfDrops;
+
+    public Animator animator;
 
     [HideInInspector] public bool canAttack;     ///
     public bool isAttacking;
@@ -67,14 +62,9 @@ public class Enemy : MonoBehaviour
     {
         UpdateState();
 
-        // Needed for the enemy uproot and root animations
-        if (currentState == State.Idle) awareOfPlayer = false;
-        else awareOfPlayer = true;
-
 
         if (awareOfPlayer != previousAwareOfPlayer)
         {
-            //print("swapped");
             OnAwarenessChanged(awareOfPlayer);
         }
 
@@ -87,7 +77,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            if (currentState != State.Idle) StartCoroutine(TakeDamage(collision));
+            animator.SetBool("Damaged",true);
+            StartCoroutine(TakeDamage(collision));
         }
     }
 
@@ -95,14 +86,13 @@ public class Enemy : MonoBehaviour
     {
         arrow = collision.gameObject.GetComponent<Arrow>();
 
-        //print("take damage: " + arrow.damage);
+        print("Current health:" + health + "take damage: " + arrow.damage);
 
         healthBar.TakeDamage(arrow.damage);
         if (healthBar.GetDesiredHealth() <= 0)
         {
 
             healthBar.gameObject.SetActive(false);
-            currentState = State.Dead;
             pauseAnimation = true;
             yield return new WaitForSeconds(immunityTime);
             DropItems();
@@ -126,20 +116,12 @@ public class Enemy : MonoBehaviour
         if (newAwarenessState)
         {
             healthBar.gameObject.SetActive(true);
-            currentState = State.Agro;
+            
         }
         else
         {
             healthBar.gameObject.SetActive(false);
-            currentState = State.Deagro;
         }
-        StartCoroutine(PauseOtherAnimations(0.2f));
     }
 
-    public IEnumerator PauseOtherAnimations(float time)
-    {
-        pauseAnimation = true;
-        yield return new WaitForSeconds(time);
-        pauseAnimation = false;
-    }
 }

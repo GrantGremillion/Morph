@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using Helpers;
 
@@ -6,7 +5,6 @@ public class MushroomEnemy : Enemy
 {
     // Object references
     private PlayerController player;
-    private Animator animator;
     private SpriteRenderer spriteRenderer;
     private new Collider2D collider;
     private Trigger attackRadius;
@@ -49,49 +47,46 @@ public class MushroomEnemy : Enemy
         CheckIfCanAttack();
         UpdateTargetDirection();
         SetVelocity();
-        PlayAnimations();
     }
 
     private void CheckIfCanAttack()
     {
         attackRadiusIsTriggered = attackRadius.getTrigger();
-        playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
-        if (attackRadiusIsTriggered || isAttacking)
-        { 
-            canAttack = true;
-        } 
-        else canAttack = false;
+        if (attackRadiusIsTriggered) animator.SetTrigger("Attacking");
 
+        else animator.SetTrigger("StopAttacking");
     }
 
     private void UpdateTargetDirection()
     {
-        if (playerAwarenessRadiusIsTriggered && !pauseAnimation)
-        {
-            targetDirection = playerAwarenessRadius.getTriggerDir().normalized;
-        }
-        else
-        {
-            targetDirection = Vector2.zero;
-        }
+        playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
+
+        if (playerAwarenessRadiusIsTriggered) targetDirection = playerAwarenessRadius.getTriggerDir().normalized;
+        
+        else targetDirection = Vector2.zero;
+        
     }
 
- 
     private void SetVelocity()
     {
-        
         if (targetDirection == Vector2.zero)
         {
+            animator.SetBool("Agro", false);
+            animator.SetBool("Deagro", true);
             rigidbody.velocity = Vector2.zero;
         }
         else if (currentState == State.Right)
         {
+            animator.SetBool("Agro", true);
+            animator.SetBool("Deagro", false);
             rigidbody.velocity = targetDirection * speed;
             spriteRenderer.flipX = true;
         }
         else if (currentState == State.Left)
         {
+            animator.SetBool("Agro", true);
+            animator.SetBool("Deagro", false);
             rigidbody.velocity = targetDirection * speed;
             spriteRenderer.flipX = false;
         }
@@ -101,68 +96,28 @@ public class MushroomEnemy : Enemy
         }
     }
 
-    void PlayAnimations()
+    public override void UpdateState()
     {
-        switch (currentState)
-            {
-                case State.Attack:
-                    animator.Play("Attack");
-                    break;
-                case State.Left:
-                    animator.Play("Walk");
-                    break;
-                case State.Right:
-                    animator.Play("Walk");
-                    break;
-                case State.Hurt:
-                    animator.Play("Hurt");
-                    break;
-                case State.Dead:
-                    animator.Play("Dead");
-                    break;
-                case State.Deagro:
-                    animator.Play("Root");
-                    break;
-                case State.Agro:
-                    animator.Play("Uproot");
-                    break;
-                case State.Idle:
-                    animator.Play("Idle");
-                    break;
-            }
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        if (targetDirection.x > 0)
+        {
+            currentState = State.Right;
+        }
+        else if (targetDirection.x < 0)
+        {
+            currentState = State.Left;
+        }
+        else
+        {
+            currentState = State.Idle;
+            gameObject.layer = LayerMask.NameToLayer("IdleEnemy");
+        }
+        
     }
 
-    // Called via event set up in attack animation 
     public void DealDamage()
     {
         player.TakeDamage(collider);
-    }
-
-    public override void UpdateState()
-    {
-        if (canAttack)
-        {
-            currentState = State.Attack;
-            StartCoroutine(PauseOtherAnimations(0.1f));
-        }
-
-        if (!pauseAnimation)
-        {
-            gameObject.layer = LayerMask.NameToLayer("Enemy");
-            if (targetDirection.x > 0)
-            {
-                currentState = State.Right;
-            }
-            else if (targetDirection.x < 0)
-            {
-                currentState = State.Left;
-            }
-            else
-            {
-                currentState = State.Idle;
-                gameObject.layer = LayerMask.NameToLayer("IdleEnemy");
-            }
-        }
     }
 
 }
