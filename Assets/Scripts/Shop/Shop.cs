@@ -14,6 +14,7 @@ public class Shop : MonoBehaviour
     public ShopUI shopUI;
     public PlayerController player;
     public Bow bow;
+    public WeaponManager weaponManager;
 
 
     // Player item counts
@@ -59,7 +60,7 @@ public class Shop : MonoBehaviour
         usingShop = true;
         if (shopUI != null)
         {
-            player.canShoot = false;
+            weaponManager.canShoot = false;
             shopUI.gameObject.SetActive(true);
         }
     }
@@ -67,7 +68,7 @@ public class Shop : MonoBehaviour
     public void CloseShop()
     {
         usingShop = false;
-        player.canShoot = true;
+        weaponManager.canShoot = true;
         if (shopUI != null)
         {
             shopUI.gameObject.SetActive(false);

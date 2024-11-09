@@ -2,20 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bow : MonoBehaviour
+public class Bow : Weapon
 {
-    public Animator animator;
-    public AnimatorOverrideController overrideController; // Used to update bow sprite
     public GameObject arrow;
-    public GameObject spawn;
-    public PlayerController player;
-    private Transform playerTransform;
-    public UpgradeSystem upgradeSystem; 
-    private float distanceFromPlayer = 0.08f; // Distance of the bow from the player
+    public float distanceFromPlayer = 0.08f; // Distance of the projectile from the player
 
     // Start is called before the first frame update
     void Start()
     {
+        type = "Bow";
         player = FindAnyObjectByType<PlayerController>();
         playerTransform = player.transform;
         upgradeSystem = player.GetComponentInChildren<UpgradeSystem>();

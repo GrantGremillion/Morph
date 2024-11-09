@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Enemy
   - Arrow
+  - ThrowingStar
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - PlayerProjectile

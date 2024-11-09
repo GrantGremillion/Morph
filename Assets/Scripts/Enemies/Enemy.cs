@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public new Rigidbody2D rigidbody;
     public HealthBar healthBar;
     public Arrow arrow;
+    public ThrowingStar throwingStar;
 
 
     [HideInInspector] public Vector2 targetDirection;
@@ -71,17 +72,30 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Arrow"))
         {
             animator.SetBool("Damaged",true);
-            StartCoroutine(TakeDamage(collision));
+            StartCoroutine(TakeDamage(collision,"Arrow"));
+        }
+        if (collision.gameObject.CompareTag("ThrowingStar"))
+        {
+            animator.SetBool("Damaged",true);
+            StartCoroutine(TakeDamage(collision,"ThrowingStar"));
         }
     }
 
-    public IEnumerator TakeDamage(Collision2D collision)
+    public IEnumerator TakeDamage(Collision2D collision, string name)
     {
-        arrow = collision.gameObject.GetComponent<Arrow>();
+        if (name == "Arrow")
+        {
+            arrow = collision.gameObject.GetComponent<Arrow>();
+            healthBar.TakeDamage(arrow.damage);
+        }
+        else if (name == "ThrowingStar")
+        {
+            throwingStar = collision.gameObject.GetComponent<ThrowingStar>();
+            healthBar.TakeDamage(throwingStar.damage);
+        }
 
         //print("Current health:" + health + "take damage: " + arrow.damage);
 
-        healthBar.TakeDamage(arrow.damage);
         if (healthBar.GetDesiredHealth() <= 0)
         {
             animator.SetBool("Damaged",false);

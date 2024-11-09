@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cherry : Item
+public class Apple : Item
 {
 
     // Start is called before the first frame update

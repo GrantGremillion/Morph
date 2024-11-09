@@ -12,22 +12,17 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput;
     private Direction currentDirection;
     public InventoryManager inventory;
-    public GameObject arrowPrefab;
-    public Transform bowTransform;
-    public Bow bow;
     public UpgradeSystem upgradeSystem;
+    public WeaponManager weaponManager;
 
     // Shooting variables
-    public bool canShoot = true;
     public float holdTimeToShoot; // Time in seconds to hold the button to shoot
     public float shootCooldown = 0.5f;
-    private float holdTime = 0.0f;
-
 
     // Dash variables
     private bool canDash = true;
     private bool isDashing;
-    private float dashingCooldown = 1f;
+    private float dashingCooldown = 0f;
 
     // Health variables
     public int health;
@@ -65,7 +60,6 @@ public class PlayerController : MonoBehaviour
 
     // Player Sound Effects
     [SerializeField] private AudioClip takeDamage;
-    [SerializeField] private AudioClip shootBow;
 
     private bool slowed;
 
@@ -92,8 +86,6 @@ public class PlayerController : MonoBehaviour
 
         currentBowLvl = 0;
         currentHealthLvl = 0;
-
-        bow = bowTransform.gameObject.GetComponent<Bow>();
     }
     void FixedUpdate()
     {
@@ -145,84 +137,22 @@ public class PlayerController : MonoBehaviour
         // Open/Close shop
         if (Input.GetKeyDown(KeyCode.E) && tz.canUseShop)
         {
-            print("Pressing E");
             if (!shop.usingShop) shop.OpenShop();
             else shop.CloseShop();
         }
 
-        // Hold Left click
-        if (Input.GetKey(KeyCode.Mouse0) && canShoot && canDash)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            holdTime += Time.deltaTime;
-
-            if (holdTime >= holdTimeToShoot)
-            {
-                if (bow.animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot") == false)
-                {
-                    bow.animator.Play("Shoot");
-                }
-            }
-            else if (bow.animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot") == false)
-            {
-                bow.animator.Play("Shoot");
-            }
+            weaponManager.SwitchToWeapon("Bow");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            weaponManager.SwitchToWeapon("ThrowingStar");
         }
 
-        // Release Left click
-        if (Input.GetKeyUp(KeyCode.Mouse0) && canShoot && canDash)
-        {
-            //print("Hold Time" + holdTimeToShoot);
 
-            // Bow can be shot
-            if (holdTime >= holdTimeToShoot)
-            {
-                ShootArrow();
-                if (bow.animator.GetCurrentAnimatorStateInfo(0).IsName("Still") == false)
-                {
-                    bow.animator.Play("Still");
-                }
-                holdTime = 0.0f; // Reset hold time after shooting
-            }
-            else
-            {
-                if (bow.animator.GetCurrentAnimatorStateInfo(0).IsName("Still") == false)
-                {
-                    bow.animator.Play("Still");
-                }
-                holdTime = 0.0f; // Reset hold time if not held long enough
-            }
-        }
-
+        weaponManager.CheckWeaponInput(canDash);
     }
-
-    void ShootArrow()
-    {
-        // Get the mouse position in world space
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Ensure the z-coordinate is 0 since we're working in 2D
-
-        // Calculate the direction from the player to the mouse position
-        Vector3 direction = (mousePosition - transform.position).normalized;
-
-        // Calculate the rotation angle
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.Euler(0, 0, angle);
-
-        // Set the velocity
-        Vector2 velocity = new Vector2(direction.x, direction.y);
-
-        // Set the offset (if needed, based on the direction)
-        Vector3 offset = direction * 0.15f; // Adjust this value if needed
-
-        // Calculate the spawn position with the offset
-        Vector3 spawnPosition = transform.position + offset;
-
-        // Instantiate the arrow at the spawn position with the calculated rotation
-        GameObject arrow = Instantiate(arrowPrefab, spawnPosition, rotation);
-        arrow.GetComponent<Rigidbody2D>().velocity = velocity * arrow.GetComponent<Arrow>().speed; 
-        SoundFXManager.instance.PlaySoundFXClip(shootBow, transform, 1f, false);
-    }
-
 
     void PlayAnimations()
     {
@@ -260,17 +190,13 @@ public class PlayerController : MonoBehaviour
             {
                 animator.Play("WalkHorizontal");
                 currentDirection = Direction.Right;
-                bowTransform.SetParent(null);
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                bowTransform.SetParent(transform);
             }
             else if (movementInput.x < 0)
             {
                 animator.Play("WalkHorizontal");
                 currentDirection = Direction.Left;
-                bowTransform.SetParent(null);
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-                bowTransform.SetParent(transform);
             }
             else if (movementInput.y > 0)
             {

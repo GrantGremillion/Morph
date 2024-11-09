@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject banana;
     public GameObject blueberry;
-    public GameObject cherry;
+    public GameObject apple;
 
     public float minSpawnDistance = 2f;
     public float maxSpawnDistance = 5f;
@@ -86,7 +86,7 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                newItem = Instantiate(cherry, spawnPosition, Quaternion.identity);
+                newItem = Instantiate(apple, spawnPosition, Quaternion.identity);
             }
 
             // Remove item from player inventory
