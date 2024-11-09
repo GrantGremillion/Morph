@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,12 +13,15 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+        if (SceneManager.GetActiveScene().name != "Main" && CurrentGameState != GameState.Paused)
+        {
+            CurrentGameState = GameState.Playing;
+        }
     }
 
     public void StartGame()
     {
         CurrentGameState = GameState.Playing;
-        // Notify other scripts if needed
     }
 
     public void PauseGame()

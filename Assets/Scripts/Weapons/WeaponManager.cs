@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public Transform bowTransform;
     public Bow bow;
     public Bow bowInstance;
     public ThrowingStar throwingStar;
@@ -24,7 +23,6 @@ public class WeaponManager : MonoBehaviour
 
     public void Start()
     {
-        bow = bowTransform.gameObject.GetComponent<Bow>();
         currentWeapon = bow;
         bowInstance = Instantiate(bow, player.transform.position, Quaternion.identity);
         currentWeaponInstance = bowInstance;
