@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bow : MonoBehaviour
 {
-
     public Animator animator;
     public AnimatorOverrideController overrideController; // Used to update bow sprite
     public GameObject arrow;
