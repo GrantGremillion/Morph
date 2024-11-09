@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Morph.sln"
+    "dotnet.defaultSolution": "TheLegendaryFruit.sln"
 }
