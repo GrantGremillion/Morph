@@ -49336,7 +49336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e33b1d012c404640a20d3852d504559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bowTransform: {fileID: 1486867391587309772, guid: 239340cbe2804934b9a611ca33399fbe, type: 3}
   bow: {fileID: 4664767756821264171, guid: 239340cbe2804934b9a611ca33399fbe, type: 3}
   bowInstance: {fileID: 0}
   throwingStar: {fileID: -91437400931393747, guid: 64d8b4b731dee474da0d8f7afd185db5, type: 3}

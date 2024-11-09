@@ -48,6 +48,7 @@ public class Shop : MonoBehaviour
     {
         if (usingShop)
         {
+            //GameManager.Instance.CurrentGameState = GameManager.GameState.Paused;
             GetPlayerItemCounts();
             shopUI.UpdateUI();
             CompareCounts();

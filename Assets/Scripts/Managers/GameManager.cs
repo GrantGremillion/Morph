@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public enum GameState { MainMenu, Playing, Paused }
-    public GameState CurrentGameState { get; private set; } = GameState.MainMenu;
+    public GameState CurrentGameState { get; set; } = GameState.MainMenu;
 
     private void Awake()
     {
