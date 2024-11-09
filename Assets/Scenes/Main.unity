@@ -42241,6 +42241,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bug
       objectReference: {fileID: 0}
+    - target: {fileID: 9057715030174051462, guid: 999eb443971dd3141a95804831f70384, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 772532513, guid: ab208be193eb6604cb93e181740f5cf9, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
