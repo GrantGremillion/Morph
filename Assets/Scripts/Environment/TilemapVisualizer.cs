@@ -73,14 +73,18 @@ public class TilemapVisualizer : MonoBehaviour
         if (WallTypesHelper.wallTop.Contains(typeAsInt))
         {
             tile = wallTop;
+            PaintSingleTile(floorTilemap,floorTile4,position);
+
         }
         else if (WallTypesHelper.wallSideRight.Contains(typeAsInt))
         {
             tile = wallSideRight;
+            PaintSingleTile(floorTilemap,floorTile4,position);
         }
         else if (WallTypesHelper.wallSideLeft.Contains(typeAsInt))
         {
             tile = wallSideLeft;
+            PaintSingleTile(floorTilemap,floorTile4,position);
         }
         else if (WallTypesHelper.wallBottm.Contains(typeAsInt))
         {
@@ -111,10 +115,12 @@ public class TilemapVisualizer : MonoBehaviour
         if (WallTypesHelper.wallInnerCornerDownLeft.Contains(typeAsInt))
         {
             tile = wallInnerCornerDownLeft;
+            PaintSingleTile(floorTilemap,floorTile4,position);
         }
         else if (WallTypesHelper.wallInnerCornerDownRight.Contains(typeAsInt))
         {
             tile = wallInnerCornerDownRight;
+            PaintSingleTile(floorTilemap,floorTile4,position);
         }
         else if (WallTypesHelper.wallInnerCornerUpRight.Contains(typeAsInt))
         {
