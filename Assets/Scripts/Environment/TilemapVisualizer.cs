@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class TilemapVisualizer : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class TilemapVisualizer : MonoBehaviour
     [SerializeField]
     private TileBase floorTile5;
     [SerializeField]
-    private TileBase wallTop;
+    private TileBase wallTop, wallSideRight, wallSideLeft, wallBottom, wallFull;
     private List<TileBase> tiles;
 
     public GameObject enemyPrefab;           // Enemy prefab to spawn
@@ -58,14 +60,42 @@ public class TilemapVisualizer : MonoBehaviour
         tilemap.SetTile(tilePosition, tile);
     }
 
-    internal void PaintSingleBasicWall(Vector2Int position)
+    internal void PaintSingleBasicWall(Vector2Int position, string binaryType)
     {
-        PaintSingleTile(wallTilemap,wallTop, position);
+        int typeAsInt = Convert.ToInt32(binaryType,2);
+        TileBase tile = null;
+        if (WallTypesHelper.wallTop.Contains(typeAsInt))
+        {
+            tile = wallTop;
+        }
+        else if (WallTypesHelper.wallSideRight.Contains(typeAsInt))
+        {
+            tile = wallSideRight;
+        }
+        else if (WallTypesHelper.wallSideLeft.Contains(typeAsInt))
+        {
+            tile = wallSideLeft;
+        }
+        else if (WallTypesHelper.wallBottm.Contains(typeAsInt))
+        {
+            tile = wallBottom;
+        }
+        else if (WallTypesHelper.wallFull.Contains(typeAsInt))
+        {
+            tile = wallFull;
+        }
+        if (tile != null)
+            PaintSingleTile(wallTilemap,tile, position);
     }
 
-        public void Clear()
+    public void Clear()
     {
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
+    }
+
+    internal void PaintSingleCornerWall(Vector2Int position, string neighboursBinaryType)
+    {
+        
     }
 }
