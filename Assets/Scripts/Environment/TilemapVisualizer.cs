@@ -33,9 +33,9 @@ public class TilemapVisualizer : MonoBehaviour
     public int enemyCount = 10;              // Number of enemies to spawn
     
 
-    public void Start()
+    public void Awake()
     {
-        
+        Clear();
     }
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)

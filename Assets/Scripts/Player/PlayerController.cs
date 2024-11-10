@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        print(GameManager.Instance.CurrentGameState);
+        //print(GameManager.Instance.CurrentGameState);
         if (GameManager.Instance.CurrentGameState != GameManager.GameState.Playing) return;
         if (isDashing || isKnockedBack) return;
         

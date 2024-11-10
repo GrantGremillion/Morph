@@ -11331,6 +11331,7 @@ MonoBehaviour:
   dungeonHeight: 70
   offset: 2
   randomWalkRooms: 0
+  player: {fileID: 622443282}
 --- !u!4 &646202639
 Transform:
   m_ObjectHideFlags: 0

@@ -17,6 +17,27 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
     [SerializeField]
     private bool randomWalkRooms;
 
+    [SerializeField]
+    private Transform player;
+
+    private Dictionary<Vector2Int, RoomType> roomTypes = new Dictionary<Vector2Int, RoomType>();
+
+    private enum RoomType
+    {
+        Start,
+        Normal,
+        Treasure,
+        Enemy,
+        Shop,
+        Boss
+    }
+
+    public void Start() 
+    {
+        RunProceduralGeneration();
+
+    }
+
     protected override void RunProceduralGeneration()
     {
         CreateRooms();
@@ -27,16 +48,8 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
         var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(new BoundsInt((Vector3Int)startPosition, new Vector3Int
             (dungeonWidth,dungeonHeight,0)), minRoomWidth, minRoomHeight);
 
-        HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> floor = randomWalkRooms ? CreateRoomsRandomly(roomsList) : CreateSimpleRooms(roomsList);
 
-        if (randomWalkRooms)
-        {
-            floor = CreateRoomsRandomly(roomsList);
-        }
-        else 
-        {
-            floor = CreateSimpleRooms(roomsList);
-        }
 
         List<Vector2Int> roomCenters = new List<Vector2Int>();
         foreach (var room in roomsList)
@@ -44,12 +57,57 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
             roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
         }
 
+        // for (int i = 0; i < roomCenters.Count; i++)
+        // {
+        //     print(roomCenters[i]);
+        // }
+
+        player.position = new Vector3(roomCenters[0][0]*.16f,roomCenters[0][1]*.16f, player.position.z);
+        //print(player.position);
+
+        AssignRoomTypes(roomCenters);
+
         HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
         floor.UnionWith(corridors);
 
         tilemapVisualizer.PaintFloorTiles(floor);
         WallGenerator.CreateWalls(floor,tilemapVisualizer);
 
+        //SpawnEntitiesBasedOnRoomTypes();
+
+    }
+
+    private void AssignRoomTypes(List<Vector2Int> roomCenters)
+    {
+        for (int i = 0; i < roomCenters.Count; i++)
+        {
+            RoomType roomType;
+
+            if (i == 0)
+                roomType = RoomType.Start; // Starting room
+            else if (i == roomCenters.Count - 1)
+                roomType = RoomType.Boss; // Boss room at the end
+            else
+                roomType = (RoomType)Random.Range(1, 4); // Randomize other room types excluding Start
+
+            roomTypes[roomCenters[i]] = roomType;
+        }
+
+        // Move the player to the Start Room
+        MovePlayerToStartRoom();
+    }
+
+    private void MovePlayerToStartRoom()
+    {
+        // Find the position of the Start Room
+        foreach (var roomCenter in roomTypes.Keys)
+        {
+            if (roomTypes[roomCenter] == RoomType.Start)
+            {
+                //player.position = new Vector3(roomCenter.x * .016f, roomCenter.y * .016f, player.position.z);
+                break;
+            }
+        }
     }
 
     private HashSet<Vector2Int> CreateRoomsRandomly(List<BoundsInt> roomsList)
