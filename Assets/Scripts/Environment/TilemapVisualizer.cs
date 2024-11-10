@@ -189,6 +189,7 @@ public class TilemapVisualizer : MonoBehaviour
         else if (WallTypesHelper.wallExposedSides1.Contains(typeAsInt))
         {
             tile = wallExposedSides1;
+            PaintSingleTile(floorTilemap,floorTile4,position);
         }
         else if (WallTypesHelper.wallExposedSides2.Contains(typeAsInt))
         {
