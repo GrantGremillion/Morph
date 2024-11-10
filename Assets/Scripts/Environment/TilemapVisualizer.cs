@@ -25,7 +25,8 @@ public class TilemapVisualizer : MonoBehaviour
         wallDiagonalCornerDownRight, wallDiagonalCornerDownLeft, wallDiagonalCornerUpRight, wallDiagonalCornerUpLeft,
         wallFullyExposedTop, wallFullyExposedBottom, wallFullyExposedRight, wallFullyExposedLeft,
         wallFullyExposedTopCorners, wallFullyExposedBottomCorners, wallFullyExposed, wallExposedSides1, wallExposedSides2,
-        wallCurveTop1, wallCurveTop2, wallCurveBottom1, wallCurveBottom2, wallCurveLeft1, wallCurveLeft2, wallCurveRight1, wallCurveRight2;
+        wallCurveTop1, wallCurveTop2, wallCurveBottom1, wallCurveBottom2, wallCurveLeft1, wallCurveLeft2, wallCurveRight1, wallCurveRight2,
+        cornersBottomRight, cornersBottomLeft, cornersTopRight, cornersTopLeft;
     private List<TileBase> tiles;
 
     public GameObject enemyPrefab;           // Enemy prefab to spawn
@@ -219,6 +220,22 @@ public class TilemapVisualizer : MonoBehaviour
         else if (WallTypesHelper.wallCurveRight2.Contains(typeAsInt))
         {
             tile = wallCurveRight2;
+        }
+        else if (WallTypesHelper.cornerBottomRight.Contains(typeAsInt))
+        {
+            tile = cornersBottomRight;
+        }
+        else if (WallTypesHelper.cornerBottomLeft.Contains(typeAsInt))
+        {
+            tile = cornersBottomLeft;
+        }
+        else if (WallTypesHelper.cornerTopRight.Contains(typeAsInt))
+        {
+            tile = cornersTopRight;
+        }
+        else if (WallTypesHelper.cornerTopLeft.Contains(typeAsInt))
+        {
+            tile = cornersTopLeft;
         }
 
         if (tile != null)
