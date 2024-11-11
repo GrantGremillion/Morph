@@ -4,7 +4,6 @@ using UnityEngine;
 public class BugEnemy : Enemy
 {
     public PlayerController player;
-    public SpriteRenderer spriteRenderer;
     public new Collider2D collider;
     private Trigger attackRadius;
     private Trigger playerAwarenessRadius;
@@ -21,12 +20,19 @@ public class BugEnemy : Enemy
     
     public Transform attackPoint;
 
+    protected override void Awake()
+    {
+        // Assuming the SpriteRenderer is a child of the MushroomEnemy GameObject
+        Transform child = transform.GetChild(3);
+        spriteRenderer = child.GetComponent<SpriteRenderer>();
+        base.Awake();
+    }
+
     void Start()
     {
         initialAttackCooldown = attackCooldown;
         itemDropType = "blueberry";
         player = FindAnyObjectByType<PlayerController>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
 
         attackRadius = transform.Find("AttackRadius").GetComponent<Trigger>();

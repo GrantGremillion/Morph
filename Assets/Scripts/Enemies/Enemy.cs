@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     public Arrow arrow;
     public ThrowingStar throwingStar;
 
-
     [HideInInspector] public Vector2 targetDirection;
     [HideInInspector] public Vector2 currentDirection = Vector2.zero;
     public State currentState;
@@ -32,6 +31,12 @@ public class Enemy : MonoBehaviour
     public bool isAttacking;
     private bool previousAwareOfPlayer = false;
     public bool awareOfPlayer = false;
+
+    protected SpriteRenderer spriteRenderer;
+    public Color flashColor; 
+    public float flashDuration = 1.0f; 
+    private Color originalColor;
+
     public enum State
     {
         Left,
@@ -47,7 +52,7 @@ public class Enemy : MonoBehaviour
         None
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         healthBar = healthBarCanvas.GetComponent<HealthBar>();
@@ -58,6 +63,8 @@ public class Enemy : MonoBehaviour
         pauseAnimation = false;
         canAttack = false;
         previousAwareOfPlayer = awareOfPlayer;  
+
+        originalColor = spriteRenderer.color; 
     }
 
     void Update()
@@ -87,6 +94,10 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator TakeDamage(Collision2D collision, string name)
     {
+ 
+        StartCoroutine(Flash());
+        
+        
         if (name == "Arrow")
         {
             arrow = collision.gameObject.GetComponent<Arrow>();
@@ -111,8 +122,14 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
         yield return new WaitForSeconds(immunityTime);
+    }
 
-
+    private IEnumerator Flash()
+    {
+        if (spriteRenderer == null) print("null");
+        spriteRenderer.color = flashColor; 
+        yield return new WaitForSeconds(flashDuration); 
+        spriteRenderer.color = originalColor; 
     }
 
     public void DropItems()

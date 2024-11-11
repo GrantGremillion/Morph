@@ -5,7 +5,6 @@ public class MushroomEnemy : Enemy
 {
     // Object references
     private PlayerController player;
-    private SpriteRenderer spriteRenderer;
     private new Collider2D collider;
     private Trigger attackRadius;
     private Trigger playerAwarenessRadius;
@@ -13,6 +12,13 @@ public class MushroomEnemy : Enemy
     public bool playerAwarenessRadiusIsTriggered = false;
     public bool attackRadiusIsTriggered = false;
     public float animationSpeed;
+
+    protected override void Awake()
+    {
+        // Assuming the SpriteRenderer is a child of the MushroomEnemy GameObject
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        base.Awake();
+    }
 
     void Start()
     {

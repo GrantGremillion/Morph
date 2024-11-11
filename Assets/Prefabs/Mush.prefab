@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2483395146284687969}
   - component: {fileID: 4271627021727086338}
   - component: {fileID: 5481018516020337834}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: OrangeFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 6052629182320401684}
   - component: {fileID: 2742831098145054092}
   - component: {fileID: 1017426150409595047}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerAwarenessRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.0144433975, y: 0}
   serializedVersion: 2
-  m_Radius: 0.776927
+  m_Radius: 0.93
 --- !u!114 &1017426150409595047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 1661066662120075535}
   - component: {fileID: 4061687163184003467}
   - component: {fileID: 5248377406286258498}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: RedFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 1221980146366351112}
   - component: {fileID: 5152099270996403368}
   - component: {fileID: 8931788591955948794}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 8626801132586982961}
   - component: {fileID: 4799494600493092693}
   - component: {fileID: 794914624299487178}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 2594250852070854150}
   - component: {fileID: 1890417834380799713}
   - component: {fileID: 6187148486023649282}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 4731303094572505209}
   - component: {fileID: 525571324553371610}
   - component: {fileID: 5355217150149544097}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mush
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -546,8 +546,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5705198476227282040}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.98, z: 6.0027866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.1, y: -0.721, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -692,13 +692,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9573c06088d6b044fa5f367bf9d16f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   rigidbody: {fileID: 0}
+  healthBar: {fileID: 0}
+  arrow: {fileID: 0}
+  throwingStar: {fileID: -91437400931393747, guid: 64d8b4b731dee474da0d8f7afd185db5, type: 3}
   targetDirection: {x: 0, y: 0}
   currentDirection: {x: 0, y: 0}
-  banana: {fileID: 3105558158463327667, guid: 663afc09ff7f5b241820531850be0fec, type: 3}
-  blueberry: {fileID: 6965595104004759051, guid: ae3a1e2a869417c4bba8c214d55d8c00, type: 3}
-  cherry: {fileID: 6642731324118583853, guid: 3c8c44ee6c7bef44d806e4f034ce6287, type: 3}
-  arrow: {fileID: 0}
   currentState: 0
   healthBarCanvas: {fileID: 6099077562493899913}
   speed: 0.4
@@ -706,19 +706,14 @@ MonoBehaviour:
   maxHealth: 100
   immunityTime: 0.5
   pauseAnimation: 0
-  dropType: 
+  itemDropType: 
   numberOfDrops: 2
-  minSpawnDistance: 0.2
-  maxSpawnDistance: 0.25
-  moveSpeed: 0.2
-  maxDistanceFromEnemy: 10
-  canAttack: 0
-  awareOfPlayer: 0
-  debug: 0
-  player: {fileID: 0}
   animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  collider: {fileID: 0}
+  canAttack: 0
+  isAttacking: 0
+  awareOfPlayer: 0
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
   playerAwarenessRadiusIsTriggered: 0
   attackRadiusIsTriggered: 0
   animationSpeed: 0.2
