@@ -38,7 +38,7 @@ public class CorridorFirstLevelGeneration : SimpleRandomWalkGenerator
         }
 
 
-        tilemapVisualizer.PaintFloorTiles(floorPositions);
+        tilemapVisualizer.PaintFloorTiles(floorPositions,false);
         WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
     }
 

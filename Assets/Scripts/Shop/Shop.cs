@@ -37,7 +37,12 @@ public class Shop : MonoBehaviour
     {
         player = FindAnyObjectByType<PlayerController>();
         bow = player.GetComponentInChildren<Bow>();
-        shopUI.gameObject.SetActive(false);
+        shopUI = FindAnyObjectByType<ShopUI>();
+
+        if (shopUI != null)
+        {
+            shopUI.gameObject.SetActive(false);
+        }
 
         bowUpgradeCosts = new List<int> { 1, 2, 3, 4, 5 };
         healthUpgradeCosts = new List<int> { 1, 2, 3, 4, 5 };
@@ -58,6 +63,7 @@ public class Shop : MonoBehaviour
 
     public void OpenShop()
     {
+        print("shop");
         usingShop = true;
         if (shopUI != null)
         {

@@ -255,7 +255,7 @@ public class PlayerController : MonoBehaviour
 
         isKnockedBack = false;
         // Wait until player has been knowcked back to drop items
-        inventory.DropItems();
+        //inventory.DropItems();
     }
 
     public void TakeDamage(Collider2D collider)

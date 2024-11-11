@@ -7,25 +7,26 @@ using Random = UnityEngine.Random;
 
 public class SimpleRandomWalkGenerator : AbstractLevelGenerator
 {
-   
-    [SerializeField]
-    private Tilemap floorTilemap;
+ 
+    public Tilemap floorTilemap;
     
     [SerializeField]
     protected SimpleRandomWalkData randomWalkParameters;
 
-    public GameObject enemyPrefab;           
+    public List<Enemy> enemyList;    
     public int maxEnemyCount = 10;     
     private int currentEnemyCount = 0;   
     public float minSpawnDelay = 1f;
     public float maxSpawnDelay = 5f;
     private List<Vector3> walkablePositions = new List<Vector3>();      
 
+
+
     protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk(randomWalkParameters, startPosition);
         tilemapVisualizer.Clear();
-        tilemapVisualizer.PaintFloorTiles(floorPositions);
+        tilemapVisualizer.PaintFloorTiles(floorPositions,false);
         WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
         //GenerateEnemies();
     }
@@ -63,7 +64,7 @@ public class SimpleRandomWalkGenerator : AbstractLevelGenerator
 
             // Spawn an enemy at a random walkable position
             Vector3 spawnPosition = walkablePositions[Random.Range(0, walkablePositions.Count)];
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            Instantiate(enemyList[Random.Range(0, enemyList.Count)], spawnPosition, Quaternion.identity);
             currentEnemyCount++;
         }
     }

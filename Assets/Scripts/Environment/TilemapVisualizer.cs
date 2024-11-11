@@ -10,6 +10,8 @@ public class TilemapVisualizer : MonoBehaviour
     [SerializeField]
     private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
+    private TileBase floorTile0;
+    [SerializeField]
     private TileBase floorTile1;
     [SerializeField]
     private TileBase floorTile2;
@@ -38,12 +40,17 @@ public class TilemapVisualizer : MonoBehaviour
         Clear();
     }
 
-    public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
+    public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions, bool paintOnlyCorridors)
     {
-        
-        tiles = new List<TileBase> { floorTile1, floorTile2, floorTile3, floorTile4, floorTile5 };
-        TileBase randomTile = tiles[Random.Range(0, tiles.Count)];
-        PaintTiles(floorPositions, floorTilemap, randomTile);
+        TileBase selectedTile = null;
+        if (paintOnlyCorridors) selectedTile = floorTile0;
+        else
+        {
+            tiles = new List<TileBase> { floorTile1, floorTile2, floorTile3, floorTile4, floorTile5 };
+            selectedTile = tiles[Random.Range(0, tiles.Count)];
+        }
+
+        PaintTiles(floorPositions, floorTilemap, selectedTile);
     }
 
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)

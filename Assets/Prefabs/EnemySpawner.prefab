@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7ed984ca78bf943878318f51869652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5705198476227282040, guid: b0116b391a77525499571fe286d239df, type: 3}
+  mushroomEnemy: {fileID: 4731303094572505209, guid: b0116b391a77525499571fe286d239df, type: 3}
+  bugEnemy: {fileID: 4483537650289593344, guid: 999eb443971dd3141a95804831f70384, type: 3}
+  enemyList: []
   minimumSpawnTime: 2
   maximumSpawnTime: 5

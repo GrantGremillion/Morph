@@ -685,7 +685,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   rigidbody: {fileID: 0}
-  arrow: {fileID: 0}
+  healthBar: {fileID: 0}
+  arrow: {fileID: -81170506000759548, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
+  throwingStar: {fileID: -91437400931393747, guid: 64d8b4b731dee474da0d8f7afd185db5, type: 3}
   targetDirection: {x: 0, y: 0}
   currentDirection: {x: 0, y: 0}
   currentState: 0
@@ -695,8 +697,9 @@ MonoBehaviour:
   maxHealth: 100
   immunityTime: 0.5
   pauseAnimation: 0
-  dropType: 
+  itemDropType: 
   numberOfDrops: 3
+  animator: {fileID: 4535768268327989673}
   canAttack: 0
   isAttacking: 0
   awareOfPlayer: 0
@@ -711,7 +714,6 @@ MonoBehaviour:
   attackCooldown: 3
   projectileSpeed: 1
   attackPoint: {fileID: 1434410043719371439}
-  animator: {fileID: 4535768268327989673}
 --- !u!1 &8541051044363547441
 GameObject:
   m_ObjectHideFlags: 0

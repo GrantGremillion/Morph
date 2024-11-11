@@ -72,12 +72,18 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Arrow"))
         {
             animator.SetBool("Damaged",true);
-            StartCoroutine(TakeDamage(collision,"Arrow"));
+            if (collision != null)
+            {
+                StartCoroutine(TakeDamage(collision,"Arrow"));
+            }
         }
         if (collision.gameObject.CompareTag("ThrowingStar"))
         {
             animator.SetBool("Damaged",true);
-            StartCoroutine(TakeDamage(collision,"ThrowingStar"));
+            if (collision != null)
+            {
+                StartCoroutine(TakeDamage(collision, "ThrowingStar"));
+            }
         }
     }
 

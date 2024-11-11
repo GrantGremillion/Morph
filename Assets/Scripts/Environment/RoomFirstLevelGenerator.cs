@@ -1,14 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
 {
     [SerializeField]
     private int minRoomWidth = 4, minRoomHeight = 4;
-
     [SerializeField]
     private int dungeonWidth = 20, dungeonHeight = 20;
     [SerializeField]
@@ -17,8 +18,12 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
     [SerializeField]
     private bool randomWalkRooms;
 
+    private float gridSizeMultiplier = 0.15f;
+
     [SerializeField]
     private Transform player;
+
+    private Dictionary<Vector2Int, BoundsInt> roomBoundsDictionary = new Dictionary<Vector2Int, BoundsInt>();
 
     private Dictionary<Vector2Int, RoomType> roomTypes = new Dictionary<Vector2Int, RoomType>();
 
@@ -32,10 +37,16 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
         Boss
     }
 
+    public GameObject box;
+    public Shop shop;
+    public EnemySpawner enemySpawner;
+
+    [SerializeField]
+    private Tilemap wallTilemap;
+
     public void Start() 
     {
         RunProceduralGeneration();
-
     }
 
     protected override void RunProceduralGeneration()
@@ -54,49 +65,130 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
         List<Vector2Int> roomCenters = new List<Vector2Int>();
         foreach (var room in roomsList)
         {
-            roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
+            Vector2Int roomCenter = (Vector2Int)Vector3Int.RoundToInt(room.center);
+            roomCenters.Add(roomCenter);
+
+            // Store each room's bounds in the dictionary.
+            roomBoundsDictionary[roomCenter] = room;
         }
+
 
         // for (int i = 0; i < roomCenters.Count; i++)
         // {
         //     print(roomCenters[i]);
         // }
 
-        player.position = new Vector3(roomCenters[0][0]*.15f,roomCenters[0][1]*.15f, player.position.z);
+        player.position = new Vector3(roomCenters[0][0]*gridSizeMultiplier,roomCenters[0][1]*gridSizeMultiplier, player.position.z);
         //print(player.position);
 
         AssignRoomTypes(roomCenters);
 
+        foreach (var room in roomTypes)
+        {
+            //print(room);
+        }
+        foreach(var bounds in roomBoundsDictionary)
+        {
+            //print(bounds);
+        }
+
         HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
-        //tilemapVisualizer.PaintFloorTiles(corridors);
+        
         floor.UnionWith(corridors);
 
-        tilemapVisualizer.PaintFloorTiles(floor);
+        tilemapVisualizer.PaintFloorTiles(floor,false);
         WallGenerator.CreateWalls(floor,tilemapVisualizer);
 
-        //SpawnEntitiesBasedOnRoomTypes();
+        SpawnEntitiesBasedOnRoomTypes();
 
+    }
+
+    private void SpawnEntitiesBasedOnRoomTypes()
+    {
+        foreach (var roomCenter in roomTypes.Keys)
+        {
+            if (roomTypes[roomCenter] == RoomType.Treasure)
+            {
+                BoundsInt bounds = roomBoundsDictionary[roomCenter];
+                //print(bounds);
+                Instantiate(box,new Vector3 (roomCenter.x*gridSizeMultiplier,roomCenter.y*gridSizeMultiplier,0),Quaternion.identity);
+            }
+            if (roomTypes[roomCenter] == RoomType.Shop)
+            {
+                BoundsInt bounds = roomBoundsDictionary[roomCenter];
+                Instantiate(shop,new Vector3 (roomCenter.x*gridSizeMultiplier+.3f,roomCenter.y*gridSizeMultiplier,0),Quaternion.identity);
+            }
+            if (roomTypes[roomCenter] == RoomType.Enemy)
+            {
+                BoundsInt bounds = roomBoundsDictionary[roomCenter];
+                GenerateEnemies(roomCenter);
+                
+            }
+        }
+    }
+
+    private void GenerateEnemies(Vector2Int roomCenter)
+    {
+        Instantiate(enemySpawner, new Vector3 (roomCenter.x*gridSizeMultiplier+.3f,roomCenter.y*gridSizeMultiplier,0),Quaternion.identity);
     }
 
     private void AssignRoomTypes(List<Vector2Int> roomCenters)
     {
+        // Counters for special rooms
+        int treasureRoomCount = 0;
+        int maxTreasureRooms = Random.Range(2, 4); // Randomly 2 or 3 treasure rooms
+        bool shopRoomAssigned = false;
+
+        // Track number of Normal and Enemy rooms assigned
+        int normalRoomCount = 0;
+        int enemyRoomCount = 0;
+
         for (int i = 0; i < roomCenters.Count; i++)
         {
             RoomType roomType;
 
             if (i == 0)
+            {
                 roomType = RoomType.Start; // Starting room
+            }
             else if (i == roomCenters.Count - 1)
+            {
                 roomType = RoomType.Boss; // Boss room at the end
+            }
+            else if (!shopRoomAssigned)
+            {
+                roomType = RoomType.Shop; // Assign one shop room
+                shopRoomAssigned = true;
+            }
+            else if (treasureRoomCount < maxTreasureRooms)
+            {
+                roomType = RoomType.Treasure; // Assign up to 2-3 treasure rooms
+                treasureRoomCount++;
+            }
             else
-                roomType = (RoomType)Random.Range(1, 4); // Randomize other room types excluding Start
+            {
+                // Ensure 1:2 ratio of Normal to Enemy rooms
+                if (normalRoomCount < enemyRoomCount)
+                {
+                    roomType = RoomType.Normal;
+                    normalRoomCount++;
+                }
+                else
+                {
+                    roomType = RoomType.Enemy;
+                    enemyRoomCount++;
+                }
+            }
 
+            // Add the room type to the dictionary
             roomTypes[roomCenters[i]] = roomType;
         }
 
         // Move the player to the Start Room
         MovePlayerToStartRoom();
     }
+
+
 
     private void MovePlayerToStartRoom()
     {

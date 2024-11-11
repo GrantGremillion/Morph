@@ -16,7 +16,7 @@ public class ItemSpawner : MonoBehaviour
     public static ItemSpawner Instance { get; private set; }
     public GameObject banana;
     public GameObject blueberry;
-    public GameObject cherry;
+    public GameObject apple;
 
     public float minSpawnDistance = .1f;
     public float maxSpawnDistance = .15f;
@@ -46,7 +46,7 @@ public class ItemSpawner : MonoBehaviour
                     newItem = Instantiate(blueberry, spawnPosition, Quaternion.identity);
                     break;
                 case "cherry":
-                    newItem = Instantiate(cherry, spawnPosition, Quaternion.identity);
+                    newItem = Instantiate(apple, spawnPosition, Quaternion.identity);
                     break;
             }
     }

@@ -5,7 +5,10 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject enemyPrefab;
+    private MushroomEnemy mushroomEnemy;
+    [SerializeField]
+    private BugEnemy bugEnemy;
+    public List<Enemy> enemyList; 
 
     [SerializeField]
     private float minimumSpawnTime;
@@ -23,10 +26,11 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        enemyList = new List<Enemy>{bugEnemy, mushroomEnemy};
         SetTimeUntilSpawn();
         player = FindAnyObjectByType<PlayerController>();
 
-        NumEnemiesSpawned = Random.Range(1,4);
+        NumEnemiesSpawned = Random.Range(3,8);
     }
 
     // Update is called once per frame
@@ -35,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
         timeUntilSpawn -= Time.deltaTime;
         if (timeUntilSpawn <= 0)
         {
-            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            Instantiate(enemyList[Random.Range(0, enemyList.Count)], transform.position, Quaternion.identity);
             SetTimeUntilSpawn();
             NumEnemiesSpawned -= 1;
             if (NumEnemiesSpawned == 0) Destroy(gameObject);

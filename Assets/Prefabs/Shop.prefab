@@ -50,6 +50,7 @@ MonoBehaviour:
   shopUI: {fileID: 0}
   player: {fileID: 0}
   bow: {fileID: 0}
+  weaponManager: {fileID: 0}
   bananaCount: 0
   blueberryCount: 0
   cherryCount: 0
