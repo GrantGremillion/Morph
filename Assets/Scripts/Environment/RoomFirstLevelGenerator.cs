@@ -153,18 +153,23 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
         HashSet<Vector2Int> corridor = new HashSet<Vector2Int>();
         var position = currentRoomCenter;
         corridor.Add(position);
+        
         while (position.y != destination.y)
         {
-            if(destination.y > position.y)
+            if (destination.y > position.y)
             {
                 position += Vector2Int.up;
             }
-            else if(destination.y < position.y)
+            else if (destination.y < position.y)
             {
                 position += Vector2Int.down;
             }
             corridor.Add(position);
+
+            // Add additional tile to the side for two-tile width
+            corridor.Add(position + Vector2Int.right); // or Vector2Int.left depending on preferred offset direction
         }
+        
         while (position.x != destination.x)
         {
             if (destination.x > position.x)
@@ -176,10 +181,14 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
                 position += Vector2Int.left;
             }
             corridor.Add(position);
-        }
-        return corridor;
 
+            // Add additional tile to the side for two-tile width
+            corridor.Add(position + Vector2Int.up); // or Vector2Int.down depending on preferred offset direction
+        }
+
+        return corridor;
     }
+
 
     private Vector2Int FindClosestPointTo(Vector2Int currentRoomCenter, List<Vector2Int> roomCenters)
     {
@@ -215,4 +224,5 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
         }
         return floor;
     }
+
 }
