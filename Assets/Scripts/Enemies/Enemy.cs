@@ -71,7 +71,6 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            animator.SetBool("Damaged",true);
             if (collision != null)
             {
                 StartCoroutine(TakeDamage(collision,"Arrow"));
@@ -79,7 +78,6 @@ public class Enemy : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("ThrowingStar"))
         {
-            animator.SetBool("Damaged",true);
             if (collision != null)
             {
                 StartCoroutine(TakeDamage(collision, "ThrowingStar"));
@@ -104,7 +102,8 @@ public class Enemy : MonoBehaviour
 
         if (healthBar.GetDesiredHealth() <= 0)
         {
-            animator.SetBool("Damaged",false);
+            speed = 0;
+            gameObject.GetComponent<Collider2D> ().enabled = false;
             animator.SetBool("Dead",true);
             healthBar.gameObject.SetActive(false);
             DropItems();
@@ -112,7 +111,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
         yield return new WaitForSeconds(immunityTime);
-        animator.SetBool("Damaged",false);
+
 
     }
 

@@ -52259,7 +52259,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.5
+  orthographic size: 1
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -60464,7 +60464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   banana: {fileID: 3105558158463327667, guid: 663afc09ff7f5b241820531850be0fec, type: 3}
   blueberry: {fileID: 6965595104004759051, guid: ae3a1e2a869417c4bba8c214d55d8c00, type: 3}
-  cherry: {fileID: 6642731324118583853, guid: 3c8c44ee6c7bef44d806e4f034ce6287, type: 3}
+  apple: {fileID: 0}
   minSpawnDistance: 0.1
   maxSpawnDistance: 0.15
   spawnableTiles: {fileID: 21625323}
@@ -61769,7 +61769,7 @@ MonoBehaviour:
   m_Follow: {fileID: 291280278}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 1.5
+    OrthographicSize: 1
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
