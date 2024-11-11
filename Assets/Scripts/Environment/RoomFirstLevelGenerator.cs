@@ -62,12 +62,13 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
         //     print(roomCenters[i]);
         // }
 
-        player.position = new Vector3(roomCenters[0][0]*.16f,roomCenters[0][1]*.16f, player.position.z);
+        player.position = new Vector3(roomCenters[0][0]*.15f,roomCenters[0][1]*.15f, player.position.z);
         //print(player.position);
 
         AssignRoomTypes(roomCenters);
 
         HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
+        //tilemapVisualizer.PaintFloorTiles(corridors);
         floor.UnionWith(corridors);
 
         tilemapVisualizer.PaintFloorTiles(floor);
