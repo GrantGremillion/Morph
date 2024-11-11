@@ -63115,7 +63115,7 @@ MonoBehaviour:
   StartButton: {fileID: 1338627717}
   OptionsButton: {fileID: 2045938822}
   QuitButton: {fileID: 341840151}
-  mainMusic: {fileID: 8300000, guid: 40c1a1a53c8da2e468b3c4f7cb0ae569, type: 3}
+  mainMusic: {fileID: 8300000, guid: d26dddca490b3b14dbb21c4bbe5521e5, type: 3}
 --- !u!1 &2045938820
 GameObject:
   m_ObjectHideFlags: 0
