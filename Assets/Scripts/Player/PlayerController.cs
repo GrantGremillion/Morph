@@ -78,8 +78,7 @@ public class PlayerController : MonoBehaviour
         // Start player facing the screen
         currentDirection = Direction.Down;
 
-        tz = FindAnyObjectByType<TriggerZone>();
-        shop = FindAnyObjectByType<Shop>();
+        tz = shop.GetComponentInChildren<TriggerZone>();
 
         speed = 0.6f;
         slowed = false;
@@ -112,9 +111,11 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
+
         // Open/Close shop
-        if (Input.GetKeyDown(KeyCode.E) && tz.canUseShop)
+        if (Input.GetKeyDown(KeyCode.E) && tz.inRangeOfShop)
         {
+            //print("shop");
             if (!shop.usingShop) shop.OpenShop();
             else shop.CloseShop();
         }

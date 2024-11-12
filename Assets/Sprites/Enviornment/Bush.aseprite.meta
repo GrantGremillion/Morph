@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32653c310b5bc304a9431aa7443470a8
+guid: ff0d52a0e678f2348926625377038d25
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: BigTree
+  - name: Bush
     originalName: 
-    pivot: {x: 0.5, y: -0.086956516}
+    pivot: {x: 0.48214284, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 80
-      height: 92
-    spriteID: bd7fc20fdcb72e842bce04d05debb5c5
+      width: 28
+      height: 35
+    spriteID: 693247b3f011e024c81b85f5d476d23d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,24 +144,24 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1887419096
-    name: BigTree
+    guid: 574229468
+    name: Bush
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: BigTree
+    - name: Bush
       frameIndex: 0
       cellRect:
-        x: 0
-        y: 8
-        width: 80
-        height: 92
-      spriteId: bd7fc20fdcb72e842bce04d05debb5c5
+        x: 2
+        y: 0
+        width: 28
+        height: 35
+      spriteId: 693247b3f011e024c81b85f5d476d23d
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 80, y: 100}
+  canvasSize: {x: 31, y: 37}

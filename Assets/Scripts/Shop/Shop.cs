@@ -37,7 +37,6 @@ public class Shop : MonoBehaviour
     {
         player = FindAnyObjectByType<PlayerController>();
         bow = player.GetComponentInChildren<Bow>();
-        shopUI = FindAnyObjectByType<ShopUI>();
 
         if (shopUI != null)
         {

@@ -131,7 +131,7 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
             if (roomTypes[roomCenter] == RoomType.Shop)
             {
                 BoundsInt bounds = roomBoundsDictionary[roomCenter];
-                Instantiate(shop,new Vector3 (roomCenter.x*gridSizeMultiplier+.3f,roomCenter.y*gridSizeMultiplier,0),Quaternion.identity);
+                shop.transform.position = new Vector3 (roomCenter.x*gridSizeMultiplier+.3f,roomCenter.y*gridSizeMultiplier,0);
             }
             if (roomTypes[roomCenter] == RoomType.Enemy)
             {

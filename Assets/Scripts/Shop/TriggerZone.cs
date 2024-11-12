@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TriggerZone : MonoBehaviour
 {
-    public bool canUseShop;
+    public bool inRangeOfShop;
 
     public Shop shop;
 
@@ -12,12 +12,7 @@ public class TriggerZone : MonoBehaviour
     void Start()
     {
         shop = GetComponentInParent<Shop>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        inRangeOfShop = false;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -25,7 +20,8 @@ public class TriggerZone : MonoBehaviour
    
         if (collider.CompareTag("Player"))
         {
-            canUseShop = true;
+            //print("in range");
+            inRangeOfShop = true;
         }
     }
 
@@ -34,7 +30,8 @@ public class TriggerZone : MonoBehaviour
    
         if (collider.CompareTag("Player"))
         {
-            canUseShop = false;
+            //print("out of range");
+            inRangeOfShop = false;
             // If the player leaves the trigger area and is still using the shop, auto-close it
             if (shop.usingShop)
             {
