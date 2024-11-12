@@ -68,6 +68,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private UIManager uiManager;
 
+    [SerializeField] private AudioClip walk;
+    private bool isMoving;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -186,6 +189,12 @@ public class PlayerController : MonoBehaviour
 
         if (movementInput != Vector2.zero)
         {
+            if (!isMoving)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(walk, transform, 1f, true);
+                isMoving = true;
+            }
+
             // Prioritize horizontal movement over vertical movement
             if (movementInput.x > 0)
             {
@@ -209,7 +218,14 @@ public class PlayerController : MonoBehaviour
                 animator.Play("WalkDown");
                 currentDirection = Direction.Down;
             }
-
+        }
+        else
+        {
+            // Stop walk sound if movement stops
+            if (isMoving)
+            {
+                isMoving = false;
+            }
         }
     }
     private IEnumerator Dash()
