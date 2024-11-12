@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
         if (SceneManager.GetActiveScene().name != "Main" && CurrentGameState != GameState.Paused)
         {
             CurrentGameState = GameState.Playing;

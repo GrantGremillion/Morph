@@ -29,7 +29,6 @@ public class MainMenuUI : MonoBehaviour
         GameManager.Instance.StartGame();
         gameObject.SetActive(false);
 
-        SoundFXManager.instance.PlayMusic(mainMusic,1f,true);
     }
     public void OnOptionsButtonPressed()
     {

@@ -63,12 +63,9 @@ public class PlayerController : MonoBehaviour
 
     private bool slowed;
 
-    private bool paused;
-
     [SerializeField]
     private UIManager uiManager;
 
-    [SerializeField] private AudioClip walk;
     private bool isMoving;
 
     void Awake()
@@ -101,32 +98,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        CheckPlayerPause();
         if (GameManager.Instance.CurrentGameState != GameManager.GameState.Playing) return;
         CheckPlayerInput();
         PlayAnimations();
-    }
-
-    void CheckPlayerPause()
-    {
-        // Open/Close settings menu
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!paused)  
-            {
-                //print ("Pause"); 
-                GameManager.Instance.PauseGame();
-                paused = true;
-                uiManager.PauseMenuUI(true);
-            }
-            else 
-            {
-                //print ("Unpause");
-                GameManager.Instance.StartGame();
-                paused = false;
-                uiManager.PauseMenuUI(false);
-            }
-        }
     }
 
     void CheckPlayerInput()
@@ -191,7 +165,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!isMoving)
             {
-                SoundFXManager.instance.PlaySoundFXClip(walk, transform, 1f, true);
+                SoundFXManager.instance.PlayFootstepsSoundFXClip();
                 isMoving = true;
             }
 
@@ -224,6 +198,7 @@ public class PlayerController : MonoBehaviour
             // Stop walk sound if movement stops
             if (isMoving)
             {
+                SoundFXManager.instance.StopFootstepsSoundFXClip();
                 isMoving = false;
             }
         }

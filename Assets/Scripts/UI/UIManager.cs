@@ -14,16 +14,13 @@ public class UIManager : MonoBehaviour
     public ShopUI shopUI;
     public InGameUI inGameUI;
     public PausedMenuUI pausedMenuUI;
+    public SettingsMenuUI settingsMenuUI;
 
     public PlayerController player;
 
-    internal void PauseMenuUI(bool v)
-    {
-        if (v) pausedMenuUI.gameObject.SetActive(true);
-        else pausedMenuUI.gameObject.SetActive(false);
-    }
+    private bool paused;
 
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -39,20 +36,65 @@ public class UIManager : MonoBehaviour
             inGameUI.gameObject.SetActive(true);
         } 
         
-
+        pausedMenuUI.gameObject.SetActive(false);
+        settingsMenuUI.gameObject.SetActive(false);
         shopUI.gameObject.SetActive(false);
         inGameUI.gameObject.SetActive(false);
+
+        paused = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-       
         if (GameManager.Instance.CurrentGameState == GameManager.GameState.Playing)
         {
             inGameUI.gameObject.SetActive(true);
         }
+
+        // Open/Close settings menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+
+            if (GameManager.Instance.CurrentGameState == GameManager.GameState.Playing || 
+            GameManager.Instance.CurrentGameState == GameManager.GameState.Paused) PauseMenuUI();
+        }
         
+    }
+
+    public void PauseMenuUI()
+    {
+        if (!paused)  
+        {
+            //print ("Pause"); 
+            GameManager.Instance.PauseGame();
+            paused = true;
+            pausedMenuUI.gameObject.SetActive(true);
+        }
+        else 
+        {
+            //print ("Unpause");
+            GameManager.Instance.StartGame();
+            paused = false;
+            pausedMenuUI.gameObject.SetActive(false);
+            settingsMenuUI.gameObject.SetActive(false);
+        }   
+    }
+
+    public void QuitGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    public void ViewSettings()
+    {
+        pausedMenuUI.gameObject.SetActive(false);
+        settingsMenuUI.gameObject.SetActive(true);
+    }
+
+    public void GoBack()
+    {
+        settingsMenuUI.gameObject.SetActive(false);
+        pausedMenuUI.gameObject.SetActive(true);
     }
 
 }
