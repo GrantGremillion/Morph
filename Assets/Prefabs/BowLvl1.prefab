@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7846450319248635082}
   - component: {fileID: 4664767756821264171}
   - component: {fileID: 7057695128076754436}
+  - component: {fileID: 4499589041516797108}
   m_Layer: 0
   m_Name: BowLvl1
   m_TagString: Untagged
@@ -101,13 +102,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7057695128076754436}
   overrideController: {fileID: 22100000, guid: da33ab9817f233a4c8425b7a4479b09c, type: 2}
-  arrow: {fileID: 7022741825510326485, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
-  spawn: {fileID: 4316780785841235710}
   player: {fileID: 0}
   playerTransform: {fileID: 0}
   upgradeSystem: {fileID: 0}
-  distanceFromPlayer: 0.08
   type: 
+  arrow: {fileID: 7022741825510326485, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
+  distanceFromPlayer: 0.08
 --- !u!95 &7057695128076754436
 Animator:
   serializedVersion: 5
@@ -129,6 +129,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4499589041516797108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597519397849049645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e993047badf7c7146a9cbe43a81328c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4316780785841235710
 GameObject:
   m_ObjectHideFlags: 0

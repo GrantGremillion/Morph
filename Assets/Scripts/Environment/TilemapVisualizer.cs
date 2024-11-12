@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap floorTilemap, wallTilemap;
+    private Tilemap floorTilemap, wallTilemap, grassTilemap;
     [SerializeField]
     private TileBase floorTile0;
     [SerializeField]
@@ -37,7 +37,7 @@ public class TilemapVisualizer : MonoBehaviour
 
     public void Awake()
     {
-        Clear();
+        //Clear();
     }
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions, bool paintOnlyCorridors)
@@ -113,6 +113,7 @@ public class TilemapVisualizer : MonoBehaviour
     {
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
+        grassTilemap.ClearAllTiles();
     }
 
     internal void PaintSingleCornerWall(Vector2Int position, string binaryType)

@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -44,9 +46,22 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
     [SerializeField]
     private Tilemap wallTilemap;
 
+    private bool levelGenerated;
+
     public void Start() 
     {
-        RunProceduralGeneration();
+        player = FindAnyObjectByType<PlayerController>().transform;
+        levelGenerated = false;
+    }
+
+    public void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Lvl1" && levelGenerated == false )
+        {
+            tilemapVisualizer.Clear();
+            RunProceduralGeneration();
+            levelGenerated = true;
+        }
     }
 
     protected override void RunProceduralGeneration()

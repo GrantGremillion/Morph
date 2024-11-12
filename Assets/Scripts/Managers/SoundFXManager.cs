@@ -18,7 +18,7 @@ public class SoundFXManager : MonoBehaviour
             instance = this;
         }
 
-        walkAudioSource = Instantiate(soundFXObject, new Vector3 (0, 0, 0), Quaternion.identity);
+        walkAudioSource = GetComponent<AudioSource>();
         walkAudioSource.clip = walk;
         walkAudioSource.loop = true;
     }

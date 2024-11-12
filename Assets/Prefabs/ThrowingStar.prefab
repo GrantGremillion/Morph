@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -91437400931393747}
   - component: {fileID: -3434098818149130415}
   - component: {fileID: -4399500009479583254}
+  - component: {fileID: 3859805139330962724}
   m_Layer: 6
   m_Name: ThrowingStar
   m_TagString: ThrowingStar
@@ -172,3 +173,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3859805139330962724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487663259957842092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e993047badf7c7146a9cbe43a81328c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

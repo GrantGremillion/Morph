@@ -149,5 +149,7 @@ public class WeaponManager : MonoBehaviour
             currentWeaponInstance = throwingStarInstance;
         }
 
+        //currentWeaponInstance.transform.SetParent(player.transform);
+
     }
 }

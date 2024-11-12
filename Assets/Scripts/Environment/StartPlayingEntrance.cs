@@ -12,7 +12,6 @@ public class StartPlayingEntrance : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             SceneManager.LoadScene("Lvl1");
-
         }
     }
 }
