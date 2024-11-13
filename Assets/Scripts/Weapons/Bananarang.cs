@@ -11,6 +11,9 @@ public class Bananarang : Weapon
     public float damage = 5;
 
     public float returnTime = 1f;
+
+    public bool rotate = false;
+    public float rotationSpeed = 3f;
     
 
     // Start is called before the first frame update

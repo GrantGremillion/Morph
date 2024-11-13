@@ -31,6 +31,17 @@ public class WeaponManager : MonoBehaviour
         currentWeapon.type = "Bow";
     }
 
+    public void Update()
+    {
+        if (currentWeaponInstance.type == "Bananarang")
+        {
+            if (bananarangInstance.rotate == true) 
+            {
+                bananarangInstance.transform.Rotate(Vector3.forward * bananarang.rotationSpeed); 
+            }
+        }
+    }
+
     public void CheckWeaponInput(bool canDash)
     {
         if (currentWeapon.type == "Bow")
@@ -77,8 +88,12 @@ public class WeaponManager : MonoBehaviour
 
         bananarangInstance.GetComponent<Collider2D>().enabled = true;
 
+        bananarangInstance.rotate = true;
+
         StartCoroutine(ReturnToPlayer());
     }
+
+
 
     private IEnumerator ReturnToPlayer()
     {
@@ -99,6 +114,8 @@ public class WeaponManager : MonoBehaviour
 
         // Stop the Bananarang when it's close enough to the player
         rb.velocity = Vector2.zero;
+        bananarangInstance.hasBeenThrown = false;
+        bananarangInstance.rotate = false;
     }
 
     private void ThrowingStarInput()

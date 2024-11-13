@@ -184,3 +184,6 @@ MonoBehaviour:
   hasBeenThrown: 0
   distanceFromPlayer: 0.08
   damage: 5
+  returnTime: 1
+  rotate: 0
+  rotationSpeed: 3
