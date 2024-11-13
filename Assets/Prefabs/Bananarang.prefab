@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2610120900821371555}
   m_Layer: 6
   m_Name: Bananarang
-  m_TagString: ThrowingStar
+  m_TagString: Bananarang
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,9 +120,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.07967269}
+  m_Offset: {x: 0.015559211, y: -0.009152687}
   serializedVersion: 2
-  m_Radius: 0.04449638
+  m_Radius: 0.06
 --- !u!50 &-4399500009479583254
 Rigidbody2D:
   serializedVersion: 4
@@ -181,9 +181,12 @@ MonoBehaviour:
   upgradeSystem: {fileID: 0}
   type: 
   throwingSpeed: 1
-  hasBeenThrown: 0
+  returnSpeed: 2
+  beingThrown: 0
+  returningToPlayer: 0
   distanceFromPlayer: 0.08
   damage: 5
-  returnTime: 1
+  returnTime: 2
   rotate: 0
   rotationSpeed: 3
+  rb: {fileID: 0}

@@ -4,45 +4,56 @@ using UnityEngine;
 
 public class Bananarang : Weapon
 {
-   public float throwingSpeed;
-    public bool hasBeenThrown;
+    public float throwingSpeed;
+    public float returnSpeed;
+    public bool beingThrown;
+    public bool returningToPlayer = false;
     public float distanceFromPlayer = 0.9f; // Distance of the projectile from the player
-    private bool hasCollided = false;
     public float damage = 5;
 
-    public float returnTime = 1f;
+    public float returnTime;
 
     public bool rotate = false;
     public float rotationSpeed = 3f;
-    
+
+    private WeaponManager weaponManager;
+    public Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
         type = "Bananarang";
-        hasBeenThrown = false;
+        beingThrown = false;
         player = FindAnyObjectByType<PlayerController>();
         playerTransform = player.transform;
         upgradeSystem = player.GetComponentInChildren<UpgradeSystem>();
-
-        // Disable the collision by default to prevent collision with other stars
+        weaponManager = FindObjectOfType<WeaponManager>();
+        rb = GetComponent<Rigidbody2D>();
+        returnTime = 1;
         Collider2D collider = GetComponent<Collider2D>();
         if (collider != null)
         {
             collider.enabled = false;
         }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        BananarangRotation();
+        Collider2D collider = GetComponent<Collider2D>();
 
+        BananarangRotation();
+        if (beingThrown)
+        {
+            collider.enabled = true; 
+        }
+        else collider.enabled = false;
     }
 
     void BananarangRotation()
     {
-        if (hasBeenThrown) return;
+        if (beingThrown) return;
         Vector3 mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
@@ -52,40 +63,15 @@ public class Bananarang : Weapon
 
         Vector3 StarPosition = playerTransform.position + (Vector3)direction.normalized * distanceFromPlayer;
 
-        // Set the bow's position and rotation
         transform.position = StarPosition;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!hasCollided)
-        {
-            hasCollided = true; // Mark as collided to prevent repeated triggers
-
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.velocity = Vector2.zero;
-                rb.isKinematic = true; 
-            }
-
-            // Disable the collider to prevent further collisions
-            Collider2D collider = GetComponent<Collider2D>();
-            if (collider != null)
-            {
-                collider.enabled = false;
-            }
-            transform.parent = collision.transform;
-
-            // Start the timer to destroy the arrow after 5 seconds
-            StartCoroutine(DestroyAfterDelay(5.0f));
-        }
+        rb.velocity = Vector2.zero;
+        returningToPlayer = true;
+        returnTime = 1.0f;
     }
 
-    private IEnumerator DestroyAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
-    }
 }

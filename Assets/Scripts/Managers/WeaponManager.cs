@@ -39,6 +39,12 @@ public class WeaponManager : MonoBehaviour
             {
                 bananarangInstance.transform.Rotate(Vector3.forward * bananarang.rotationSpeed); 
             }
+            if (bananarangInstance.beingThrown && !bananarangInstance.returningToPlayer) ReduceReturnTime(); 
+
+            if (bananarangInstance.returningToPlayer)
+            {
+                ReturnToPlayer();
+            }
         }
     }
 
@@ -62,7 +68,7 @@ public class WeaponManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && canShoot)
         {
-            ThrowBanana();
+            if (!bananarangInstance.beingThrown) ThrowBanana();
         }
     }
 
@@ -82,40 +88,41 @@ public class WeaponManager : MonoBehaviour
         // Set the velocity
         Vector2 velocity = new Vector2(direction.x, direction.y);
 
-        bananarangInstance.hasBeenThrown = true;
+        bananarangInstance.beingThrown = true;
 
         bananarangInstance.GetComponent<Rigidbody2D>().velocity = velocity * bananarang.throwingSpeed;
 
-        bananarangInstance.GetComponent<Collider2D>().enabled = true;
-
         bananarangInstance.rotate = true;
 
-        StartCoroutine(ReturnToPlayer());
     }
 
-
-
-    private IEnumerator ReturnToPlayer()
+    public void ReduceReturnTime()
     {
-        yield return new WaitForSeconds(bananarang.returnTime);
-
-        Rigidbody2D rb = bananarangInstance.GetComponent<Rigidbody2D>();
-
-        while (Vector2.Distance(bananarangInstance.transform.position, player.transform.position) > 0.1f)
+        if (bananarangInstance.returnTime <= 0)
         {
-            // Calculate direction to the player's current position
+            bananarangInstance.returningToPlayer = true;
+            bananarangInstance.returnTime = 1f;
+        } 
+        else bananarangInstance.returnTime -= Time.deltaTime;
+    }
+
+    public void ReturnToPlayer()
+    {
+        // Check distance and move the Bananarang towards the player
+        if (Vector2.Distance(bananarangInstance.transform.position, player.transform.position) > 0.1f)
+        {
+            // Calculate direction towards the player
             Vector2 directionToPlayer = (player.transform.position - bananarangInstance.transform.position).normalized;
-
-            // Set velocity to move toward player
-            rb.velocity = directionToPlayer * bananarang.throwingSpeed;
-
-            yield return null; // Wait for the next frame
+            bananarangInstance.rb.velocity = directionToPlayer * bananarang.returnSpeed;
         }
-
-        // Stop the Bananarang when it's close enough to the player
-        rb.velocity = Vector2.zero;
-        bananarangInstance.hasBeenThrown = false;
-        bananarangInstance.rotate = false;
+        else
+        {
+            // Stop movement when close to the player
+            bananarangInstance.rb.velocity = Vector2.zero;
+            bananarangInstance.returningToPlayer = false; // Stop the return process
+            bananarangInstance.beingThrown = false;
+            bananarangInstance.rotate = false;
+        }
     }
 
     private void ThrowingStarInput()

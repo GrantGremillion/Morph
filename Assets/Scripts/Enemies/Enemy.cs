@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public HealthBar healthBar;
     public Arrow arrow;
     public ThrowingStar throwingStar;
+    public Bananarang bananarang;
 
     [HideInInspector] public Vector2 targetDirection;
     [HideInInspector] public Vector2 currentDirection = Vector2.zero;
@@ -90,13 +91,19 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(TakeDamage(collision, "ThrowingStar"));
             }
         }
+        if (collision.gameObject.CompareTag("Bananarang"))
+        {
+            if (collision != null)
+            {
+                StartCoroutine(TakeDamage(collision, "Bananarang"));
+            }
+        }
     }
 
     public IEnumerator TakeDamage(Collision2D collision, string name)
     {
  
         StartCoroutine(Flash());
-        
         
         if (name == "Arrow")
         {
@@ -107,6 +114,11 @@ public class Enemy : MonoBehaviour
         {
             throwingStar = collision.gameObject.GetComponent<ThrowingStar>();
             healthBar.TakeDamage(throwingStar.damage);
+        }
+        else if (name == "Bananarang")
+        {
+            bananarang = collision.gameObject.GetComponent<Bananarang>();
+            healthBar.TakeDamage(bananarang.damage);
         }
 
         //print("Current health:" + health + "take damage: " + arrow.damage);
