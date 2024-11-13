@@ -8,10 +8,12 @@ public class WeaponManager : MonoBehaviour
 {
     public Bow bow;
     public Bow bowInstance;
+    public GameObject arrowPrefab;
     public ThrowingStar throwingStar;
     public ThrowingStar throwingStarInstance;
-    public GameObject arrowPrefab;
-    public GameObject throwingStarPrefab;
+    public Bananarang bananarang;
+    public Bananarang bananarangInstance;
+
     public PlayerController player;
     private float holdTime;
     public bool canShoot = true;
@@ -39,6 +41,64 @@ public class WeaponManager : MonoBehaviour
         {
             ThrowingStarInput();
         }
+        else if (currentWeapon.type == "Bananarang")
+        {
+            BananarangInput();
+        }
+    }
+
+    private void BananarangInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canShoot)
+        {
+            ThrowBanana();
+        }
+    }
+
+    private void ThrowBanana()
+    {
+        // Get the mouse position in world space
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; // Ensure the z-coordinate is 0 since we're working in 2D
+
+        // Calculate the direction from the player to the mouse position
+        Vector3 direction = (mousePosition - player.transform.position).normalized;
+
+        // Calculate the rotation angle
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+        // Set the velocity
+        Vector2 velocity = new Vector2(direction.x, direction.y);
+
+        bananarangInstance.hasBeenThrown = true;
+
+        bananarangInstance.GetComponent<Rigidbody2D>().velocity = velocity * bananarang.throwingSpeed;
+
+        bananarangInstance.GetComponent<Collider2D>().enabled = true;
+
+        StartCoroutine(ReturnToPlayer());
+    }
+
+    private IEnumerator ReturnToPlayer()
+    {
+        yield return new WaitForSeconds(bananarang.returnTime);
+
+        Rigidbody2D rb = bananarangInstance.GetComponent<Rigidbody2D>();
+
+        while (Vector2.Distance(bananarangInstance.transform.position, player.transform.position) > 0.1f)
+        {
+            // Calculate direction to the player's current position
+            Vector2 directionToPlayer = (player.transform.position - bananarangInstance.transform.position).normalized;
+
+            // Set velocity to move toward player
+            rb.velocity = directionToPlayer * bananarang.throwingSpeed;
+
+            yield return null; // Wait for the next frame
+        }
+
+        // Stop the Bananarang when it's close enough to the player
+        rb.velocity = Vector2.zero;
     }
 
     private void ThrowingStarInput()
@@ -148,8 +208,12 @@ public class WeaponManager : MonoBehaviour
             throwingStarInstance = Instantiate(throwingStar, player.transform.position, Quaternion.identity);
             currentWeaponInstance = throwingStarInstance;
         }
+        else if (weaponName == "Bananarang")
+        {
+            bananarangInstance = Instantiate(bananarang, player.transform.position, Quaternion.identity);
+            currentWeaponInstance = bananarangInstance;
+        }
 
-        //currentWeaponInstance.transform.SetParent(player.transform);
 
     }
 }

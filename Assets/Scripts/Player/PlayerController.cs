@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-
         // Open/Close shop
         if (Input.GetKeyDown(KeyCode.E) && tz.inRangeOfShop)
         {
@@ -127,6 +126,10 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             weaponManager.SwitchToWeapon("ThrowingStar");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            weaponManager.SwitchToWeapon("Bananarang");
         }
 
 

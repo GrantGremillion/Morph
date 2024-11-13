@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 12420dff9b8be0346aa01f61ab28ed67
+guid: b1e5e83634c70f942a3a02ff9cf01fde
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: StatsBoard
+  - name: Bananarang
     originalName: 
-    pivot: {x: 0.5, y: -0.03448276}
+    pivot: {x: 0.4166667, y: -0.083333336}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 30
-      height: 29
-    spriteID: 6fce4099685452e4fa521c4a306e3ea4
+      width: 12
+      height: 12
+    spriteID: 0dd5ad80cf8c5ed449b5404f6ce2203c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,24 +144,24 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 100762599
-    name: StatsBoard
+    guid: 1590008577
+    name: Bananarang
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: StatsBoard
+    - name: Bananarang
       frameIndex: 0
       cellRect:
-        x: 1
+        x: 3
         y: 1
-        width: 30
-        height: 29
-      spriteId: 6fce4099685452e4fa521c4a306e3ea4
+        width: 12
+        height: 12
+      spriteId: 0dd5ad80cf8c5ed449b5404f6ce2203c
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 16, y: 16}
