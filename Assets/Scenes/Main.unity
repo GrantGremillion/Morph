@@ -52752,7 +52752,7 @@ GameObject:
   - component: {fileID: 480151866}
   - component: {fileID: 480151868}
   - component: {fileID: 480151869}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StartPlayingEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}

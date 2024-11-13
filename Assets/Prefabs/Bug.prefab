@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 1807157069601092258}
   - component: {fileID: 2304475469400405412}
   - component: {fileID: 7523107537033212030}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: PlayerAwarenessRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,6 +688,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   arrow: {fileID: -81170506000759548, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
   throwingStar: {fileID: -91437400931393747, guid: 64d8b4b731dee474da0d8f7afd185db5, type: 3}
+  bananarang: {fileID: 0}
   targetDirection: {x: 0, y: 0}
   currentDirection: {x: 0, y: 0}
   currentState: 0
@@ -727,7 +728,7 @@ GameObject:
   - component: {fileID: 6183964869189609464}
   - component: {fileID: 6411573470911496280}
   - component: {fileID: 5453598104083024254}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AttackRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -136,6 +136,28 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(immunityTime);
     }
 
+    public IEnumerator TakeBananarangDamage(Collider2D collision)
+    {
+ 
+        StartCoroutine(Flash());
+        bananarang = collision.gameObject.GetComponent<Bananarang>();
+        healthBar.TakeDamage(bananarang.damage);
+    
+        //print("Current health:" + health + "take damage: " + arrow.damage);
+
+        if (healthBar.GetDesiredHealth() <= 0)
+        {
+            speed = 0;
+            gameObject.GetComponent<Collider2D> ().enabled = false;
+            animator.SetBool("Dead",true);
+            healthBar.gameObject.SetActive(false);
+            DropItems();
+            yield return new WaitForSeconds(immunityTime);
+            Destroy(gameObject);
+        }
+        yield return new WaitForSeconds(immunityTime);
+    }
+
     private IEnumerator Flash()
     {
         if (spriteRenderer == null) print("null");

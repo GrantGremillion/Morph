@@ -67,11 +67,27 @@ public class Bananarang : Weapon
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        rb.velocity = Vector2.zero;
-        returningToPlayer = true;
-        returnTime = 1.0f;
+        // Check if the collided object has an Enemy component (or a specific tag)
+        if (other.CompareTag("Enemy"))
+        {
+            // Apply damage to the enemy
+            Enemy enemy = other.GetComponent<Enemy>();
+            Collider2D collider = GetComponent<Collider2D>();
+            if (enemy != null)
+            {
+                StartCoroutine(enemy.TakeBananarangDamage(collider));
+            }
+        }
+
+        else
+        {
+            rb.velocity = Vector2.zero;
+            returningToPlayer = true;
+            returnTime = 1.0f;
+        }
     }
 
 }

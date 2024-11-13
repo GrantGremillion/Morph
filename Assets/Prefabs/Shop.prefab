@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 5828250899826874322}
   - component: {fileID: 4594250063615464736}
   - component: {fileID: 3126970971747061681}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TriggerZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,5 +302,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62284c85b8d6d014abb9665e56ca2b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canUseShop: 0
+  inRangeOfShop: 0
   shop: {fileID: 0}
