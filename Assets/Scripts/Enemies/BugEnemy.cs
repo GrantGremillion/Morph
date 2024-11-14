@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BugEnemy : Enemy
 {
@@ -17,6 +18,7 @@ public class BugEnemy : Enemy
     public float attackCooldown;
     private float initialAttackCooldown;
     public float projectileSpeed = 1.0f;
+    private float changeDirectionCooldown;
     
     public Transform attackPoint;
 
@@ -26,6 +28,7 @@ public class BugEnemy : Enemy
         Transform child = transform.GetChild(3);
         spriteRenderer = child.GetComponent<SpriteRenderer>();
         base.Awake();
+        targetDirection = transform.up;
     }
 
     void Start()
@@ -66,19 +69,42 @@ public class BugEnemy : Enemy
             else canAttack = false;
     }
 
+
     private void UpdateTargetDirection()
+    {
+        HandleRandomDirectionChange();
+        HandlePlayerTargeting();
+    }
+
+    private void HandleRandomDirectionChange()
+    {
+        changeDirectionCooldown -= Time.fixedDeltaTime;
+
+        if (changeDirectionCooldown <= 0 || hitWall)
+        {
+            if (hitWall) targetDirection = -targetDirection;
+            else
+            {
+                float angleChange = Random.Range(-90f,90f);
+                Quaternion rotation = Quaternion.AngleAxis(angleChange, transform.forward);
+                targetDirection = rotation * targetDirection;
+            }
+
+            changeDirectionCooldown = Random.Range(1f, 5f);
+            hitWall = false;
+        }
+    }
+
+    private void HandlePlayerTargeting()
     {
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
         if (playerAwarenessRadiusIsTriggered)
         {
-            animator.SetTrigger("Agro");
             targetDirection = playerAwarenessRadius.getTriggerDir().normalized;
+            speed = originalSpeed;
         }
-        else
-        {
-            animator.SetTrigger("Deagro");
-            targetDirection = Vector2.zero;
-        }
+
+        speed = idleSpeed;
     }
 
     private void SetVelocity()
@@ -170,6 +196,16 @@ public class BugEnemy : Enemy
         if (projectileRigidbody != null)
         {
             projectileRigidbody.velocity = direction * projectileSpeed;
+        }
+    }
+
+    public override void OnCollisionEnter2D(Collision2D collision)
+    {
+        base.OnCollisionEnter2D(collision);
+
+        if (collision.gameObject.CompareTag("Untagged") && !awareOfPlayer)
+        {
+            hitWall = true;
         }
     }
 }

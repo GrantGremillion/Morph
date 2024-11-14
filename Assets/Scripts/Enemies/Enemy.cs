@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     public State currentState;
     public Canvas healthBarCanvas;
     public float speed;
+    protected float originalSpeed;
+    [SerializeField] protected float idleSpeed;
+    protected bool hitWall;
     public float health;
     public float maxHealth;
     public float immunityTime = 0.5f;
@@ -66,6 +69,7 @@ public class Enemy : MonoBehaviour
         previousAwareOfPlayer = awareOfPlayer;  
 
         originalColor = spriteRenderer.color; 
+        originalSpeed = speed;
     }
 
     void Update()
@@ -75,30 +79,6 @@ public class Enemy : MonoBehaviour
 
     public virtual void UpdateState() { }
 
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Arrow"))
-        {
-            if (collision != null)
-            {
-                StartCoroutine(TakeDamage(collision,"Arrow"));
-            }
-        }
-        if (collision.gameObject.CompareTag("ThrowingStar"))
-        {
-            if (collision != null)
-            {
-                StartCoroutine(TakeDamage(collision, "ThrowingStar"));
-            }
-        }
-        if (collision.gameObject.CompareTag("Bananarang"))
-        {
-            if (collision != null)
-            {
-                StartCoroutine(TakeDamage(collision, "Bananarang"));
-            }
-        }
-    }
 
     public IEnumerator TakeDamage(Collision2D collision, string name)
     {
@@ -172,6 +152,31 @@ public class Enemy : MonoBehaviour
         {
             Vector3 spawnPosition = ItemSpawner.Instance.GetRandomSpawnPosition(transform.position);
             ItemSpawner.Instance.SpawnEnemyDrops(itemDropType, spawnPosition);
+        }
+    }
+
+    public virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Arrow"))
+        {
+            if (collision != null)
+            {
+                StartCoroutine(TakeDamage(collision,"Arrow"));
+            }
+        }
+        if (collision.gameObject.CompareTag("ThrowingStar"))
+        {
+            if (collision != null)
+            {
+                StartCoroutine(TakeDamage(collision, "ThrowingStar"));
+            }
+        }
+        if (collision.gameObject.CompareTag("Bananarang"))
+        {
+            if (collision != null)
+            {
+                StartCoroutine(TakeDamage(collision, "Bananarang"));
+            }
         }
     }
 }
