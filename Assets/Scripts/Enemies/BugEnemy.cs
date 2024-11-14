@@ -103,8 +103,9 @@ public class BugEnemy : Enemy
             targetDirection = playerAwarenessRadius.getTriggerDir().normalized;
             speed = originalSpeed;
         }
+        else speed = idleSpeed;
 
-        speed = idleSpeed;
+
     }
 
     private void SetVelocity()

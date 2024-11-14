@@ -100,12 +100,12 @@ TextureImporter:
       name: Shop2-Sheet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 6
+        y: 5
+        width: 68
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.213862}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: Shop2-Sheet_1
       rect:
         serializedVersion: 2
-        x: 80
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 86
+        y: 5
+        width: 68
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.213862}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: Shop2-Sheet_2
       rect:
         serializedVersion: 2
-        x: 160
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 166
+        y: 5
+        width: 68
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.213862}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,12 +163,12 @@ TextureImporter:
       name: Shop2-Sheet_3
       rect:
         serializedVersion: 2
-        x: 240
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 246
+        y: 5
+        width: 68
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.213862}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: Shop2-Sheet_4
       rect:
         serializedVersion: 2
-        x: 320
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 326
+        y: 5
+        width: 68
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.213862}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: Shop2-Sheet_5
       rect:
         serializedVersion: 2
-        x: 400
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 406
+        y: 5
+        width: 68
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.213862}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,12 +226,12 @@ TextureImporter:
       name: Shop2-Sheet_6
       rect:
         serializedVersion: 2
-        x: 480
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 486
+        y: 5
+        width: 68
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.213862}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,12 +247,12 @@ TextureImporter:
       name: Shop2-Sheet_7
       rect:
         serializedVersion: 2
-        x: 560
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 566
+        y: 5
+        width: 68
+        height: 74
+      alignment: 9
+      pivot: {x: 0.5, y: 0.213862}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

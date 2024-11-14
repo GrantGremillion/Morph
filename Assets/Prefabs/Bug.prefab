@@ -694,6 +694,7 @@ MonoBehaviour:
   currentState: 0
   healthBarCanvas: {fileID: 4703991442181391524}
   speed: 0.2
+  idleSpeed: 0.1
   health: 100
   maxHealth: 100
   immunityTime: 0.5
