@@ -36,7 +36,8 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
         Treasure,
         Enemy,
         Shop,
-        Boss
+        Boss,
+        Corridor
     }
 
     public GameObject box;
@@ -47,6 +48,7 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
     private Tilemap wallTilemap;
 
     private bool levelGenerated;
+    private RoomType currentRoomType;
 
     public void Start() 
     {
@@ -62,7 +64,37 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
             RunProceduralGeneration();
             levelGenerated = true;
         }
+
+        CheckPlayerRoomType();
+
+        print(currentRoomType);
     }
+
+    private void CheckPlayerRoomType()
+    {
+        Vector2 playerPosition = new Vector2(player.position.x / gridSizeMultiplier, player.position.y / gridSizeMultiplier);
+        Vector3Int playerGridPosition = Vector3Int.RoundToInt(playerPosition);
+
+        foreach (var roomCenter in roomBoundsDictionary.Keys)
+        {
+            BoundsInt roomBounds = roomBoundsDictionary[roomCenter];
+            // print("Player pos: " + playerGridPosition);
+
+            // print("Start-------------------------------");
+            // print("xMin: " + roomBounds.xMin);
+            // print("xMax: " + roomBounds.xMax);
+            // print("yMin: " + roomBounds.yMin);
+            // print("yMax: " + roomBounds.yMax);
+            // print("Stop--------------------------------");
+            if (playerPosition.y <= roomBounds.yMax && playerPosition.y >= roomBounds.yMin && playerPosition.x <= roomBounds.xMax && playerPosition.x >= roomBounds.xMin)
+            {
+                currentRoomType = roomTypes[roomCenter];
+                break;
+            }
+            else currentRoomType = RoomType.Corridor;
+        }
+    }
+
 
     protected override void RunProceduralGeneration()
     {
@@ -198,25 +230,8 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
             // Add the room type to the dictionary
             roomTypes[roomCenters[i]] = roomType;
         }
-
-        // Move the player to the Start Room
-        MovePlayerToStartRoom();
     }
 
-
-
-    private void MovePlayerToStartRoom()
-    {
-        // Find the position of the Start Room
-        foreach (var roomCenter in roomTypes.Keys)
-        {
-            if (roomTypes[roomCenter] == RoomType.Start)
-            {
-                //player.position = new Vector3(roomCenter.x * .016f, roomCenter.y * .016f, player.position.z);
-                break;
-            }
-        }
-    }
 
     private HashSet<Vector2Int> CreateRoomsRandomly(List<BoundsInt> roomsList)
     {

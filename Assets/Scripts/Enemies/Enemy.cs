@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     public bool pauseAnimation;
     public string itemDropType;
     public int numberOfDrops;
+    protected Vector2 chaseOffset;
 
     public Animator animator;
 
@@ -70,6 +71,8 @@ public class Enemy : MonoBehaviour
 
         originalColor = spriteRenderer.color; 
         originalSpeed = speed;
+
+        chaseOffset = new Vector2(Random.Range(-.1f, .1f), Random.Range(-.1f, .1f));
     }
 
     void Update()

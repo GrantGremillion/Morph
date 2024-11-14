@@ -100,11 +100,10 @@ public class BugEnemy : Enemy
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
         if (playerAwarenessRadiusIsTriggered)
         {
-            targetDirection = playerAwarenessRadius.getTriggerDir().normalized;
+            targetDirection = playerAwarenessRadius.getTriggerDir().normalized + chaseOffset;
             speed = originalSpeed;
         }
         else speed = idleSpeed;
-
 
     }
 
