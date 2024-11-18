@@ -111,6 +111,7 @@ MonoBehaviour:
   distanceFromPlayer: 0.08
   destroyTime: 20
   damage: 10
+  throwCooldown: 1
 --- !u!58 &-3434098818149130415
 CircleCollider2D:
   m_ObjectHideFlags: 0

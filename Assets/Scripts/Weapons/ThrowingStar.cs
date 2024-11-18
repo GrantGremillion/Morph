@@ -10,6 +10,10 @@ public class ThrowingStar : Weapon
     public float destroyTime = 20.0f;
     private bool hasCollided = false;
     public float damage = 10;
+    public float throwCooldown;
+    public float rotationSpeed = 3f;
+
+    public bool rotate;
     
 
     // Start is called before the first frame update
@@ -27,6 +31,7 @@ public class ThrowingStar : Weapon
         {
             collider.enabled = false;
         }
+        rotate = false;
     }
 
     // Update is called once per frame
@@ -64,6 +69,8 @@ public class ThrowingStar : Weapon
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        rotate = false;
+
         if (!hasCollided)
         {
             hasCollided = true; // Mark as collided to prevent repeated triggers
@@ -74,6 +81,7 @@ public class ThrowingStar : Weapon
                 rb.velocity = Vector2.zero;
                 rb.isKinematic = true; 
             }
+            Destroy(GetComponent<Rigidbody2D>());
 
             // Disable the collider to prevent further collisions
             Collider2D collider = GetComponent<Collider2D>();

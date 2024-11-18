@@ -67,13 +67,12 @@ public class RoomFirstLevelGenerator : SimpleRandomWalkGenerator
 
         CheckPlayerRoomType();
 
-        print(currentRoomType);
+        //print(currentRoomType);
     }
 
     private void CheckPlayerRoomType()
     {
         Vector2 playerPosition = new Vector2(player.position.x / gridSizeMultiplier, player.position.y / gridSizeMultiplier);
-        Vector3Int playerGridPosition = Vector3Int.RoundToInt(playerPosition);
 
         foreach (var roomCenter in roomBoundsDictionary.Keys)
         {

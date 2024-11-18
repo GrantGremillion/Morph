@@ -21,6 +21,8 @@ public class WeaponManager : MonoBehaviour
     public Weapon currentWeapon;
     public Weapon currentWeaponInstance;
 
+    private bool attacking;
+
     [SerializeField] private AudioClip shootBow;
 
     public void Start()
@@ -45,6 +47,15 @@ public class WeaponManager : MonoBehaviour
             {
                 ReturnToPlayer();
             }
+        }
+
+        if (currentWeaponInstance.type == "ThrowingStar")
+        {
+            if (throwingStarInstance.rotate == true) 
+            {
+                throwingStarInstance.transform.Rotate(Vector3.forward * throwingStar.rotationSpeed); 
+            }
+            else throwingStarInstance.transform.rotation = Quaternion.identity;
         }
     }
 
@@ -74,6 +85,7 @@ public class WeaponManager : MonoBehaviour
 
     private void ThrowBanana()
     {
+        attacking = true;
         // Get the mouse position in world space
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0; // Ensure the z-coordinate is 0 since we're working in 2D
@@ -122,18 +134,20 @@ public class WeaponManager : MonoBehaviour
             bananarangInstance.returningToPlayer = false; // Stop the return process
             bananarangInstance.beingThrown = false;
             bananarangInstance.rotate = false;
+            attacking = false;
         }
     }
 
     private void ThrowingStarInput()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canShoot)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canShoot && !throwingStar.hasBeenThrown)
         {
             ThrowStar();
         }
     }
     private void ThrowStar()
     {
+        attacking = true;
         // Get the mouse position in world space
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0; // Ensure the z-coordinate is 0 since we're working in 2D
@@ -148,14 +162,24 @@ public class WeaponManager : MonoBehaviour
         // Set the velocity
         Vector2 velocity = new Vector2(direction.x, direction.y);
 
-        throwingStarInstance.hasBeenThrown = true;
 
         throwingStarInstance.GetComponent<Rigidbody2D>().velocity = velocity * throwingStar.throwingSpeed;
 
         throwingStarInstance.GetComponent<Collider2D>().enabled = true;
+        StartCoroutine(SetThrowCooldown());
+    }
 
+    public IEnumerator SetThrowCooldown()
+    {
+        throwingStar.hasBeenThrown = true;
+        throwingStarInstance.hasBeenThrown = true;
+        throwingStarInstance.rotate = true;
+        yield return new WaitForSeconds(throwingStarInstance.throwCooldown);
         throwingStarInstance = Instantiate(throwingStar, player.transform.position, Quaternion.identity);
         currentWeaponInstance = throwingStarInstance;
+        throwingStar.hasBeenThrown = false;
+        throwingStarInstance.hasBeenThrown = false;
+        attacking = false;
     }
 
     private void BowInput(bool canDash)
@@ -215,6 +239,8 @@ public class WeaponManager : MonoBehaviour
 
     public void SwitchToWeapon(String weaponName)
     {
+        if (attacking) return;
+        
         currentWeapon.type = weaponName;
         
         if (currentWeaponInstance != null)

@@ -67388,6 +67388,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shop
       objectReference: {fileID: 0}
+    - target: {fileID: 6245241784208383552, guid: 035da0baf06c1fb4b831058bda0fa365, type: 3}
+      propertyPath: m_Size.y
+      value: 0.17021164
+      objectReference: {fileID: 0}
+    - target: {fileID: 6245241784208383552, guid: 035da0baf06c1fb4b831058bda0fa365, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.04275249
+      objectReference: {fileID: 0}
     - target: {fileID: 7843814474963910456, guid: 035da0baf06c1fb4b831058bda0fa365, type: 3}
       propertyPath: shopUI
       value: 
