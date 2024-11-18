@@ -136,7 +136,7 @@ public class Enemy : MonoBehaviour
             healthBar.gameObject.SetActive(false);
             DropItems();
             yield return new WaitForSeconds(immunityTime);
-            Destroy(gameObject);
+            if (gameObject != null) Destroy(gameObject);
         }
         yield return new WaitForSeconds(immunityTime);
     }

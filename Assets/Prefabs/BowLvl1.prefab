@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4664767756821264171}
   - component: {fileID: 7057695128076754436}
   - component: {fileID: 4499589041516797108}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BowLvl1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerTransform: {fileID: 0}
   upgradeSystem: {fileID: 0}
-  type: 
+  type: Bow
   arrow: {fileID: 7022741825510326485, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
   distanceFromPlayer: 0.08
 --- !u!95 &7057695128076754436
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8271018504242225830}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

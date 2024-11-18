@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2264871605957057208}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 90863391549852884}
   - component: {fileID: 3250027405044928309}
   - component: {fileID: 889187597522249242}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BowLvl3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,10 +131,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 889187597522249242}
-  arrow: {fileID: 7022741825510326485, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
-  spawn: {fileID: 6219108775575838432}
+  overrideController: {fileID: 0}
   player: {fileID: 0}
+  playerTransform: {fileID: 0}
   upgradeSystem: {fileID: 0}
+  type: 
+  arrow: {fileID: 7022741825510326485, guid: 9eb642ec0034c7f47a2578ff75a62903, type: 3}
+  distanceFromPlayer: 0.08
 --- !u!95 &889187597522249242
 Animator:
   serializedVersion: 5

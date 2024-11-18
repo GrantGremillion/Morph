@@ -98,7 +98,7 @@ public class BugEnemy : Enemy
     private void HandlePlayerTargeting()
     {
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
-        if (playerAwarenessRadiusIsTriggered)
+        if (playerAwarenessRadiusIsTriggered && playerAwarenessRadius.canSeePlayer)
         {
             targetDirection = playerAwarenessRadius.getTriggerDir().normalized + chaseOffset;
             speed = originalSpeed;
@@ -145,7 +145,7 @@ public class BugEnemy : Enemy
 
     public override void UpdateState()
     {
-        if (canAttack && !isAttacking)
+        if (canAttack && !isAttacking && playerAwarenessRadius.canSeePlayer)
         {
             isAttacking = true;
             ThrowProjectile();

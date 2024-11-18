@@ -68,7 +68,7 @@ public class MushroomEnemy : Enemy
     {
         playerAwarenessRadiusIsTriggered = playerAwarenessRadius.getTrigger();
 
-        if (playerAwarenessRadiusIsTriggered) targetDirection = playerAwarenessRadius.getTriggerDir().normalized + chaseOffset;
+        if (playerAwarenessRadiusIsTriggered && playerAwarenessRadius.canSeePlayer) targetDirection = playerAwarenessRadius.getTriggerDir().normalized + chaseOffset;
         
         else targetDirection = Vector2.zero;
         

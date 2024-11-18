@@ -62,7 +62,7 @@ public class Shop : MonoBehaviour
 
     public void OpenShop()
     {
-        print("shop");
+        //print("shop");
         usingShop = true;
         if (shopUI != null)
         {
